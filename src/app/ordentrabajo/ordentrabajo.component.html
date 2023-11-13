@@ -1,0 +1,151 @@
+<div class="card border-primary mb-3">
+  <div class="card-header">Ordenes de Trabajos</div>
+  <div class="card-body text-primary">
+    <h5 class="card-title">Listado de Ordenes de Trabajos</h5>
+
+    <div class="my-2 text-left">
+      <button class="btn btn-rounded btn-primary" type="button" [routerLink]="['/ordenes/ordenesform']"><i class="bi bi-person-plus"></i> Crear Orden</button>
+    </div>
+    <div *ngIf="ordenes?.length==0" class="alert alert-info">
+      No hay registros en la base de datos!
+    </div>
+    <div class="table-responsive text-nowrap">
+    <table class="table table-bordered table-striped w-auto table-hover table-fixed"  *ngIf="ordenes?.length">
+      <thead>
+        <tr>
+          <th>
+            editar
+          </th>
+          <th>
+            eliminar
+          </th>
+          <th>
+            imprimir reporte
+           </th>
+         <th>ID OT</th>
+            <th>Cliente</th>
+            <th>Equipo</th>
+            <th>No. Orden Trabajo</th>
+            <th>No. Solicitud</th>
+            <th>No. Orden Compra</th>
+            <th>No. Cotización</th>
+            <th>Fecha Entrega Certificado</th>
+            <th>No. Certificado</th>
+            <th>No. Reporte Técnico</th>
+            <th>Metrologo Responsable</th>
+            <th>Fecha Calibración</th>
+            <th>Próxima Calibración</th>
+            <th>Nombre Cliente</th>
+            <th>Dirección Cliente</th>
+            <th>Usuario Final</th>
+            <th>Lugar Calibración</th>
+            <th>Contacto Cliente</th>
+            <th>Teléfono Contacto</th>
+            <th>Cargo</th>
+            <th>Correo</th>
+            <th>Contacto Cargo</th>
+            <th>Descripción Recepción</th>
+            <th>Fabricante Instrumento</th>
+            <th>Modelo Instrumento</th>
+            <th>Serie Instrumento</th>
+            <th>Clase Instrumento</th>
+            <th>Alcance</th>
+            <th>Fabricante Registrador</th>
+            <th>Modelo Registrador</th>
+            <th>Serie Registrador</th>
+            <th>Resolución</th>
+            <th>Fabricante Sensor</th>
+            <th>Modelo Sensor</th>
+            <th>Serie Sensor</th>
+            <th>Observaciones</th>
+            <th>Rechazo Técnico</th>
+            <th>Motivo</th>
+            <th>Nombre Entrega</th>
+            <th>Cédula</th>
+            <th>Fecha Entrega</th>
+            <th>Metrologo Entrega</th>
+            <th>Recibe IBC</th>
+            <th>Entregó con IBC</th>
+            <th>Observaciones Entrega</th>
+            <th>Fecha Entrega IBC</th>
+            <th>Es Fecha Entrega</th>
+            <th>Persona Entrega IBC</th>
+            <th>Recibe Certificado</th>
+            <th>Recibe Cédula</th>
+            <th>Activo</th>
+
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let orden of ordenes">
+          <td>
+            <button type="button" name="editar" [routerLink]="['/ordenes/ordenesform',orden.idOT]" class="btn btn-success btn-sm">editar</button>
+          </td>
+          <td>
+            <button type="button" name="eliminar" (click)='delete(orden)' class="btn btn-danger btn-sm">eliminar</button>
+          </td>
+          <td>
+            <button type="button" name="imprimir" (click)='exportarPDF(orden.idOT)' class="btn btn-primary btn-sm">imprimir</button>
+          </td>
+          <td>{{ orden.idOT }}</td>
+	  <td>{{  orden.nombre_cliente }}</td>
+	  <td>{{ orden.nombre_equipo }}</td>
+    <td>{{ orden.no_ordent}}</td>
+          <td>{{ orden.no_solicitud }}</td>
+          <td>{{ orden.no_ordencompra }}</td>
+          <td>{{ orden.no_cotizacion }}</td>
+          <td>{{ orden.fecha_entrega_certificado }}</td>
+          <td>{{ orden.no_certificado }}</td>
+          <td>{{ orden.no_reporte_tecnico }}</td>
+          <td>{{ orden.metrologo_responsable }}</td>
+          <td>{{ orden.fecha_calibracion| date}}</td>
+          <td><input title="prox_calibracion"type="checkbox" [checked]=" orden.prox_calibracion" disabled="disabled" /></td>
+          <td>{{ orden.nombre_cliente }}</td>
+          <td>{{ orden.direccion_cliente }}</td>
+          <td>{{ orden.usuario_final }}</td>
+          <td>{{ orden.lugar_calibracion }}</td>
+          <td>{{ orden.contacto_cliente }}</td>
+          <td>{{ orden.telefono_contacto }}</td>
+          <td>{{ orden.cargo}}</td>
+          <td>{{ orden.correo }}</td>
+          <td>{{ orden.contacto_cargo }}</td>
+          <td>{{ orden.descripcion_recep }}</td>
+          <td>{{ orden.fabricante_ind! }}</td>
+          <td>{{ orden.modelo_ind }}</td>
+          <td>{{ orden.serie_ind }}</td>
+          <td>{{ orden.clase_ind }}</td>
+          <td>{{ orden.alcance }}</td>
+          <td>{{ orden.fabricande_rec }}</td>
+          <td>{{ orden.modelo_rec }}</td>
+          <td>{{ orden.serie_rec }}</td>
+	  <td>{{ orden.resolucion }}</td>
+	  <td>{{ orden.fabricante_sen }}</td>
+	  <td>{{ orden. modelo_sen }}</td>
+	  <td>{{ orden.serie_sen }}</td>
+	  <td>{{ orden.observaciones }}</td>
+    <td><input title="rechazotecno"type="checkbox" [checked]="orden.rechazotecno" disabled="disabled" /></td>
+	  <td>{{ orden.motivo }}</td>
+	  <td>{{ orden. nombre_entrega }}</td>
+	  <td>{{ orden.cedula }}</td>
+	  <td>{{ orden.fecha_entrega | date}}</td>
+	  <td>{{ orden.metrologo_entrega }}</td>
+	  <td>{{ orden.recibe_ibc }}</td>
+    <td><input title="entrego_con_ibc"type="checkbox" [checked]="orden.entrego_con_ibc" disabled="disabled" /></td>
+	  <td>{{ orden.observaciones_entrega }}</td>
+	  <td>{{ orden.fecha_entrega_ibc | date}}</td>
+    <td><input title="es_fecha_entrga"type="checkbox" [checked]="orden.es_fecha_entrga" disabled="disabled" /></td>
+	  <td>{{ orden.persona_entrega_ibc }}</td>
+	  <td>{{ orden.recibe_certificado }}</td>
+	  <td>{{ orden.recibe_cedula}}</td>
+    <td><input title="activo"type="checkbox" [checked]="orden.activo " disabled="disabled" /></td>
+
+
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+</div>
+

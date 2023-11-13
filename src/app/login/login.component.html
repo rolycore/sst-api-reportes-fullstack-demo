@@ -1,0 +1,92 @@
+<div class="col-md-12">
+  <div class="card card-container">
+    <img
+      title="image"
+      id="profile-img"
+      src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+      class="profile-img-card"
+    />
+    <form
+      *ngIf="!isLoggedIn"
+      [formGroup]="loginForm"
+      (ngSubmit)="onSubmit()"
+      novalidate
+    >
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input
+          placeholder="Ingrese el Nombre de Usuario"
+          type="text"
+          class="form-control"
+          formControlName="username"
+        />
+        <div
+          class="alert alert-danger"
+          role="alert"
+          *ngIf="loginForm.get('username')?.hasError('required') && loginForm.get('username')?.touched"
+        >
+          Username is required!
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          placeholder="Ingrese el Password"
+          type="password"
+          class="form-control"
+          formControlName="password"
+        />
+        <div
+          class="alert alert-danger"
+          role="alert"
+          *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched"
+        >
+          Password is required
+        </div>
+        <div
+          class="alert alert-danger"
+          role="alert"
+          *ngIf="loginForm.get('password')?.hasError('minlength') && loginForm.get('password')?.touched"
+        >
+          Password must be at least 6 characters
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="role">Role</label>
+        <select title="role" class="form-control"
+        formControlName="role" required>
+          <option value="" disabled>Selecciona un role</option>
+          <option [ngValue]="role"
+          *ngFor="let role of roles">{{ role }}</option>
+        </select>
+        <div
+          class="alert alert-danger"
+          *ngIf="loginForm.get('role')?.hasError('required') && loginForm.get('role')?.touched"
+        >
+          Role is required
+        </div>
+      </div>
+
+      <div class="form-group">
+        <button class="btn btn-primary btn-block" type="submit">Login</button>
+      </div>
+      <div class="form-group">
+          <!-- Enlace para restablecimiento de contraseña -->
+  <a routerLink="/reset-password">¿Olvidaste tu contraseña?</a>
+      </div>
+      <div
+        class="form-group"
+        *ngIf="isLoginFailed"
+      >
+        <div class="alert alert-danger" role="alert">
+          Login failed: {{ errorMessage }}
+        </div>
+      </div>
+    </form>
+
+    <div class="alert alert-success" *ngIf="isLoggedIn">
+      Logged in as {{ this.selectedRole }}.
+    </div>
+
+  </div>
+</div>

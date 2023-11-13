@@ -1,0 +1,610 @@
+<div class="row justify-content-center align-items-center">
+  <div class="col-md-6">
+    <div class="card bg-dark text-white">
+      <div class="card-header">{{titulo}}</div>
+      <div class="my-2 text-left">
+        <button class="btn btn-rounded btn-secondary" type="button" (click)="exportarPDF(reporte.idreptec)"><i
+            class="bi bi-person-plus"></i> Imprimir Reporte</button>
+      </div>
+      <div *ngIf="loading" class="alert alert-info">
+        Imprimiendo... Por favor, espere.
+      </div>
+      <div class="card-body">
+        <ul class="nav nav-pills">
+          <li class="nav-item">
+            <a class="nav-link" [class.active]="activeTab === 1" (click)="activeTab = 1">1. DATOS TÉCNICOS DEL
+              INSTRUMENTO</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [class.active]="activeTab === 2" (click)="activeTab = 2">2. SERVICIO A REALIZAR</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [class.active]="activeTab === 3" (click)="activeTab = 3">3. DEFICIENCIAS ENCONTRADAS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [class.active]="activeTab === 4" (click)="activeTab = 4">4. OTROS TRABAJOS
+              REALIZADOS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [class.active]="activeTab === 5" (click)="activeTab = 5">5. ESTATUS FINAL DEL
+              SERVICIO</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [class.active]="activeTab === 6" (click)="activeTab = 6">6. OBSERVACIONES DEL
+              CLIENTE</a>
+          </li><li class="nav-item">
+            <a class="nav-link" [class.active]="activeTab === 7" (click)="activeTab = 7">7. FOTOS DEL SERVICIO BRINDADO</a>
+          </li>
+        </ul>
+        <form [formGroup]="formulario" formulario.valid>
+          <div *ngIf="activeTab===1">
+            <div class="form-group">
+              <div class="form-check">
+                <input class="form-check-input form-control" type="checkbox" id="activo" formControlName="activo"
+                  [(ngModel)]="reporte.activo">
+                <label class="form-check-label" for="activo">Activo</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="no_reporte_tecnico" class="col-form-label col-sm-6">No. Reporte Tecnico:</label>
+              <input id="no_reporte_tecnico" type="text" formControlName="no_reporte_tecnico" class="form-control"
+                [readonly]="true" [(ngModel)]="reporte.no_reporte_tecnico"
+                placeholder="Ingrese el Numero de Reporte Tecnico" />
+            </div>
+            <div class="form-group">
+              <label for="no_cotizacion" class="col-form-label col-sm-6">No. de Cotizacion:</label>
+
+              <input id="no_cotizacion" type="text" formControlName="no_cotizacion" class="form-control"
+                [(ngModel)]="reporte.no_cotizacion" placeholder="Ingrese el numero de no_cotizacion" />
+              <div class="alert alert-danger"
+                *ngIf="formulario?.get('no_cotizacion')?.invalid && formulario?.get('no_cotizacion')?.touched">
+                Numero de cotizacion es requerido
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="tecnico" class="col-form-label col-sm-6">Tecnico:</label>
+
+              <input id="tecnico" type="text" formControlName="tecnico" class="form-control"
+                [(ngModel)]="reporte.tecnico" placeholder="Ingrese el tecnico" />
+              <div class="alert alert-danger"
+                *ngIf="formulario?.get('tecnico')?.invalid && formulario?.get('tecnico')?.touched">
+                Tecnico es requerido
+              </div>
+
+            </div>
+            <div class="form-group">
+              <label for="fechareporte" class="col-form-label col-sm-6">Fecha del Reporte:</label>
+
+              <input id="fechareporte" type="date" formControlName="fechareporte" class="form-control"
+                [(ngModel)]="reporte.fechareporte" placeholder="yyyy/MM/dd" />
+              <div class="alert alert-danger"
+                *ngIf="formulario?.get('fechareporte')?.invalid && formulario?.get('fechareporte')?.touched">
+                La Fecha del reporte es requerida
+              </div>
+
+            </div>
+            <div class="form-group">
+              <label for="horaentrada" class="col-form-label col-sm-6">Hora entrada:</label>
+
+              <input id="horaentrada" type="time" formControlName="horaentrada" class="form-control"
+                [(ngModel)]="reporte.horaentrada" placeholder="Ingrese la hora de entrada" />
+              <div class="alert alert-danger"
+                *ngIf="formulario?.get('horaentrada')?.invalid && formulario?.get('horaentrada')?.touched">
+                La Hora de entrada es requerida
+              </div>
+
+            </div>
+            <div class="form-group">
+              <label for="horasalida" class="col-form-label col-sm-6">Hora salida:</label>
+
+              <input id="horasalida" type="time" formControlName="horasalida" class="form-control"
+                [(ngModel)]="reporte.horasalida" placeholder="Ingrese la fecha del reporte" />
+              <div class="alert alert-danger"
+                *ngIf="formulario?.get('horasalida')?.invalid && formulario?.get('horasalida')?.touched">
+                La hora de salida es requerida
+              </div>
+
+            </div>
+            <div class="form-group">
+              <label for="horaviajes" class="col-form-label col-sm-6">Horas de viaje:</label>
+
+              <input id="horaviajes" type="text" formControlName="horaviajes" class="form-control"
+                [(ngModel)]="reporte.horaviajes" placeholder="Ingrese las horas de viaje"  />
+                <div class="alert alert-danger"
+                *ngIf="formulario?.get('horaviajes')?.invalid && formulario?.get('horaviajes')?.touched">
+                Las horaviajes de salida es requerida
+              </div>
+
+            </div>
+            <div class="form-group">
+              <label for="clienteSelect">Selecciona un cliente:</label>
+              <select title="clienteSelect" class="form-control" formControlName="cliente" requiredid="clienteSelect"
+                [(ngModel)]="clienteSeleccionado" (change)="onSelectCliente()">
+                <option value="" disabled>Selecciona un cliente</option>
+                <option *ngFor="let cliente of clientes" [value]="cliente.idCliente">{{ cliente.nombre_comercial }}
+                </option>
+              </select>
+              <div class="alert-danger"
+                *ngIf="formulario?.get('cliente')?.errors && formulario?.get('cliente')?.touched">
+                <div *ngIf="formulario?.get('cliente')?.hasError('required')">El Cliente es requerido</div>
+              </div>
+            </div>
+            <div class="form-group" *ngIf="clienteSeleccionado">
+              <h3>{{titulocliente}}</h3>
+              <div class="form-group">
+                <label for="nombrecliente" class="col-form-label col-sm-6">Nombre del cliente:</label>
+                <input id="nombrecliente" type="text" formControlName="nombrecliente" class="form-control"
+                  [(ngModel)]="reporte.nombrecliente" placeholder="Ingrese el nombre del cliente" [readonly]="true" />
+              </div>
+              <div class="form-group">
+                <label for="direccion" class="col-form-label col-sm-6">Dirección del cliente:</label>
+                <input id="direccion" type="text" formControlName="direccion" class="form-control"
+                  [(ngModel)]="reporte.direccion" placeholder="Ingrese la direccion del cliente" [readonly]="true" />
+              </div>
+
+
+              <div class="form-group">
+                <label for="contacto" class="col-form-label col-sm-6">Contacto:</label>
+                <input id="contacto" type="text" formControlName="contacto" class="form-control"
+                  [(ngModel)]="reporte.contacto" placeholder="Ingrese el nombre del contacto cliente"
+                  [readonly]="true" />
+              </div>
+
+            </div>
+            <label for="equipoSelect">Selecciona un equipo:</label>
+            <select title="equipoSelect" class="form-control" formControlName="equipo" required id="equipoSelect" [(ngModel)]="equipoSeleccionado"(change)="onSelectEquipocliente()">
+              <option value="" disabled>Selecciona un equipo</option>
+              <option *ngFor="let equipo of equiposFiltrados" [value]="equipo.idEquipo">{{ equipo.nombre }}</option>
+            </select>
+
+            <div class="alert-danger" *ngIf="formulario?.get('equipo')?.errors && formulario?.get('equipo')?.touched">
+              <div *ngIf="formulario?.get('equipo')?.hasError('required')">El Equipo es requerido</div>
+            </div>
+
+          <div class="form-group" *ngIf="equipoSeleccionado">
+            <h3>{{tituloequipo}}</h3>
+            <div class="form-group">
+              <label for="nombreequipo" class="col-form-label col-sm-6">Nombre del Equipo:</label>
+              <input id="nombreequipo" type="text" formControlName="nombreequipo" class="form-control"
+                [(ngModel)]="reporte.nombreequipo" placeholder="Ingrese el Nombre del equipo" [readonly]="true" />
+            </div>
+            <label for="idinterno" class="col-form-label col-sm-6">ID interno del equipo:</label>
+            <input id="idinterno" type="text" formControlName="idinterno" class="form-control"
+              [(ngModel)]="reporte.idinterno" placeholder="Ingrese el ID interno del equipo" [readonly]="true" />
+          </div>
+          <div class="form-group">
+            <label for="marca" class="col-form-label col-sm-6">Marca:</label>
+            <input id="marca" type="text" formControlName="marca" class="form-control"
+              [(ngModel)]="reporte.marca" placeholder="Ingrese la marca del equipo" [readonly]="true" />
+
+          <div class="form-group">
+            <label for="modelo" class="col-form-label col-sm-6">Modelo:</label>
+            <input id="modelo" type="text" formControlName="modelo" class="form-control"
+              [(ngModel)]="reporte.modelo" placeholder="Ingrese el modelo del equipo" [readonly]="true" />
+          </div>
+          <div class="form-group">
+            <label for="no_serie" class="col-form-label col-sm-6">No serie:</label>
+            <input id="no_serie" type="text" formControlName="no_serie" class="form-control"
+              [(ngModel)]="reporte.no_serie" placeholder="Ingrese el No serie del equipo" [readonly]="true" />
+          </div>
+          <div class="form-group">
+            <label for="capacidad" class="col-form-label col-sm-6">Capacidad:</label>
+            <input id="capacidad" type="text" formControlName="capacidad" class="form-control"
+              [(ngModel)]="reporte.capacidad" placeholder="Ingrese la capacidad del equipo" [readonly]="true" />
+          </div>
+          <div class="form-group">
+            <label for="resolucion" class="col-form-label col-sm-6">Resolucion:</label>
+            <input id="resolucion" type="text" formControlName="resolucion" class="form-control"
+              [(ngModel)]="reporte.resolucion" placeholder="Ingrese la resolucion del equipo" [readonly]="true" />
+          </div>
+          <div class="form-group">
+            <label for="ubicacion_equipo" class="col-form-label col-sm-6">Ubicacion Equipo:</label>
+            <input id="ubicacion_equipo" type="text" formControlName="ubicacion_equipo" class="form-control"
+              [(ngModel)]="reporte.ubicacion_equipo" placeholder="Ingrese la ubicacion del equipo" />
+            <div class="alert alert-danger"
+              *ngIf="formulario?.get('ubicacion_equipo')?.invalid && formulario?.get('ubicacion_equipo')?.touched">
+              La clase del indicador es requerido
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div *ngIf="activeTab === 2">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input form-control" type="checkbox" id="calibracion" formControlName="calibracion"
+              [(ngModel)]="reporte.calibracion">
+            <label class="form-check-label" for="calibracion">Calibracion:</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input form-control" type="checkbox" id="instalacion" formControlName="instalacion"
+              [(ngModel)]="reporte.instalacion">
+            <label class="form-check-label" for="instalacion">Instalacion:</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input form-control" type="checkbox" id="verificacion"
+              formControlName="verificacion" [(ngModel)]="reporte.verificacion">
+            <label class="form-check-label" for="verificacion">Verificacion:</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input form-control" type="checkbox" id="retiroequipo"
+              formControlName="retiroequipo" [(ngModel)]="reporte.retiroequipo">
+            <label class="form-check-label" for="retiroequipo">Retiro equipo:</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input form-control" type="checkbox" id="entregaequipo"
+              formControlName="entregaequipo" [(ngModel)]="reporte.entregaequipo">
+            <label class="form-check-label" for="entregaequipo">Entrega equipo:</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input form-control" type="checkbox" id="gestionmetrologica"
+              formControlName="gestionmetrologica" [(ngModel)]="reporte.gestionmetrologica">
+            <label class="form-check-label" for="gestionmetrologica">Gestion metrologica:</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input form-control" type="checkbox" id="inspeccion" formControlName="inspeccion"
+              [(ngModel)]="reporte.inspeccion">
+            <label class="form-check-label" for="inspeccion">Inspeccion:</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input form-control" type="checkbox" id="otros" formControlName="otros"
+              [(ngModel)]="reporte.otros">
+            <label class="form-check-label" for="otros">Otros:</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="observaciones" class="col-form-label col-sm-6">Observaciones:</label>
+
+          <input id="observaciones" type="text" formControlName="observaciones" class="form-control"
+            [(ngModel)]="reporte.observaciones" placeholder="Ingrese las observaciones " />
+          <div class="alert alert-danger"
+            *ngIf="formulario?.get('observaciones')?.invalid && formulario?.get('observaciones')?.touched">
+            Las observaciones son requeridas
+
+          </div>
+        </div>
+
+
+
+      </div>
+      <div *ngIf="activeTab === 3">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input form-control" type="checkbox" id="desnivel" formControlName="desnivel"
+              [(ngModel)]="reporte.desnivel">
+            <label class="form-check-label" for="desnivel">Desnivel:</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input form-control" type="checkbox" id="vibraciones" formControlName="vibraciones"
+              [(ngModel)]="reporte.vibraciones">
+            <label class="form-check-label" for="vibraciones">Vibraciones:</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input form-control" type="checkbox" id="averias" formControlName="averias"
+              [(ngModel)]="reporte.averias">
+            <label class="form-check-label" for="averias">Averias:</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input form-control" type="checkbox" id="erroresindicador"
+              formControlName="erroresindicador" [(ngModel)]="reporte.erroresindicador">
+            <label class="form-check-label" for="erroresindicador">Errores de indicador:</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input form-control" type="checkbox" id="soporteinadecuadas"
+              formControlName="soporteinadecuadas" [(ngModel)]="reporte.soporteinadecuadas">
+            <label class="form-check-label" for="soporteinadecuadas">Soporte inadecuadas:</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input form-control" type="checkbox" id="suceidad" formControlName="suceidad"
+              [(ngModel)]="reporte.suceidad">
+            <label class="form-check-label" for="suceidad">Suciedad:</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input form-control" type="checkbox" id="insectos" formControlName="insectos"
+              [(ngModel)]="reporte.insectos">
+            <label class="form-check-label" for="insectos">Insectos:</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input form-control" type="checkbox" id="golpe" formControlName="golpe"
+              [(ngModel)]="reporte.golpe">
+            <label class="form-check-label" for="golpe">Golpe:</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input form-control" type="checkbox" id="fuentexternacalor"
+              formControlName="fuentexternacalor" [(ngModel)]="reporte.fuentexternacalor">
+            <label class="form-check-label" for="fuentexternacalor">Fuente externas de calor:</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input form-control" type="checkbox" id="configuracion"
+              formControlName="configuracion" [(ngModel)]="reporte.configuracion">
+            <label class="form-check-label" for="configuracion">Configuración:</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="observaciones2" class="col-form-label col-sm-6">Observaciones:</label>
+
+          <input id="observaciones2" type="text" formControlName="observaciones2" class="form-control"
+            [(ngModel)]="reporte.observaciones2" placeholder="Ingrese las observaciones " />
+          <div class="alert alert-danger"
+            *ngIf="formulario?.get('observaciones2')?.invalid && formulario?.get('observaciones2')?.touched">
+            Las observaciones son requeridas
+
+          </div>
+        </div>
+      </div>
+      <div *ngIf="activeTab === 4">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input form-control" type="checkbox" id="nivelacion" formControlName="nivelacion"
+              [(ngModel)]="reporte.nivelacion">
+            <label class="form-check-label" for="nivelacion">Nivelacion:</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input form-control" type="checkbox" id="limpieza" formControlName="limpieza"
+              [(ngModel)]="reporte.limpieza">
+            <label class="form-check-label" for="limpieza">Limpieza:</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input form-control" type="checkbox" id="ajusteslinealidad"
+              formControlName="ajusteslinealidad" [(ngModel)]="reporte.ajusteslinealidad">
+            <label class="form-check-label" for="ajusteslinealidad">Ajuste de linealidad:</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input form-control" type="checkbox" id="ajusteexcentricidad"
+              formControlName="ajusteexcentricidad" [(ngModel)]="reporte.ajusteexcentricidad">
+            <label class="form-check-label" for="ajusteexcentricidad">Ajuste de excentricidad:</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input form-control" type="checkbox" id="reemplazo" formControlName="reemplazo"
+              [(ngModel)]="reporte.reemplazo">
+            <label class="form-check-label" for="reemplazo">Reemplazo de partes:</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input form-control" type="checkbox" id="faltacomponente"
+              formControlName="faltacomponente" [(ngModel)]="reporte.faltacomponente">
+            <label class="form-check-label" for="faltacomponente">Falta de componentes:</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input form-control" type="checkbox" id="configuracion1"
+              formControlName="configuracion1" [(ngModel)]="reporte.configuracion1">
+            <label class="form-check-label" for="configuracion1">Configuración:</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="observaciones3" class="col-form-label col-sm-6">Observaciones:</label>
+
+          <input id="observaciones3" type="text" formControlName="observaciones3" class="form-control"
+            [(ngModel)]="reporte.observaciones3" placeholder="Ingrese las observaciones " />
+          <div class="alert alert-danger"
+            *ngIf="formulario?.get('observaciones3')?.invalid && formulario?.get('observaciones3')?.touched">
+            Las observaciones son requeridas
+
+          </div>
+        </div>
+      </div>
+      <div *ngIf="activeTab === 5">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input form-control" type="checkbox" id="completo" formControlName="completo"
+              [(ngModel)]="reporte.completo">
+            <label class="form-check-label" for="completo">Completo:</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input form-control" type="checkbox" id="incompleto" formControlName="incompleto"
+              [(ngModel)]="reporte.incompleto">
+            <label class="form-check-label" for="incompleto">incompleto:</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="observaciones4" class="col-form-label col-sm-6">Observaciones:</label>
+
+          <input id="observaciones4" type="text" formControlName="observaciones4" class="form-control"
+            [(ngModel)]="reporte.observaciones4" placeholder="Ingrese las observaciones " />
+          <div class="alert alert-danger"
+            *ngIf="formulario?.get('observaciones4')?.invalid && formulario?.get('observaciones4')?.touched">
+            Las observaciones son requeridas
+
+          </div>
+        </div>
+      </div>
+      <div *ngIf="activeTab === 6">
+        <div class="form-group">
+          <label for="nota" class="col-form-label col-sm-6">Nota:</label>
+
+          <input id="nota" type="text" formControlName="nota" class="form-control" [(ngModel)]="reporte.nota"
+            placeholder="Ingrese la nota" />
+          <div class="alert alert-danger" *ngIf="formulario?.get('nota')?.invalid && formulario?.get('nota')?.touched">
+            La nota es requerida
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="recibidopor" class="col-form-label col-sm-6">Recibido por:</label>
+
+          <input id="recibidopor" type="text" formControlName="recibidopor" class="form-control"
+            [(ngModel)]="reporte.recibidopor" placeholder="Ingrese el nombre del que recibibe" />
+          <div class="alert alert-danger"
+            *ngIf="formulario?.get('recibidopor')?.invalid && formulario?.get('recibidopor')?.touched">
+            Recibido por es requerido
+
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="fecha" class="col-form-label col-sm-6">Fecha:</label>
+
+          <input id="fecha" type="date" formControlName="fecha" class="form-control" [(ngModel)]="reporte.fecha"
+            placeholder="yyyy/MM/dd" />
+          <div class="alert alert-danger"
+            *ngIf="formulario?.get('fecha')?.invalid && formulario?.get('fecha')?.touched">
+            La fecha es requerida
+
+          </div>
+        </div>
+
+      </div>
+        <div *ngIf="activeTab === 7">
+        <div class="form-group">
+          <label for="imagen_1" class="col-form-label col-sm-6">Foto 1:</label>
+
+          <input class="input-file" id="imagen_1" (change)="capturarFile($event, 0)" type="file" formControlName="imagen_1" class="form-control"
+            placeholder="Ingrese la foto 1" />
+          <div class="alert alert-danger" *ngIf="formulario?.get('imagen_1')?.invalid && formulario?.get('imagen_1')?.touched">
+            La Foto es requerida
+          </div>
+            <div class="p-1">
+                <small>Se aceptan archivos imágenes de tipo .jpg</small>
+              </div>
+          <button class="clear-image" type="button" (click)="clearImage()">Clear</button>
+          <div *ngIf="previsualizacion" class="form-group">
+            <img [src]="previsualizacion" alt="imagen equipo" class="fluid img-thumbnail" width="300" height="100" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="descripcion1" class="col-form-label col-sm-6">Descripcion 1:</label>
+
+          <input id="descripcion1" type="text" formControlName="descripcion1" class="form-control" [(ngModel)]="reporte.descripcion_1"
+            placeholder="Ingrese la descripcion 1" />
+          <div class="alert alert-danger" *ngIf="formulario?.get('descripcion1')?.invalid && formulario?.get('descripcion1')?.touched">
+            La descripcion 1 es requerida
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="imagen_2" class="col-form-label col-sm-6">Foto 2:</label>
+          <input class="input-file" id="imagen_2" (change)="capturarFile($event, 1)" type="file" formControlName="imagen_2" class="form-control"
+            placeholder="Ingrese la foto 2" />
+          <div class="alert alert-danger" *ngIf="formulario?.get('imagen_2')?.invalid && formulario?.get('imagen_2')?.touched">
+            La Foto es requerida
+          </div>
+            <div class="p-1">
+                <small>Se aceptan archivos imágenes de tipo .jpg</small>
+              </div>
+          <button class="clear-image" type="button" (click)="clearImage1()">Clear</button>
+          <div *ngIf="previsualizacion1" class="form-group">
+            <img [src]="previsualizacion1" alt="imagen equipo" class="fluid img-thumbnail" width="300" height="100" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="descripcion2" class="col-form-label col-sm-6">Descripcion 2:</label>
+
+          <input id="descripcion2" type="text" formControlName="descripcion2" class="form-control" [(ngModel)]="reporte.descripcion_2"
+            placeholder="Ingrese la descripcion 2" />
+          <div class="alert alert-danger" *ngIf="formulario?.get('descripcion2')?.invalid && formulario?.get('descripcion2')?.touched">
+            La descripcion 2 es requerida
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="imagen_3" class="col-form-label col-sm-6">Foto 3:</label>
+          <input class="input-file" id="imagen_3" (change)="capturarFile($event, 2)" type="file" formControlName="imagen_3" class="form-control"
+            placeholder="Ingrese la foto 3" />
+          <div class="alert alert-danger" *ngIf="formulario?.get('imagen_3')?.invalid && formulario?.get('imagen_3')?.touched">
+            La Foto es requerida
+          </div>
+            <div class="p-1">
+                <small>Se aceptan archivos imágenes de tipo .jpg</small>
+              </div>
+          <button class="clear-image" type="button" (click)="clearImage2()">Clear</button>
+          <div *ngIf="previsualizacion2" class="form-group">
+            <img [src]="previsualizacion2" alt="imagen equipo" class="fluid img-thumbnail" width="300" height="100" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="descripcion3" class="col-form-label col-sm-6">Descripcion 3:</label>
+
+          <input id="descripcion3" type="text" formControlName="descripcion3" class="form-control" [(ngModel)]="reporte.descripcion_3"
+            placeholder="Ingrese la descripcion 3" />
+          <div class="alert alert-danger" *ngIf="formulario?.get('descripcion3')?.invalid && formulario?.get('descripcion3')?.touched">
+            La descripcion 3 es requerida
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="imagen_4" class="col-form-label col-sm-6">Foto 4:</label>
+          <input class="input-file" id="imagen_4" (change)="capturarFile($event, 3)" type="file" formControlName="imagen_4" class="form-control"
+            placeholder="Ingrese la foto 4" />
+          <div class="alert alert-danger" *ngIf="formulario?.get('imagen_4')?.invalid && formulario?.get('imagen_4')?.touched">
+            La Foto es requerida
+          </div>
+            <div class="p-1">
+                <small>Se aceptan archivos imágenes de tipo .jpg</small>
+              </div>
+          <button class="clear-image" type="button" (click)="clearImage3()">Clear</button>
+          <div *ngIf="previsualizacion3" class="form-group">
+            <img [src]="previsualizacion3" alt="imagen equipo" class="fluid img-thumbnail" width="300" height="100" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="descripcion4" class="col-form-label col-sm-6">Descripcion 4:</label>
+
+          <input id="descripcion4" type="text" formControlName="descripcion4" class="form-control" [(ngModel)]="reporte.descripcion_4"
+            placeholder="Ingrese la descripcion 4" />
+          <div class="alert alert-danger" *ngIf="formulario?.get('descripcion4')?.invalid && formulario?.get('descripcion4')?.touched">
+            La descripcion 4 es requerida
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-6">
+          <button class="btn btn-primary" role="button" (click)="crearReporte()"
+            *ngIf="!reporte.idreptec else elseBlock">Crear</button>
+          <!-- *ngIf="!cliente.id"-->
+          <ng-template #elseBlock>
+            <button class="btn btn-primary" role="button" (click)="updateReporte()"
+              [disabled]="!formulario.valid">Editar</button>
+          </ng-template>
+        </div>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+</div>

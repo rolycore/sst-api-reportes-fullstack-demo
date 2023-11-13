@@ -1,0 +1,85 @@
+<div class="col-md-12">
+  <div class="card card-container">
+    <img title="imagen"
+      id="profile-img"
+      src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+      class="profile-img-card"
+    />
+    <form
+      *ngIf="!isSuccessful"
+      name="form"
+      (ngSubmit)="onSubmit()"
+      [formGroup]="form"
+      form.valid
+    >
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input placeholder="Ingrese el Nombre de usuario"
+          type="text"
+          class="form-control"
+          formControlName="username"
+          required
+          minlength="3"
+          maxlength="20"
+        />
+        <div class="alert-danger" *ngIf="form.get('username')?.errors && form.get('username')?.touched">
+          <div *ngIf="form.get('username')?.hasError('required')">Username is required</div>
+          <div *ngIf="form.get('username')?.hasError('minlength')">
+            Username must be at least 3 characters
+          </div>
+          <div *ngIf="form.get('username')?.hasError('maxlength')">
+            Username must be at most 20 characters
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input placeholder="Ingrese el Email"
+          type="email"
+          class="form-control"
+          formControlName="email"
+          required
+          email
+        />
+        <div class="alert-danger" *ngIf="form.get('email')?.errors && form.get('email')?.touched">
+          <div *ngIf="form.get('email')?.hasError('required')">Email is required</div>
+          <div *ngIf="form.get('email')?.hasError('email')">Email must be a valid email address</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input placeholder="Ingrese el Password"
+          type="password"
+          class="form-control"
+          formControlName="password"
+          required
+          minlength="6"
+        />
+        <div class="alert-danger" *ngIf="form.get('password')?.errors && form.get('password')?.touched">
+          <div *ngIf="form.get('password')?.hasError('required')">Password is required</div>
+          <div *ngIf="form.get('password')?.hasError('minlength')">Password must be at least 6 characters</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="role">Role</label>
+        <select title="roles" class="form-control" formControlName="role" required>
+          <option *ngFor="let roleOption of roles" [value]="roleOption">{{ roleOption }}</option>
+        </select>
+        <div class="alert-danger" *ngIf="form.get('role')?.errors && form.get('role')?.touched">
+          <div *ngIf="form.get('role')?.hasError('required')">Role is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary btn-block">Sign Up</button>
+      </div>
+
+      <div class="alert alert-warning" *ngIf="!submitted && isSignUpFailed">
+        Signup failed!<br />{{ errorMessage }}
+      </div>
+    </form>
+
+    <div class="alert alert-success" *ngIf="isSuccessful">
+      Your registration is successful!
+    </div>
+  </div>
+</div>

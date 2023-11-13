@@ -1,0 +1,181 @@
+<div class="card border-primary mb-3">
+  <div class="card-header">Reportes Tecnicos</div>
+  <div class="card-body text-primary">
+    <h5 class="card-title">Listado de Reportes Tecnicos</h5>
+
+    <div class="d-flex gap-2 my-2">
+      <button class="btn btn-rounded btn-primary" type="button" [routerLink]="['/reportes/reportesform']"><i class="bi bi-person-plus"></i> Crear reporte</button>
+
+      <!-- <input [(ngModel)]="nombreCliente" placeholder="Nombre del Cliente"> --><!-- Input para ingresar el nombre del cliente a filtrar -->
+       <select title="clienteSelect"class="form-control"
+      [(ngModel)]="nombreCliente" (change)="getReportes()">
+      <option value="" disabled selected>Selecciona un cliente</option>
+      <option *ngFor="let cliente of clientes" [value]="cliente.nombre_comercial">{{ cliente.nombre_comercial }}</option>
+    </select>
+   <select title="equipoSelect" class="form-control"
+    [(ngModel)]="nombreEquipo"(change)="filtrarequipo()">
+      <option value="" disabled selected>Selecciona un equipo</option>
+      <option *ngFor="let equipo of equipos" [value]="equipo.nombre">{{ equipo.nombre }}</option>
+    </select>
+   <!--<input id="fechareporte" type="date" [(ngModel)]="fechaReporte" class="form-control"  placeholder="yyyy/MM/dd"  />
+    <button (click)="filtrarfechareporte()">Buscar fecha Reporte </button>-->
+
+   <button class="btn btn-rounded btn-primary"(click)="limpiarFiltro()">Eliminar filtro</button>
+
+    </div>
+    <div *ngIf="reportes?.length==0" class="alert alert-info">
+      No hay registros en la base de datos!
+    </div>
+    <div *ngIf="loading" class="alert alert-info">
+      Imprimiendo... Por favor, espere.
+    </div>
+
+
+    <div class="table-responsive text-nowrap">
+
+    <table class="table table-bordered table-striped w-auto table-hover table-fixed"  *ngIf="reportes?.length">
+      <thead>
+        <tr>
+          <th>
+            editar
+          </th>
+          <th>
+            eliminar
+          </th>
+          <th>
+           imprimir reporte
+          </th>
+            <th>ID Reporte Técnico</th>
+            <th>Cliente  </th>
+            <th>Equipo</th>
+            <th>No. de Reporte Técnico</th>
+            <th>No. de Cotización</th>
+            <th>Técnico</th>
+            <th>Hora de Entrada</th>
+            <th>Hora de Salida</th>
+            <th>Hora de Viaje</th>
+            <th>Fecha de Reporte</th>
+            <th>Contacto</th>
+            <th>Dirección</th>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>No. de Serie</th>
+            <th>Ubicación del Equipo</th>
+            <th>ID Interno</th>
+            <th>Capacidad</th>
+            <th>Resolución</th>
+            <th>Calibración</th>
+            <th>Instalación</th>
+            <th>Verificación</th>
+            <th>Entrega del Equipo</th>
+            <th>Gestión Metrologica</th>
+            <th>Retiro del Equipo</th>
+            <th>Inspección</th>
+            <th>Otros</th>
+            <th>Observaciones</th>
+            <th>Desnivel</th>
+            <th>Vibraciones</th>
+            <th>Averías</th>
+            <th>Errores de Indicador</th>
+            <th>Soporte Inadecuado</th>
+            <th>Falta de Componentes</th>
+            <th>Suciedad</th>
+            <th>Corriente de Aire</th>
+            <th>Insectos</th>
+            <th>Golpe</th>
+            <th>Fuente Externa de Calor</th>
+            <th>Configuración</th>
+            <th>Observaciones (2)</th>
+            <th>Nivelación</th>
+            <th>Limpieza</th>
+            <th>Ajustes de Linealidad</th>
+            <th>Configuración (1)</th>
+            <th>Ajuste de Excentricidad</th>
+            <th>Reemplazo</th>
+            <th>Observaciones (3)</th>
+            <th>Completo</th>
+            <th>Incompleto</th>
+            <th>Observaciones (4)</th>
+            <th>Nota</th>
+            <th>Recibido por</th>
+            <th>Fecha</th>
+            <th>Activo</th>
+
+
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let reporte of reportes">
+          <td>
+            <button type="button" name="editar" [routerLink]="['/reportes/reportesform',reporte.idreptec]" class="btn btn-success btn-sm">editar</button>
+          </td>
+          <td>
+            <button type="button" name="eliminar" (click)='delete(reporte)' class="btn btn-danger btn-sm">eliminar</button>
+          </td>
+          <td>
+            <button type="button" name="imprimir" (click)='exportarPDF(reporte.idreptec)' class="btn btn-primary btn-sm">imprimir</button>
+          </td>
+          <td>{{ reporte.idreptec }}</td>
+	  <td>{{reporte.nombrecliente }}</td>
+	  <td>{{ reporte.nombreequipo }}</td>
+          <td>{{ reporte.no_reporte_tecnico}}</td>
+          <td>{{ reporte.no_cotizacion }}</td>
+          <td>{{ reporte.tecnico}}</td>
+          <td>{{ reporte.horaentrada  }}</td>
+          <td>{{ reporte.horasalida }}</td>
+          <td>{{ reporte.horaviajes }}</td>
+          <td>{{ reporte.fechareporte}}</td>
+          <td>{{ reporte.contacto}}</td>
+          <td>{{ reporte.direccion}}</td>
+          <td>{{ reporte.marca }}</td>
+          <td>{{ reporte.modelo }}</td>
+          <td>{{ reporte.no_serie }}</td>
+          <td>{{ reporte.ubicacion_equipo }}</td>
+          <td>{{ reporte.idinterno }}</td>
+          <td>{{ reporte.capacidad }}</td>
+          <td>{{ reporte.resolucion }}</td>
+	  <td><input title="calibracion"type="checkbox" [checked]="reporte.calibracion" disabled="disabled" /></td>
+          <td><input title="instalacion" type="checkbox" [checked]="reporte.instalacion" disabled="disabled" /></td>
+ <td><input title="instalacion"type="checkbox" [checked]="reporte.verificacion" disabled="disabled" /></td>
+ <td><input title="instalacion"type="checkbox" [checked]="reporte.entregaequipo" disabled="disabled" /></td>
+ <td><input title="instalacion"type="checkbox" [checked]="reporte.gestionmetrologica" disabled="disabled" /></td>
+ <td><input title="instalacion"type="checkbox" [checked]="reporte.retiroequipo" disabled="disabled" /></td>
+ <td><input title="instalacion"type="checkbox" [checked]="reporte.inspeccion" disabled="disabled" /></td>
+ <td><input title="instalacion"type="checkbox" [checked]="reporte.otros" disabled="disabled" /></td>
+          <td>{{ reporte.observaciones }}</td>
+<td><input title="instalacion"type="checkbox" [checked]="reporte.desnivel" disabled="disabled" /></td>
+<td><input title="instalacion"type="checkbox" [checked]="reporte.vibraciones" disabled="disabled" /></td>
+<td><input title="instalacion"type="checkbox" [checked]="reporte.averias" disabled="disabled" /></td>
+<td><input title="instalacion"type="checkbox" [checked]="reporte.erroresindicador" disabled="disabled" /></td>
+<td><input title="instalacion"type="checkbox" [checked]="reporte.soporteinadecuadas" disabled="disabled" /></td>
+<td><input title="instalacion"type="checkbox" [checked]="reporte.faltacomponente" disabled="disabled" /></td>
+<td><input title="instalacion"type="checkbox" [checked]="reporte.suceidad" disabled="disabled" /></td>
+<td><input title="corrienteaire"type="checkbox" [checked]="reporte.corrienteaire" disabled="disabled" /></td>
+<td><input title="insectos"type="checkbox" [checked]="reporte.insectos" disabled="disabled" /></td>
+<td><input title="golpe"type="checkbox" [checked]="reporte.golpe" disabled="disabled" /></td>
+<td><input title="fuentexternacalor"type="checkbox" [checked]="reporte.fuentexternacalor" disabled="disabled" /></td>
+<td><input title="configuracion"type="checkbox" [checked]="reporte.configuracion" disabled="disabled" /></td>
+          <td>{{ reporte.observaciones2 }}</td>
+<td><input title="nivelacion"type="checkbox" [checked]="reporte.nivelacion" disabled="disabled" /></td>
+<td><input title="limpieza"type="checkbox" [checked]="reporte.limpieza" disabled="disabled" /></td>
+<td><input title="ajusteslinealidad"type="checkbox" [checked]="reporte.ajusteslinealidad" disabled="disabled" /></td>
+<td><input title="configuracion1"type="checkbox" [checked]="reporte.configuracion1" disabled="disabled" /></td>
+<td><input title="ajusteexcentricidad"type="checkbox" [checked]="reporte.ajusteexcentricidad" disabled="disabled" /></td>
+<td><input title="remplaso"type="checkbox" [checked]="reporte.reemplazo" disabled="disabled" /></td>
+          <td>{{ reporte.observaciones3 }}</td>
+<td><input title="completo"type="checkbox" [checked]="reporte.completo" disabled="disabled" /></td>
+<td><input title="incompleto"type="checkbox" [checked]="reporte.incompleto" disabled="disabled" /></td>
+          <td>{{ reporte.observaciones4 }}</td>
+          <td>{{ reporte.nota }}</td>
+          <td>{{ reporte.recibidopor}}</td>
+	  <td>{{ reporte.fecha}}</td>
+<td><input title="activo"type="checkbox" [checked]="reporte.activo" disabled="disabled" /></td>
+
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+</div>

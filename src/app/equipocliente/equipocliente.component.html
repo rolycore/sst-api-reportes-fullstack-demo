@@ -1,0 +1,113 @@
+<div class="card border-primary mb-3">
+  <div class="card-header">Equipo Clientes</div>
+  <div class="card-body text-primary">
+    <h5 class="card-title">Listado de Equipo Clientes</h5>
+    <div class="my-2 text-left">
+      <button class="btn btn-rounded btn-primary" type="button" [routerLink]="['/equipoclientes/equipoform']"><i class="bi bi-person-plus"></i> Crear Equipos</button>
+     <!-- <button class="btn btn-rounded btn-secondary"(click)="exportarEquipos()" >Exportar Equipos</button>-->
+      <!--<input title="file"class="form-control" placeholder="seleccione un archivo excel" type="file" (change)="seleccionarArchivo($event)" />-->
+     <!-- <button  class="btn btn-rounded btn-success "(click)="importar()">Importar Equipos</button>-->
+    </div>
+    <div *ngIf="loading" class="alert alert-info">
+      Cargando... Por favor, espere.
+    </div>
+
+    <div *ngIf="equipos?.length==0" class="alert alert-info">
+      No hay registros en la base de datos!
+    </div>
+    <div class="table-responsive text-nowrap">
+    <table class="table table-bordered table-striped w-auto table-hover table-fixed"  *ngIf="equipos?.length">
+      <thead>
+        <tr>
+          <th>
+            editar
+          </th>
+          <th>
+            eliminar
+          </th>
+          <th>ID Equipo</th>
+          <th>Código de Equipo</th>
+          <th>Nombre</th>
+          <th>Cliente</th>
+          <th>Marca</th>
+          <th>Modelo</th>
+          <th>Numero Serie</th>
+        <!--    <th>Categoría de Equipo</th>-->
+          <th>Capacidad</th>
+          <th>Capacidad Máxima</th>
+          <th>Capacidad Mínima</th>
+          <th>Resolución</th>
+          <th>Divisiones</th>
+          <th>Observaciones</th>
+          <!--<th>Imagen de Equipo</th>-->
+          <th>Unidad de Medida</th>
+          <th>Instrumento</th>
+          <th>Mide</th>
+         <!--   <th>Lista de Precio</th>-->
+         <!--   <th>CMC de Equipo</th>-->
+          <th>Fabricante de Receptor</th>
+          <th>Modelo de Receptor</th>
+          <th>Serie de Receptor</th>
+          <th>ID Interno de Receptor</th>
+          <th>Fabricante de Sensor</th>
+          <th>Modelo de Sensor</th>
+          <th>ID Interno de Sensor</th>
+          <th>Serie de Sensor</th>
+          <th>Fabricante de Indicador</th>
+          <th>Modelo de Indicador</th>
+          <th>Serie de Indicador</th>
+          <th>ID Interno de Indicador</th>
+          <th>Fecha de Creación</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let equipo of equipos">
+          <td>
+            <button type="button" name="editar" [routerLink]="['/equipoclientes/equipoform',equipo.idEquipo]" class="btn btn-success btn-sm">editar</button>
+          </td>
+          <td>
+            <button type="button" name="eliminar" (click)='delete(equipo)' class="btn btn-danger btn-sm">eliminar</button>
+          </td>
+          <td>{{ equipo.idEquipo }}</td>
+          <td>{{ equipo.codigoequipo }}</td>
+          <td>{{ equipo.nombre }}</td>
+         <!-- Muestra el nombre_comercial del cliente -->
+      <td>{{ equipo.nombrecliente }}</td>
+      <!-- ...otras celdas de datos... -->
+      <td>{{ equipo.marca}}</td>
+      <td>{{ equipo.modelo}}</td>
+      <td>{{ equipo.numero_serie }}</td>
+         <!--   <td>{{ equipo.categoria_equipo }}</td>-->
+          <td>{{ equipo.capacidad }}</td>
+          <td>{{ equipo.capacidad_maxima }}</td>
+          <td>{{ equipo.capacidad_minima }}</td>
+          <td>{{ equipo.resolucion }}</td>
+          <td>{{ equipo.divisiones }}</td>
+          <td>{{ equipo.observaciones }}</td>
+        <!--  <td><img [src]="dataURItoArrayBuffer(equipo.imagen_equipo)" alt="Imagen de Equipo" width="100" height="100"></td>-->
+          <td>{{ equipo.unidad_medida }}</td>
+          <td>{{ equipo.instrumento }}</td>
+          <td>{{ equipo.mide }}</td>
+           <!-- <td>{{ equipo.lista_precio }}</td>-->
+           <!-- <td>{{ equipo.cmc_equipo }}</td>-->
+          <td>{{ equipo.fabricante_receptor }}</td>
+          <td>{{ equipo.modelo_receptor }}</td>
+          <td>{{ equipo.serie_receptor }}</td>
+          <td>{{ equipo.id_interno_receptor }}</td>
+          <td>{{ equipo.fabricante_sensor }}</td>
+          <td>{{ equipo.modelo_sensor }}</td>
+          <td>{{ equipo.id_interno_sensor }}</td>
+          <td>{{ equipo.serie_sensor }}</td>
+          <td>{{ equipo.fabricante_indicador }}</td>
+          <td>{{ equipo.modelo_indicador }}</td>
+          <td>{{ equipo.serie_indicador }}</td>
+          <td>{{ equipo.id_interno_indicador }}</td>
+          <td>{{ equipo.createAt | date }}</td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+</div>

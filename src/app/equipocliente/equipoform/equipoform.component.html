@@ -1,0 +1,479 @@
+<div class="row justify-content-center align-items-center">
+  <div class="col-md-6">
+    <div class="card bg-dark text-white">
+      <div class="card-header">{{titulo}}</div>
+      <div class="card-body">
+        <ul class="nav nav-pills">
+          <li class="nav-item">
+            <a class="nav-link" [class.active]="activeTab === 1" (click)="activeTab = 1"> Popiedades Metrológicas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [class.active]="activeTab === 2" (click)="activeTab = 2"> Datos del Receptor o
+              estructura</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [class.active]="activeTab === 3" (click)="activeTab = 3">Datos del sensor o celda</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [class.active]="activeTab === 4" (click)="activeTab = 4">Datos del Indicador</a>
+          </li>
+        </ul>
+        <form [formGroup]="formulario" formulario.valid >
+          <div *ngIf="activeTab===1">
+            <div class="form-group">
+              <div class="form-check">
+                <input class="form-check-input form-control" type="checkbox" id="activo" formControlName="activo"
+                  [(ngModel)]="equipo.activo">
+                <label class="form-check-label" for="activo">Activo</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="codigoequipo" class="form-label">Codigo Equipo</label>
+              <input id="codigoequipo" type="text" formControlName="codigoequipo" [(ngModel)]="equipo.codigoequipo" class="form-control" [readonly]="true" />
+          </div>
+          <div class="form-group">
+            <label for="codigoequipocliente" class="col-form-label col-sm-6">Codigo ID interno cliente:</label>
+            <input id="codigoequipocliente" type="text" formControlName="codigoequipocliente" class="form-control" [(ngModel)]="equipo.codigoequipocliente"
+              placeholder="Ingrese el codigo equipo cliente interno." />
+            <div class="alert alert-danger"
+              *ngIf="formulario.get('codigoequipocliente')?.invalid && formulario.get('codigoequipocliente')?.touched">
+              el codigo equipo cliente interno es requerido
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="clienteSelect">Selecciona un cliente:</label>
+            <select
+              title="clienteSelect"
+              class="form-control"
+              formControlName="cliente"
+              required
+              id="clienteSelect"
+              [(ngModel)]="clienteSeleccionado"
+              (change)="onSelectCliente()"
+
+            >
+              <option value="" disabled>Selecciona un cliente</option>
+              <option *ngFor="let cliente of clientes" [value]="cliente.idCliente">{{ cliente.nombre_comercial }}</option>
+            </select>
+            <div class="alert-danger" *ngIf="formulario?.get('cliente')?.errors && formulario?.get('cliente')?.touched">
+              <div *ngIf="formulario?.get('cliente')?.hasError('required')">El Cliente es requerido</div>
+            </div>
+          </div>
+
+          <div class="form-group"*ngIf="clienteSeleccionado">
+            <label for="nombrecliente" class="col-form-label col-sm-6">Nombre del Cliente:</label>
+            <input id="nombrecliente" type="text" formControlName="nombrecliente" class="form-control" [(ngModel)]="equipo.nombrecliente"
+              placeholder="Ingrese el Nombre del Cliente" [readonly]="true"/>
+            <div class="alert alert-danger"
+              *ngIf="formulario.get('nombrecliente')?.invalid && formulario.get('nombrecliente')?.touched">
+              Nombre del cliente es requerido
+            </div>
+          </div>
+            <div class="form-group">
+              <label for="nombre" class="col-form-label col-sm-6">Nombre del Equipo:</label>
+              <input id="nombre" type="text" formControlName="nombre" class="form-control" [(ngModel)]="equipo.nombre"
+                placeholder="Ingrese el Nombre del Equipo" />
+              <div class="alert alert-danger"
+                *ngIf="formulario.get('nombre')?.invalid && formulario.get('nombre')?.touched">
+                Nombre es requerido
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="marca" class="col-form-label col-sm-6">Marca del Equipo:</label>
+              <input id="marca" type="text" formControlName="marca" class="form-control" [(ngModel)]="equipo.marca"
+                placeholder="Ingrese la marca del Equipo" />
+              <div class="alert alert-danger"
+                *ngIf="formulario.get('marca')?.invalid && formulario.get('marca')?.touched">
+                Marca es requerida
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="modelo" class="col-form-label col-sm-6">Modelo del Equipo:</label>
+              <input id="modelo" type="text" formControlName="modelo" class="form-control" [(ngModel)]="equipo.modelo"
+                placeholder="Ingrese el modelo del Equipo" />
+              <div class="alert alert-danger"
+                *ngIf="formulario.get('modelo')?.invalid && formulario.get('modelo')?.touched">
+                Modelo es requerido
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="numero_serie" class="col-form-label col-sm-6">Numero serie del Equipo:</label>
+              <input id="numero_serie" type="text" formControlName="numero_serie" class="form-control" [(ngModel)]="equipo.numero_serie"
+                placeholder="Ingrese el modelo del Equipo" />
+              <div class="alert alert-danger"
+                *ngIf="formulario.get('numero_serie')?.invalid && formulario.get('numero_serie')?.touched">
+                Numero serie es requerido
+              </div>
+            </div>
+          <!--  <div class="form-group">
+              <label for="imagen_equipo" class="col-form-label col-sm-6">Imagen del Equipo</label>
+              <input id="imagen_equipo" type="file" class="form-control" formControlName="imagen_equipo"
+                #imagenEquipoInput (change)="capturarFile($event)" accept="image/*" />
+              <div class="alert alert-danger"
+                *ngIf="formulario.get('imagen_equipo')?.invalid && formulario.get('imagen_equipo')?.touched">
+                Imagen requerida
+              </div>
+              <div class="p-1">
+                <small>Se aceptan archivos imágenes de tipo .png</small>
+              </div>
+            </div>
+
+             Div para mostrar la imagen cargada
+            <button class="clear-image" type="button" (click)="clearImage()">Clear</button>
+            <div *ngIf="previsualizacion" class="form-group">
+              <img [src]="previsualizacion" alt="imagen equipo" class="fluid img-thumbnail" width="300" height="100" />
+            </div> -->
+          <!--  <div class="form-group">
+              <label for="categoriaSelect">Selecciona una categoría:</label>
+              <select
+                title="categoriaSelect"
+                class="form-control"
+                formControlName="categoria_equipo"
+                [(ngModel)]="selectedCategoria"
+                (change)="onSelectCategoria()"
+                id="categoriaSelect"
+                required
+              >
+                <option value="" disabled>Selecciona una categoría</option>
+                <option *ngFor="let selectedCategoria of categorias" [value]="selectedCategoria">{{ selectedCategoria}}</option>
+              </select>
+              <div class="alert-danger" *ngIf="formulario?.get('categoria')?.errors && formulario?.get('categoria')?.touched">
+                <div *ngIf="formulario?.get('categoria')?.hasError('required')">La categoría es requerida</div>
+              </div>
+            </div>-->
+
+
+            <div class="form-group"*ngIf="selectedCategoria">
+              <label for="categoria_equipo" class="col-form-label col-sm-6">Categoria Equipo:</label>
+
+              <input id="categoria_equipo" type="text" formControlName="categoria_equipo" class="form-control"
+                [(ngModel)]="equipo.categoria_equipo" placeholder="Ingrese la categoria del equipo" [readonly]="true"/>
+
+            </div>
+            <div class="form-group">
+              <label for="capacidad_maxima" class="col-form-label col-sm-6">Capacidad Maxima:</label>
+
+              <input id="capacidad_maxima" type="text" formControlName="capacidad_maxima" class="form-control"
+                [(ngModel)]="equipo.capacidad_maxima" placeholder="Ingrese la capacidad maxima" />
+              <div class="alert alert-danger"
+                *ngIf="formulario?.get('capacidad_maxima')?.invalid && formulario?.get('capacidad_maxima')?.touched">
+                Capacidad Maxima es requerida
+              </div>
+
+            </div>
+            <div class="form-group">
+              <label for="capacidad_minima" class="col-form-label col-sm-6">Capacidad Minima:</label>
+
+              <input id="capacidad_minima" type="text" formControlName="capacidad_minima" class="form-control"
+                [(ngModel)]="equipo.capacidad_minima" placeholder="Ingrese la capicidad minima" />
+              <div class="alert alert-danger"
+                *ngIf="formulario?.get('capacidad_minima')?.invalid && formulario?.get('capacidad_minima')?.touched">
+                Capacidad Minima es requerida
+              </div>
+
+            </div>
+            <div class="form-group">
+              <label for="capacidad" class="col-form-label col-sm-6">Capacidad:</label>
+
+              <input id="capacidad" type="text" formControlName="capacidad" class="form-control"
+                [(ngModel)]="equipo.capacidad" placeholder="Ingrese la capicidad" />
+              <div class="alert alert-danger"
+                *ngIf="formulario?.get('capacidad')?.invalid && formulario?.get('capacidad')?.touched">
+                Capacidades requerida
+              </div>
+
+            </div>
+            <div class="form-group">
+              <label for="resolucion" class="col-form-label col-sm-6">Resolucion:</label>
+
+              <input id="resolucion" type="text" formControlName="resolucion" class="form-control"
+                [(ngModel)]="equipo.resolucion" placeholder="Ingrese la resolucion del equipo" />
+              <div class="alert alert-danger"
+                *ngIf="formulario?.get('resolucion')?.invalid && formulario?.get('resolucion')?.touched">
+                La Resolucion es requerida
+              </div>
+
+            </div>
+            <div class="form-group">
+              <label for="divisiones" class="col-form-label col-sm-6">Divisiones:</label>
+
+              <input id="divisiones" type="text" formControlName="divisiones" class="form-control"
+                [(ngModel)]="equipo.divisiones" placeholder="Ingrese las divisiones del equipo" />
+              <div class="alert alert-danger"
+                *ngIf="formulario?.get('divisiones')?.invalid && formulario?.get('divisiones')?.touched">
+                las Divisiones son requeridas
+              </div>
+
+            </div>
+            <div class="form-group">
+              <label for="unidadSelect">Selecciona una unidad de medida:</label>
+              <select
+                title="unidadSelect"
+                class="form-control"
+                formControlName="unidad_medida"
+                required
+                id="unidadSelect"
+              [(ngModel)]="selectedUnidad"
+                (change)="onSelectUnidad()"
+
+              >
+                <option value="" disabled>Selecciona una unidad de medida</option>
+                <option *ngFor="let selectedUnidad of unidadmedida" [value]="selectedUnidad">{{selectedUnidad}}</option>
+              </select>
+              <div class="alert-danger" *ngIf="formulario?.get('unidadSelect')?.errors && formulario?.get('unidadSelect')?.touched">
+                <div *ngIf="formulario?.get('unidadSelect')?.hasError('required')">La unidad es requerida</div>
+              </div>
+            </div>
+            <div class="form-group"*ngIf="selectedUnidad">
+              <label for="unidad_medida" class="col-form-label col-sm-6">Unidad de Medida:</label>
+
+              <input id="unidad_medida" type="text" formControlName="unidad_medida" class="form-control"
+                [(ngModel)]="equipo.unidad_medida" placeholder="Ingrese la unidad de medida del equipo" [readonly]="true"/>
+
+
+            </div>
+            <div class="form-group">
+              <label for="instrumentoSelect">Selecciona un instrumento:</label>
+              <select
+                title="instrumentoSelect"
+                class="form-control"
+                formControlName="instrumento"
+                required
+                id="instrumentoSelect"
+              [(ngModel)]="selectedInstrumento"
+                (change)="onSelectInstrumento()"
+
+              >
+                <option value="" disabled>Selecciona un instrumento</option>
+                <option *ngFor="let selectedInstrumento of instrumento" [value]="selectedInstrumento">{{selectedInstrumento}}</option>
+              </select>
+              <div class="alert-danger" *ngIf="formulario?.get('instrumentoSelect')?.errors && formulario?.get('instrumentoSelect')?.touched">
+                <div *ngIf="formulario?.get('instrumentoSelect')?.hasError('required')">El Instrumento es requerido</div>
+              </div>
+            </div>
+            <div class="form-group" *ngIf="selectedInstrumento">
+              <label for="instrumento" class="col-form-label col-sm-6">Instrumento:</label>
+
+              <input id="instrumento" type="text" formControlName="instrumento" class="form-control"
+                [(ngModel)]="equipo.instrumento" placeholder="Ingrese el instrumento del equipo" [readonly]="true"/>
+
+
+            </div>mide
+            <div class="form-group">
+              <label for="mideSelect">Selecciona una magnitud:</label>
+              <select
+                title="mideSelect"
+                class="form-control"
+                formControlName="mide"
+                required
+                id="mideSelect"
+              [(ngModel)]="selectedMagnitud"
+                (change)="onSelectMagnitud()"
+
+              >
+                <option value="" disabled>Selecciona una magnitud</option>
+                <option *ngFor="let selectedMagnitud of magnitud" [value]="selectedMagnitud">{{selectedMagnitud}}</option>
+              </select>
+              <div class="alert-danger" *ngIf="formulario?.get('mideSelect')?.errors && formulario?.get('mideSelect')?.touched">
+                <div *ngIf="formulario?.get('mideSelect')?.hasError('required')">La magnitud es requerida</div>
+              </div>
+            </div>
+
+            <div class="form-group" *ngIf="selectedMagnitud">
+              <label for="mide" class="col-form-label col-sm-6">Magnitud:</label>
+
+              <input id="mide" type="text" formControlName="mide" class="form-control" [(ngModel)]="equipo.mide"
+                placeholder="Ingrese que mide el equipo" [readonly]="true"/>
+              <div class="alert alert-danger"
+                *ngIf="formulario?.get('mide')?.invalid && formulario?.get('mide')?.touched">
+                Se espera datos como longitud, ancho, altura, peso, etc.
+              </div>
+
+            </div>
+           <!-- <div class="form-group">
+              <label for="lista_precio" class="col-form-label col-sm-6">Lista de Precio:</label>
+
+              <input id="lista_precio" type="text" formControlName="lista_precio" class="form-control"
+                [(ngModel)]="equipo.lista_precio" placeholder="Ingrese la lista de precio" />
+              <div class="alert alert-danger"
+                *ngIf="formulario?.get('lista_precio')?.invalid && formulario?.get('lista_precio')?.touched">
+                La Lista de precio es requerida.
+              </div>
+
+            </div>-->
+          <!--  <div class="form-group">
+              <label for="cmc_equipo" class="col-form-label col-sm-6">Incertidumbre ofrecida (CMC):</label>
+
+              <input id="cmc_equipo" type="text" formControlName="cmc_equipo" class="form-control"
+                [(ngModel)]="equipo.cmc_equipo" placeholder="Ingrese el CMC del equipo" />
+              <div class="alert alert-danger"
+                *ngIf="formulario?.get('cmc_equipo')?.invalid && formulario?.get('cmc_equipo')?.touched">
+                El CMC es requerido.
+              </div>
+
+            </div>-->
+
+            <div class="form-group">
+              <label for="observaciones" class="col-form-label col-sm-6">Observaciones:</label>
+
+              <input id="observaciones" type="text" formControlName="observaciones" class="form-control"
+                [(ngModel)]="equipo.observaciones" placeholder="Ingrese la observacion del equipo" />
+              <div class="alert alert-danger"
+                *ngIf="formulario?.get('observaciones')?.invalid && formulario?.get('observaciones')?.touched">
+                Las Observaciones son requeridas, si no hay coloque N/A.
+              </div>
+
+            </div>
+
+          </div>
+
+          <div *ngIf="activeTab === 2">
+            <div class="form-group">
+              <label for="fabricante_receptor" class="col-form-label col-sm-6">Fabricante del receptor:</label>
+
+              <input id="fabricante_receptor" type="text" formControlName="fabricante_receptor" class="form-control"
+                [(ngModel)]="equipo.fabricante_receptor" placeholder="Ingrese el Nombre del fabricante del receptor" />
+              <div class="alert alert-danger"
+                *ngIf="formulario?.get('fabricante_receptor')?.invalid && formulario?.get('fabricante_receptor')?.touched">
+                Nombre del fabricante del receptor es requerido
+              </div>
+
+            </div>
+            <div class="form-group">
+              <label for="modelo_receptor" class="col-form-label col-sm-6">Modelo del receptor:</label>
+
+              <input id="modelo_receptor" type="text" formControlName="modelo_receptor" class="form-control"
+                [(ngModel)]="equipo.modelo_receptor" placeholder="Ingrese el modelo del receptor" />
+              <div class="alert alert-danger"
+                *ngIf="formulario?.get('modelo_receptor')?.invalid && formulario?.get('modelo_receptor')?.touched">
+                El Modelo del receptor es requerido
+              </div>
+
+            </div>
+            <div class="form-group">
+              <label for="serie_receptor" class="col-form-label col-sm-6">Serie del receptor:</label>
+
+              <input id="serie_receptor" type="text" formControlName="serie_receptor" class="form-control"
+                [(ngModel)]="equipo.serie_receptor" placeholder="Ingrese el numero serie del receptor" />
+              <div class="alert alert-danger"
+                *ngIf="formulario?.get('serie_receptor')?.invalid && formulario?.get('serie_receptor')?.touched">
+                El numero de serie del receptor es requerido
+              </div>
+
+            </div>
+            <div class="form-group">
+              <label for="id_interno_receptor" class="col-form-label col-sm-6">Id interno del receptor:</label>
+
+              <input id="id_interno_receptor" type="text" formControlName="id_interno_receptor" class="form-control"
+                [(ngModel)]="equipo.id_interno_receptor" placeholder="Ingrese el id interno del receptor" />
+              <div class="alert alert-danger"
+                *ngIf="formulario?.get('id_interno_receptor')?.invalid && formulario?.get('id_interno_receptor')?.touched">
+                El Id interno del receptor es requerido
+              </div>
+            </div>
+
+          </div>
+          <div *ngIf="activeTab === 3">
+            <div class="form-group">
+              <label for="fabricante_sensor" class="col-form-label col-sm-6">Fabricante del sensor:</label>
+
+              <input id="fabricante_sensor" type="text" formControlName="fabricante_sensor" class="form-control"
+                [(ngModel)]="equipo.fabricante_sensor" placeholder="Ingrese Nombre del fabricante del sensor" />
+              <div class="alert alert-danger"
+                *ngIf="formulario?.get('fabricante_sensor')?.invalid && formulario?.get('fabricante_sensor')?.touched">
+                Nombre del fabricante del sensor es requerido
+
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="modelo_sensor" class="col-form-label col-sm-6">Modelo del sensor:</label>
+
+              <input id="modelo_sensor" type="text" formControlName="modelo_sensor" class="form-control"
+                [(ngModel)]="equipo.modelo_sensor" placeholder="Ingrese el modelo del sensor" />
+              <div class="alert alert-danger"
+                *ngIf="formulario?.get('modelo_sensor')?.invalid && formulario?.get('modelo_sensor')?.touched">
+                El modelo del sensor es requerido
+
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="id_interno_sensor" class="col-form-label col-sm-6">Id interno del sensor:</label>
+
+              <input id="id_interno_sensor" type="text" formControlName="id_interno_sensor" class="form-control"
+                [(ngModel)]="equipo.id_interno_sensor" placeholder="Ingrese el numero del id interno del sensor" />
+              <div class="alert alert-danger"
+                *ngIf="formulario?.get('id_interno_sensor')?.invalid && formulario?.get('id_interno_sensor')?.touched">
+                El id interno del sensor es requerido
+
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="serie_sensor" class="col-form-label col-sm-6">Serie del sensor:</label>
+              <input id="serie_sensor" type="text" formControlName="serie_sensor" class="form-control"
+                [(ngModel)]="equipo.serie_sensor" placeholder="Ingrese numero de serie del sensor" />
+              <div class="alert alert-danger"
+                *ngIf="formulario?.get('serie_sensor')?.invalid && formulario?.get('serie_sensor')?.touched">
+                El numero de serie del sensor es requerido
+              </div>
+            </div>
+
+          </div>
+          <div *ngIf="activeTab === 4">
+            <div class="form-group">
+              <label for=" fabricante_indicador" class="col-form-label col-sm-6">Fabricante del indicador:</label>
+
+              <input id="fabricante_indicador" type="text" formControlName="fabricante_indicador" class="form-control"
+                [(ngModel)]="equipo.fabricante_indicador" placeholder="Ingrese Nombre del fabricante del indicador" />
+              <div class="alert alert-danger"
+                *ngIf="formulario?.get('fabricante_indicador')?.invalid && formulario?.get('fabricante_indicador')?.touched">
+                Nombre del fabricante del indicador es requerido
+
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="modelo_indicador" class="col-form-label col-sm-6">Modelo del indicador:</label>
+
+              <input id="modelo_indicador" type="text" formControlName="modelo_indicador" class="form-control"
+                [(ngModel)]="equipo.modelo_indicador" placeholder="Ingrese el modelo del indicador" />
+              <div class="alert alert-danger"
+                *ngIf="formulario?.get('modelo_indicador')?.invalid && formulario?.get('modelo_indicador')?.touched">
+                El modelo del indicador es requerido
+
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="serie_indicador" class="col-form-label col-sm-6">Serie del indicador:</label>
+              <input id="serie_indicador" type="text" formControlName="serie_indicador" class="form-control"
+                [(ngModel)]="equipo.serie_indicador" placeholder="Ingrese numero de serie del indicador" />
+              <div class="alert alert-danger"
+                *ngIf="formulario?.get('serie_indicador')?.invalid && formulario?.get('serie_indicador')?.touched">
+                El numero de serie del indicador es requerido
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="id_interno_indicador" class="col-form-label col-sm-6">Id interno del indicador:</label>
+
+              <input id="id_interno_indicador" type="text" formControlName="id_interno_indicador" class="form-control"
+                [(ngModel)]="equipo.id_interno_indicador"
+                placeholder="Ingrese el numero del id interno del indicador" />
+              <div class="alert alert-danger"
+                *ngIf="formulario?.get('id_interno_indicador')?.invalid && formulario?.get('id_interno_indicador')?.touched">
+                El id interno del indicador es requerido
+
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-6">
+              <button class="btn btn-primary" role="button" (click)="crearEquipo()"*ngIf="!equipo.idEquipo else elseBlock"> Crear</button>
+
+      <ng-template #elseBlock>
+          <button class="btn btn-primary" role="button" (click)="updateEquipo()"[disabled]="!formulario.valid">Editar</button>
+      </ng-template>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

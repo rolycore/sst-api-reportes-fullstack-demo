@@ -1,0 +1,99 @@
+<div class="card border-primary mb-3">
+  <div class="card-header">Clientes</div>
+  <div class="card-body text-primary">
+    <h5 class="card-title">Listado de Clientes</h5>
+<div class="d-flex gap-2 justify-content-center my-2">
+  <button class="btn btn-rounded btn-primary" type="button" [routerLink]="['/clientes/form']"><i class="bi bi-person-plus"></i> Crear Cliente</button>
+  <button class="btn btn-rounded btn-secondary"(click)="exportarClientes()" >Exportar Clientes</button>
+  <input title="file"class="form-control" placeholder="seleccione un archivo excel" type="file" (change)="seleccionarArchivo($event)" />
+  <button  class="btn btn-rounded btn-success "(click)="importar()">Importar Clientes</button>
+</div>
+<div *ngIf="loading" class="alert alert-info">
+  Cargando... Por favor, espere.
+</div>
+
+
+    <div *ngIf="clientes?.length==0" class="alert alert-info">
+      No hay registros en la base de datos!
+    </div>
+    <div class="table-responsive text-nowrap">
+    <table class="table table-bordered table-striped w-auto table-hover table-fixed"  *ngIf="clientes?.length">
+      <thead>
+        <tr>
+          <th>
+            editar
+          </th>
+          <th>
+            eliminar
+          </th>
+          <th>id</th>
+          <th>Nombre Comercial</th>
+          <th>Nombre Apellido Representante legal</th>
+          <!--<th>Apellido</th>-->
+          <th>Email</th>
+          <th>Fecha</th>
+          <th>Codigo Cliente</th>
+
+          <th>Abreciatura</th>
+          <!--<th>Jefe Encargado</th>-->
+          <!--<th>Correo Jefe</th>-->
+          <th>Celular Servicio</th>
+          <th>Cargo</th>
+          <th>Razon Social</th>
+          <th>Ruc</th>
+          <th>DV</th>
+          <th>Nombre Cobro</th>
+          <th>Correo Cobro</th>
+          <th>Telefono Cobro</th>
+          <th>Celular Cobro</th>
+          <th>Cargo</th>
+         <!-- <th>Actividad Economica</th>-->
+          <th>Direccion</th>
+          <th>Telefono Empresa</th>
+          <th>Correo Servicio</th>
+          <th>Telefono Servivio</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cliente of clientes">
+
+          <td>
+            <button type="button" name="editar" [routerLink]="['/clientes/form',cliente.idCliente]" class="btn btn-success btn-sm">editar</button>
+          </td>
+          <td>
+            <button type="button" name="eliminar" (click)='delete(cliente)' class="btn btn-danger btn-sm">eliminar</button>
+          </td>
+          <td>{{ cliente.idCliente }}</td>
+          <td>{{cliente.nombre_comercial}}</td>
+          <td>{{ cliente.nombre }}</td>
+         <!-- <td>{{ cliente.apellido }}</td>-->
+          <td>{{ cliente.email }}</td>
+          <td>{{ cliente.createAt |  date:"dd, MMMM yyyy"}}</td>
+          <td>{{cliente.cod_cliente}}</td>
+
+          <td>{{cliente.abreviatura}}</td>
+          <td>{{cliente.nombre_contacto}}</td>
+          <td>{{cliente.correo_electronico}}</td>
+          <td>{{cliente.celular_servicio}}</td>
+          <td>{{cliente.cargo_servicio}}</td>
+          <td>{{cliente.razon_social}}</td>
+          <td>{{cliente.ruc}}</td>
+          <td>{{cliente.dv}}</td>
+          <td>{{cliente.nombre_cobro}}</td>
+          <td>{{cliente.correo_cobro}}</td>
+          <td>{{cliente.telefono_cobro}}</td>
+          <td>{{cliente.celular_cobro}}</td>
+          <td>{{cliente.cargo_cobro}}</td>
+         <!-- <td>{{cliente.actividad_economica}}</td>-->
+          <td>{{cliente.direccion}}</td>
+          <td>{{cliente.telefono_empresa}}</td>
+          <td>{{cliente.correo_servicio}}</td>
+          <td>{{cliente.telefono_servicio}}</td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+</div>

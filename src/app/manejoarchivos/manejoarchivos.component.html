@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card-header">{{titulo}}</div>
+    <div class="card-body bg-dark text-white">
+      <h2 class="card-title">Manejo de archivos</h2>
+
+      <!-- Seleccionar archivos para cargar -->
+      <input class="input-file" type="file" multiple (change)="onFileSelected($event)" />
+      <button type="button" class="btn btn-primary" (click)="onUploadFiles(selectedFiles)">Cargar archivos</button>
+
+
+      <!-- Estado de la carga/descarga -->
+      <div *ngIf="fileStatus.status === 'progress'">
+        <p>{{ fileStatus.requestType }} {{ fileStatus.percent }}% completado</p>
+      </div>
+
+
+      <!-- Lista de archivos cargados -->
+      <h3 class="card-title">Archivos cargados:</h3>
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let filename of filenames">{{ filename }}</li>
+      </ul>
+
+      <!-- Botón para descargar archivos -->
+      <button type="button" class="btn btn-success" (click)="onDownloadFiles(filenameToDownload)">Descargar
+        archivo</button>
+      </div>
+
+
+      <h3 class="card-title">Subir imagen:</h3>
+      <input class="input-file" (change)="capturarFile($event)" type="file">
+      <div *ngIf="previsualizacion">
+      <button type="button" class="btn btn-warning" type="button" (click)="clearImage()">Clear</button>
+      <img [src]="previsualizacion" alt="">
+     </div>
+
+     <div>
+      <small class="card-text">Se aceptan archivos imágenes de tipo .png</small>
+      </div>
+     <div *ngIf="previsualizacion">
+      <button type="button" class="btn btn-secondary" [disabled]="loading" (click)="subirArchivo()">
+        {{(loading) ? 'Cargando.....' : 'Subir Archivo'}}
+      </button>
+    </div>
+    <div>
+      <input type="text" [(ngModel)]="imageUrl" placeholder="URL de la imagen">
+      <button (click)="downloadImage(imageUrl)">Descargar Imagen</button>
+    </div>
+  </div>
+</div>

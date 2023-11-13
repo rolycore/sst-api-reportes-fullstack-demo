@@ -1,0 +1,71 @@
+<div id="app">
+  <nav class="navbar navbar-expand-lg navbar-dark text-white custom-header-bg">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        {{titleheader}}
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item" routerLinkActive="active">
+              <a href="/home" class="nav-link" routerLink="home">Home </a>
+            </li>
+            <li class="nav-item" *ngIf="showAdminBoard" routerLinkActive="active">
+              <a href="/admin" class="nav-link" routerLink="admin">Admin Board</a>
+            </li>
+            <li class="nav-item" *ngIf="showModeratorBoard" routerLinkActive="active">
+              <a href="/mod" class="nav-link" routerLink="mod">Moderator Board</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+              <a href="/user" class="nav-link" *ngIf="isLoggedIn" routerLink="user">User</a>
+            </li>
+           <!--<li class="nav-item" routerLinkActive="active">
+              <a href="/manejoarchivo" class="nav-link" *ngIf="isLoggedIn" routerLink="manejoarchivo">Archivos</a>
+            </li>-->
+             <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Modulos
+              </a>
+            <ul class="dropdown-menu " routerLinkActive="active">
+              <li ><a class="dropdown-item"  aria-current="page" *ngIf="isLoggedIn" routerLink="/cliente">Clientes</a></li>
+              <li ><hr class="dropdown-divider"></li>
+              <li ><a class="dropdown-item"  aria-current="page" *ngIf="isLoggedIn" routerLink="/equipocliente">Equipos Clientes</a></li>
+              <li ><hr class="dropdown-divider"></li>
+              <li ><a class="dropdown-item"  aria-current="page" *ngIf="isLoggedIn" routerLink="/ordentrabajo">Ordenes de Trabajo</a></li>
+              <li ><hr class="dropdown-divider"></li>
+              <li ><a class="dropdown-item"  aria-current="page" *ngIf="isLoggedIn" routerLink="/reportetecnico">Reporte Tecnico</a></li>
+            </ul>
+           </li>
+
+          </ul>
+
+          <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
+            <li class="nav-item">
+              <a href="/register" class="nav-link" routerLink="register">Sign Up</a>
+            </li>
+            <li class="nav-item">
+              <a href="/login" class="nav-link" routerLink="login">Login</a>
+            </li>
+          </ul>
+
+          <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+            <li class="nav-item">
+              <a href="/profile" class="nav-link" routerLink="profile">{{ username }}</a>
+            </li>
+            <li class="nav-item">
+              <a href class="nav-link" (click)="logout()">LogOut</a>
+            </li>
+          </ul>
+        </ul>
+
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+  <app-footer></app-footer>
+</div>

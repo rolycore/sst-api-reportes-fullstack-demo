@@ -1,0 +1,462 @@
+<div class="row justify-content-center align-items-center">
+  <div class="col-md-6">
+    <div class="card bg-dark text-white">
+      <div class="card-header">{{titulo}}</div>
+      <div class="my-2 text-left">
+        <button class="btn btn-rounded btn-secondary" type="button" (click)="exportarPDF(orden.idOT)"><i class="bi bi-person-plus"></i> Imprimir Orden</button>
+      </div>
+      <div *ngIf="loading" class="alert alert-info">
+        Imprimiendo... Por favor, espere.
+      </div>
+
+      <div class="card-body">
+        <ul class="nav nav-pills">
+          <li class="nav-item">
+            <a class="nav-link" [class.active]="activeTab === 1" (click)="activeTab = 1">1. Información general</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [class.active]="activeTab === 2" (click)="activeTab = 2">2. Recepción técnica del equipo</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [class.active]="activeTab === 3" (click)="activeTab = 3">3. Entrega del IBC y certificado</a>
+          </li>
+        </ul>
+        <form [formGroup]="formulario" formulario.valid>
+          <div *ngIf="activeTab===1">
+            <div class="form-group">
+              <div class="form-check">
+                <input class="form-check-input form-control" type="checkbox" id="activo" formControlName="activo"
+                  [(ngModel)]="orden.activo">
+                <label class="form-check-label" for="activo">Activo</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="no_ordent" class="col-form-label col-sm-6">No. Orden de trabajo:</label>
+              <input id="no_ordent" type="text" formControlName="no_ordent" class="form-control" [readonly]="true"
+                [(ngModel)]="orden.no_ordent" placeholder="Ingrese el Numero de Orden Trabajo" />
+            </div>
+            <div class="form-group">
+              <label for="no_solicitud" class="col-form-label col-sm-6">No. de Solicitud:</label>
+
+              <input id="no_solicitud" type="text" formControlName="no_solicitud" class="form-control"
+                [(ngModel)]="orden.no_solicitud" placeholder="Ingrese el numero de solicitud" />
+              <div class="alert alert-danger"
+                *ngIf="formulario?.get('no_solicitud')?.invalid && formulario?.get('no_solicitud')?.touched">
+                Numero de solicitud es requerido
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="no_ordencompra" class="col-form-label col-sm-6">Orden de compra:</label>
+
+              <input id="no_ordencompra" type="text" formControlName="no_ordencompra" class="form-control"
+                [(ngModel)]="orden.no_ordencompra" placeholder="Ingrese el numero de ordencompra" />
+              <div class="alert alert-danger"
+                *ngIf="formulario?.get('no_ordencompra')?.invalid && formulario?.get('no_ordencompra')?.touched">
+                No orden de compra es requerida
+              </div>
+
+            </div>
+            <div class="form-group">
+              <label for="no_cotizacion" class="col-form-label col-sm-6">No. Cotización:</label>
+
+              <input id="no_cotizacion" type="text" formControlName="no_cotizacion" class="form-control"
+                [(ngModel)]="orden.no_cotizacion" placeholder="Ingrese el numero de cotizacion" />
+              <div class="alert alert-danger"
+                *ngIf="formulario?.get('no_cotizacion')?.invalid && formulario?.get('no_cotizacion')?.touched">
+                El No cotizacion es requerida
+              </div>
+
+            </div>
+            <div class="form-group">
+              <label for="fecha_entrega_certificado" class="col-form-label col-sm-6">Fecha de entrega de certificado:</label>
+
+              <input id="fecha_entrega_certificado" type="date" formControlName="fecha_entrega_certificado"
+                class="form-control" [(ngModel)]="orden.fecha_entrega_certificado"
+                placeholder="Ingrese la fecha de entrega certificado" />
+              <div class="alert alert-danger"
+                *ngIf="formulario?.get('fecha_entrega_certificado')?.invalid && formulario?.get('fecha_entrega_certificado')?.touched">
+                La fecha de entrega certificado es requerida
+              </div>
+
+            </div>
+            <div class="form-group">
+              <label for="no_certificado" class="col-form-label col-sm-6">No. Certificado:</label>
+
+              <input id="no_certificado" type="text" formControlName="no_certificado" class="form-control"
+                [(ngModel)]="orden.no_certificado" placeholder="Ingrese el numero de certificado" />
+              <div class="alert alert-danger"
+                *ngIf="formulario?.get('no_certificado')?.invalid && formulario?.get('no_certificado')?.touched">
+                El numero de certificado requeridas
+              </div>
+
+            </div>
+            <div class="form-group">
+              <label for="no_reporte_tecnico" class="col-form-label col-sm-6">No. Reporte Técnico:</label>
+
+              <input id="no_reporte_tecnico" type="text" formControlName="no_reporte_tecnico" class="form-control"
+                [(ngModel)]="orden.no_reporte_tecnico" placeholder="Ingrese el no reporte tecnico" />
+              <div class="alert alert-danger"
+                *ngIf="formulario?.get('no_reporte_tecnico')?.invalid && formulario?.get('no_reporte_tecnico')?.touched">
+                El no reporte tecnico requerido.
+              </div>
+
+            </div>
+            <div class="form-group">
+              <label for="metrologo_responsable" class="col-form-label col-sm-6">Metrólogo Responsable:</label>
+
+              <input id="metrologo_responsable" type="text" formControlName="metrologo_responsable"
+                class="form-control" [(ngModel)]="orden.metrologo_responsable"
+                placeholder="Ingrese el metrologo responsable" />
+              <div class="alert alert-danger"
+                *ngIf="formulario?.get('metrologo_responsable')?.invalid && formulario?.get('metrologo_responsable')?.touched">
+                El metrologo responsable es requerido.
+              </div>
+
+            </div>
+            <div class="form-group">
+              <label for="fecha_calibracion" class="col-form-label col-sm-6">Fecha de calibración:</label>
+
+              <input id="fecha_calibracion" type="date" formControlName="fecha_calibracion" class="form-control"
+                [(ngModel)]="orden.fecha_calibracion" placeholder="Ingrese la fecha de calibracion" />
+              <div class="alert alert-danger"
+                *ngIf="formulario?.get('fecha_calibracion')?.invalid && formulario?.get('fecha_calibracion')?.touched">
+                La fecha calibracion es requerida
+              </div>
+
+            </div>
+            <div class="form-group">
+              <label for="prox_calibracion" class="col-form-label col-sm-6">Próxima calibración:</label>
+
+              <input id="prox_calibracion" type="checkbox" formControlName="prox_calibracion" class="form-check-input form-control"
+                [(ngModel)]="orden.prox_calibracion" />
+            </div>
+            <div class="form-group">
+              <label for="clienteSelect">Selecciona un cliente:</label>
+              <select title="clienteSelect" class="form-control" formControlName="cliente" requiredid="clienteSelect"
+                [(ngModel)]="clienteSeleccionado" (change)="onSelectCliente()">
+                <option value="" disabled>Selecciona un cliente</option>
+                <option *ngFor="let cliente of clientes" [value]="cliente.idCliente">{{ cliente.nombre_comercial }}
+                </option>
+              </select>
+              <div class="alert-danger"
+                *ngIf="formulario?.get('cliente')?.errors && formulario?.get('cliente')?.touched">
+                <div *ngIf="formulario?.get('cliente')?.hasError('required')">El Cliente es requerido</div>
+              </div>
+            </div>
+            <div class="form-group" *ngIf="clienteSeleccionado">
+              <h3>{{titulocliente}}</h3>
+              <div class="form-group">
+                <label for="nombre_cliente" class="col-form-label col-sm-6">Nombre del cliente:</label>
+                <input id="nombre_cliente" type="text" formControlName="nombre_cliente" class="form-control"
+                  [(ngModel)]="orden.nombre_cliente" placeholder="Ingrese el nombre del cliente" [readonly]="true"/>
+              </div>
+              <div class="form-group">
+                <label for="direccion_cliente" class="col-form-label col-sm-6">Dirección del cliente:</label>
+                <input id="direccion_cliente" type="text" formControlName="direccion_cliente" class="form-control"
+                  [(ngModel)]="orden.direccion_cliente" placeholder="Ingrese la direccion del cliente" [readonly]="true" />
+              </div>
+              <div class="form-group">
+                <label for="usuario_final" class="col-form-label col-sm-6">Usuario final:</label>
+                <input id="usuario_final" type="text" formControlName="usuario_final" class="form-control"
+                  [(ngModel)]="orden.usuario_final" placeholder="Ingrese la observacion del equipo" />
+                <div class="alert alert-danger"
+                  *ngIf="formulario?.get('usuario_final')?.invalid && formulario?.get('observaciones')?.touched">
+                  El usuario final es requerido.
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="cargo" class="col-form-label col-sm-6">Cargo usuario final:</label>
+                <input id="cargo" type="text" formControlName="cargo" class="form-control" [(ngModel)]="orden.cargo"
+                  placeholder="Ingrese el cargo del usuario final" />
+                <div class="alert alert-danger"
+                  *ngIf="formulario?.get('cargo')?.invalid && formulario?.get('cargo')?.touched">
+                  El cargo del usuario final es requerido.
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="lugar_calibracion" class="col-form-label col-sm-6">Lugar de calibracion: </label>
+                <input id="lugar_calibracion" type="text" formControlName="usuario_final" class="form-control"
+                  [(ngModel)]="orden.lugar_calibracion" placeholder="Ingrese el lugar de calibracion" />
+                <div class="alert alert-danger"
+                  *ngIf="formulario?.get('lugar_calibracion')?.invalid && formulario?.get('lugar_calibracion')?.touched">
+                  El lugar de calibracion es requerido.
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="contacto_cliente" class="col-form-label col-sm-6">Contacto:</label>
+                <input id="contacto_cliente" type="text" formControlName="contacto_cliente" class="form-control"
+                  [(ngModel)]="orden.contacto_cliente" placeholder="Ingrese el nombre del contacto cliente" [readonly]="true"/>
+              </div>
+              <div class="form-group">
+                <label for="telefono_contacto" class="col-form-label col-sm-6">Teléfono:</label>
+                <input id="telefono_contacto" type="text" formControlName="telefono_contacto" class="form-control"
+                  [(ngModel)]="orden.telefono_contacto" placeholder="Ingrese el telefono del contacto cliente" [readonly]="true"/>
+              </div>
+              <div class="form-group">
+                <label for="correo" class="col-form-label col-sm-6">Correo:</label>
+                <input id="correo" type="text" formControlName="correo" class="form-control"
+                  [(ngModel)]="orden.correo" placeholder="Ingrese el  correo del contacto cliente" />
+              </div>
+              <div class="form-group">
+                <label for="contacto_cargo" class="col-form-label col-sm-6"> Cargo: </label>
+                <input id="contacto_cargo" type="text" formControlName="contacto_cargo" class="form-control"
+                  [(ngModel)]="orden.contacto_cargo" placeholder="Ingrese el  contacto cargo cliente" [readonly]="true"/>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="activeTab === 2">
+            <div class="form-group">
+
+              <label for="equipoSelect">Selecciona un equipo:</label>
+              <select title="equipoSelect" class="form-control" formControlName="equipo" requiredid="equipoSelect"
+                [(ngModel)]="equipoSeleccionado"(change)="onSelectEquipocliente()">
+                <option value="" disabled>Selecciona un equipo</option>
+                <option *ngFor="let equipo of equipos" [value]="equipo.idEquipo">{{ equipo.nombre }}</option>
+              </select>
+              <div class="alert-danger" *ngIf="formulario?.get('equipo')?.errors && formulario?.get('equipo')?.touched">
+                <div *ngIf="formulario?.get('equipo')?.hasError('required')">El Equipo es requerido</div>
+              </div>
+            </div>
+            <div class="form-group" *ngIf="equipoSeleccionado">
+              <h3>{{tituloequipo}}</h3>
+              <div class="form-group">
+                <label for="nombre_equipo" class="col-form-label col-sm-6">Nombre del Equipo:</label>
+                <input id="nombre_equipo" type="text" formControlName="nombre_equipo" class="form-control"
+                  [(ngModel)]="orden.nombre_equipo"
+                  placeholder="Ingrese el Nombre del equipo" [readonly]="true" />
+              </div>
+              <div class="form-group">
+                <label for="descripcion_recep" class="col-form-label col-sm-6">Descripción:</label>
+                <input id="descripcion_recep" type="text" formControlName="descripcion_recep" class="form-control"
+                  [(ngModel)]="orden.descripcion_recep" placeholder="Ingrese descripcion de la recepcion" />
+                <div class="alert alert-danger"
+                  *ngIf="formulario?.get('descripcion_recep')?.invalid && formulario?.get('descripcion_recep')?.touched">
+                  la decripcion de la recepcion es requerida
+                </div>
+              </div>
+              <div class="form-group">
+                <h4>Datos del Indicador</h4>
+              </div>
+              <div class="form-group">
+                <label for="fabricante_ind" class="col-form-label col-sm-6">Fabricante del Indicador:</label>
+                <input id="fabricante_ind" type="text" formControlName="fabricante_ind" class="form-control"
+                  [(ngModel)]="orden.fabricante_ind"
+                  placeholder="Ingrese el Nombre del fabricante del indicador" [readonly]="true" />
+              </div>
+
+              <div class="form-group">
+                <label for="modelo_ind" class="col-form-label col-sm-6">Modelo indicador:</label>
+                <input id="modelo_ind" type="text" formControlName="modelo_ind" class="form-control"
+                  [(ngModel)]="orden.modelo_ind" placeholder="Ingrese el modelo del indicador" [readonly]="true"/>
+              </div>
+              <div class="form-group">
+                <label for="serie_ind" class="col-form-label col-sm-6">Serie indicador:</label>
+                <input id="serie_ind" type="text" formControlName="serie_ind" class="form-control"
+                  [(ngModel)]="orden.serie_ind" placeholder="Ingrese la serie del indicador" [readonly]="true" />
+              </div>
+              <div class="form-group">
+                <label for="clase_ind" class="col-form-label col-sm-6">Clase indicador:</label>
+                <input id="clase_ind" type="text" formControlName="clase_ind" class="form-control"
+                  [(ngModel)]="orden.clase_ind" placeholder="Ingrese la clase del indicador"  />
+                <div class="alert alert-danger"
+                  *ngIf="formulario?.get('clase_ind')?.invalid && formulario?.get('clase_ind')?.touched">
+                  La clase del indicador es requerido
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="alcance" class="col-form-label col-sm-6">Alcance:</label>
+                <input id="alcance" type="text" formControlName="alcance" class="form-control"
+                  [(ngModel)]="orden.alcance" placeholder="Ingrese el alcance" />
+                <div class="alert alert-danger"
+                  *ngIf="formulario?.get('alcance')?.invalid && formulario?.get('alcance')?.touched">
+                  El alcance es requerido
+                </div>
+              </div>
+              <div class="form-group">
+                <h4>Datos del Receptor | Estructura</h4>
+              </div>
+              <div class="form-group">
+                <label for="fabricande_rec" class="col-form-label col-sm-6">Fabricante receptor:</label>
+                <input id="fabricande_rec" type="text" formControlName="fabricande_rec" class="form-control"
+                  [(ngModel)]="orden.fabricande_rec" placeholder="Ingrese el Fabricante del receptor" [readonly]="true"/>
+              </div>
+              <div class="form-group">
+                <label for="modelo_rec" class="col-form-label col-sm-6">Modelo del receptor:</label>
+                <input id="modelo_rec" type="text" formControlName="modelo_rec" class="form-control"
+                  [(ngModel)]="orden.modelo_rec" placeholder="Ingrese el Modelo del receptor" [readonly]="true"/>
+              </div>
+              <div class="form-group">
+                <label for="serie_rec" class="col-form-label col-sm-6">Serie del receptor:</label>
+                <input id="serie_rec" type="text" formControlName="serie_rec" class="form-control"
+                  [(ngModel)]="orden.serie_rec" placeholder="Ingrese la Serie del receptor" [readonly]="true"/>
+              </div>
+              <div class="form-group">
+                <label for="resolucion" class="col-form-label col-sm-6">Resolucion:</label>
+                <input id="resolucion" type="text" formControlName="resolucion" class="form-control"
+                  [(ngModel)]="orden.resolucion" placeholder="Ingrese la resolucion" [readonly]="true"/>
+              </div>
+              <div class="form-group">
+                <h4>Celda | Sensor</h4>
+              </div>
+              <div class="form-group">
+                <label for="fabricante_senc" class="col-form-label col-sm-6">Fabricante del sensor:</label>
+                <input id="fabricante_sen" type="text" formControlName="fabricante_sen" class="form-control"
+                  [(ngModel)]="orden.fabricante_sen" placeholder="Ingrese el Fabricante del sensor" [readonly]="true"/>
+              </div>
+              <div class="form-group">
+                <label for="modelo_sen" class="col-form-label col-sm-6">Modelo del sensor:</label>
+                <input id="modelo_sen" type="text" formControlName="modelo_sen" class="form-control"
+                  [(ngModel)]="orden.modelo_sen" placeholder="Ingrese el Modelo del sensor" [readonly]="true"/>
+              </div>
+              <div class="form-group">
+                <label for="serie_sen" class="col-form-label col-sm-6">Serie del sensor:</label>
+                <input id="serie_sen" type="text" formControlName="serie_sen" class="form-control"
+                  [(ngModel)]="orden.serie_sen" placeholder="Ingrese la serie del sensor" [readonly]="true"/>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="observaciones" class="col-form-label col-sm-6">Observaciones:</label>
+              <input id="observaciones" type="text" formControlName="observaciones" class="form-control"
+                [(ngModel)]="orden.observaciones" placeholder="Ingrese las observaciones" />
+              <div class="alert alert-danger"
+                *ngIf="formulario?.get('id_interno_receptor')?.invalid && formulario?.get('id_interno_receptor')?.touched">
+                Las observaciones son requeridas, pero si no hay coloque N/A.
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="rechazotecno" class="col-form-label col-sm-6">Rechazo Técnico:</label>
+              <input id="rechazotecno" type="checkbox" formControlName="rechazotecno" class="form-check-input form-control"
+                [(ngModel)]="orden.rechazotecno" />
+            </div>
+
+            <div class="form-group" *ngIf="orden.rechazotecno">
+              <label for="motivo">Motivo de rechazo: </label>
+              <input   class="form-control" placeholder="Ingrese el motivo del rechazo tecnico" type="text" id="motivo"
+                [(ngModel)]="orden.motivo" [disabled]="!orden.rechazotecno">
+            </div>
+            <div class="form-group">
+              <label for="nombre_entrega" class="col-form-label col-sm-6">Nombre del que entrega:</label>
+              <input id="nombre_entrega" type="text" formControlName="nombre_entrega" class="form-control"
+                [(ngModel)]="orden.nombre_entrega" placeholder="Ingrese Nombre del que entrega" />
+              <div class="alert alert-danger"
+                *ngIf="formulario?.get('nombre_entrega')?.invalid && formulario?.get('nombre_entrega')?.touched">
+                El Nombre del que entrega es requerido
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="cedula" class="col-form-label col-sm-6">Cédula:</label>
+              <input id="cedula" type="text" formControlName="cedula" class="form-control" [(ngModel)]="orden.cedula"
+                placeholder="Ingrese la cedula del que entrega" />
+              <div class="alert alert-danger"
+                *ngIf="formulario?.get('cedula')?.invalid && formulario?.get('cedula')?.touched">
+                La cedula de que entrega es requerida
+              </div>
+            </div>
+
+          </div>
+          <div *ngIf="activeTab === 3">
+            <div class="form-group">
+              <label for="fecha_entrega" class="col-form-label col-sm-6">Fecha de entrega:</label>
+
+              <input id="fecha_entrega" type="date" formControlName="fecha_entrega" class="form-control"
+                [(ngModel)]="orden.fecha_entrega" placeholder="Ingrese la Fecha de entrega" />
+              <div class="alert alert-danger"
+                *ngIf="formulario?.get('fecha_entrega')?.invalid && formulario?.get('fecha_entrega')?.touched">
+                La Fecha de entrega es requerida
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="metrologo_entrega" class="col-form-label col-sm-6">Metrólogo que entrega:</label>
+
+              <input id="metrologo_entrega" type="text" formControlName="metrologo_entrega" class="form-control"
+                [(ngModel)]="orden.metrologo_entrega" placeholder="Ingrese el nombre del metrologo que entrega " />
+              <div class="alert alert-danger"
+                *ngIf="formulario?.get('metrologo_entrega')?.invalid && formulario?.get('metrologo_entrega')?.touched">
+                El Metrólogo de que entrega es requerido
+
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="recibe_ibc" class="col-form-label col-sm-6">Recibe IBC:</label>
+
+              <input id="recibe_ibc" type="text" formControlName="recibe_ibc" class="form-control"
+                [(ngModel)]="orden.recibe_ibc" placeholder="Ingrese el Nombre de quien recibe IBC" />
+              <div class="alert alert-danger"
+                *ngIf="formulario?.get('recibe_ibc')?.invalid && formulario?.get('recibe_ibc')?.touched">
+                El Nombre quien recibe ibc es requerido
+
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="entrego_con_ibc" class="col-form-label col-sm-6">Se entregó el certificado junto con IBC:</label>
+              <input id="entrego_con_ibc" type="checkbox" formControlName="entrego_con_ibc" class="form-check-input form-control"
+                [(ngModel)]="orden.entrego_con_ibc" />
+
+            </div>
+            <div class="form-group" *ngIf="orden.entrego_con_ibc">
+              <label for="observaciones_entrega" class="col-form-label col-sm-6">Observaciones de entrega:</label>
+
+              <input id="observaciones_entrega" type="text" formControlName="observaciones_entrega" class="form-control"
+                [(ngModel)]="orden.observaciones_entrega" placeholder="Ingrese las observaciones de entrega" />
+
+            </div>
+            <div class="form-group" *ngIf="!orden.entrego_con_ibc">
+              <label for="fecha_entrega_ibc" class="col-form-label col-sm-6">Fecha de entrega ibc:</label>
+
+              <input id="fecha_entrega_ibc" type="date" formControlName="fecha_entrega_ibc" class="form-control"
+                [(ngModel)]="orden.fecha_entrega_ibc" placeholder="Ingrese la fecha de entrega del IBC" />
+              <div class="alert alert-danger"
+                *ngIf="formulario?.get('fecha_entrega_ibc')?.invalid && formulario?.get('fecha_entrega_ibc')?.touched">
+                La fecha de entrega del IBC es requerida
+
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="persona_entrega_ibc" class="col-form-label col-sm-6">Persona que entrega el certificado:</label>
+
+              <input id="persona_entrega_ibc" type="text" formControlName="recibe_ibc" class="form-control"
+                [(ngModel)]="orden.persona_entrega_ibc" placeholder="Ingrese el Nombre de quien persona_entrega_ibc" />
+              <div class="alert alert-danger"
+                *ngIf="formulario?.get('persona_entrega_ibc')?.invalid && formulario?.get('persona_entrega_ibc')?.touched">
+                El Nombre de la persona que entrega ibc es requerido
+
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="recibe_certificado" class="col-form-label col-sm-6">Recibe certificado</label>
+
+              <input id="recibe_certificado" type="text" formControlName="recibe_certificado" class="form-control"
+                [(ngModel)]="orden.recibe_certificado" placeholder="Ingrese el Nombre de quien recibe certificado" />
+              <div class="alert alert-danger"
+                *ngIf="formulario?.get('recibe_certificado')?.invalid && formulario?.get('recibe_certificado')?.touched">
+                El Nombre quien recibe el certifocado es requerido
+
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="recibe_cedula" class="col-form-label col-sm-6">Cédula de quien recibe:</label>
+
+              <input id="recibe_cedula" type="text" formControlName="recibe_cedula" class="form-control"
+                [(ngModel)]="orden.recibe_cedula" placeholder="Ingrese la cedula de quien recibe" />
+              <div class="alert alert-danger"
+                *ngIf="formulario?.get('recibe_cedula')?.invalid && formulario?.get('recibe_cedula')?.touched">
+                La cedula de quien recibe es requerida
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-6">
+              <button class="btn btn-primary" role="button" (click)="crearOrden()" *ngIf="!orden.idOT else elseBlock">Crear</button>
+              <!-- *ngIf="!cliente.id"-->
+              <ng-template #elseBlock>
+                <button class="btn btn-primary" role="button" (click)="updateOrden()"
+                  [disabled]="!formulario.valid">Editar</button>
+              </ng-template>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
