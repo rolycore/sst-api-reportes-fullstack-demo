@@ -79,10 +79,10 @@ public class ReporteTecnicoReportGenerator {
         System.out.println("nombreArchivo4 = " + nombreArchivo4);
 
 // Ahora puedes concatenar el nombre del archivo con la ruta local
-        String archivoImagen1 = "/root/mediafiles/" + nombreArchivo1;//"/root/mediafiles/"
-        String archivoImagen2 = "/root/mediafiles/" + nombreArchivo2;
-        String archivoImagen3 = "/root/mediafiles/" + nombreArchivo3;
-        String archivoImagen4 = "/root/mediafiles/" + nombreArchivo4;
+        String archivoImagen1 = "C:/mediafiles/" + nombreArchivo1;//  ruta Local Windows
+        String archivoImagen2 = "C:/mediafiles/" + nombreArchivo2;
+        String archivoImagen3 = "C:/mediafiles/" + nombreArchivo3;
+        String archivoImagen4 = "C:/mediafiles/" + nombreArchivo4;
         System.out.println("archivoImagen4 = " + archivoImagen4);
 
 

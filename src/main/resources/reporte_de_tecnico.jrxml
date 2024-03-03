@@ -1426,10 +1426,10 @@ Apartado Postal: 0819-00088
 				</textElement>
 				<textFieldExpression><![CDATA["Página " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="493" y="7" width="39" height="30" uuid="41c91b9d-7df2-4aad-8ac5-9d543a881000"/>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Verdana" size="7" isBold="false"/>
+			<textField evaluationTime="Report">
+				<reportElement x="494" y="18" width="22" height="18" uuid="eaac9efc-c6db-4999-82ad-484c89214c98"/>
+				<textElement>
+					<font fontName="Verdana" size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
@@ -1438,8 +1438,8 @@ Apartado Postal: 0819-00088
 	<summary>
 		<band height="652">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
-			<image hAlign="Center">
-				<reportElement x="20" y="42" width="260" height="180" uuid="1a5cfe1c-fec8-4ce5-bf5d-9b8d887c018a"/>
+			<image scaleImage="FillFrame" hAlign="Center" onErrorType="Blank">
+				<reportElement isPrintRepeatedValues="false" x="20" y="42" width="260" height="180" isRemoveLineWhenBlank="true" uuid="1a5cfe1c-fec8-4ce5-bf5d-9b8d887c018a"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1456,7 +1456,7 @@ Apartado Postal: 0819-00088
 				<text><![CDATA[Imagen 1]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="20" y="229" width="260" height="33" uuid="1cb94199-a21e-4231-aa61-24642bb46ea7"/>
+				<reportElement x="20" y="223" width="260" height="33" uuid="1cb94199-a21e-4231-aa61-24642bb46ea7"/>
 				<box padding="2">
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1465,7 +1465,7 @@ Apartado Postal: 0819-00088
 				</box>
 				<textFieldExpression><![CDATA["Descripcion 1: "+ $P{descripcion1}]]></textFieldExpression>
 			</textField>
-			<image hAlign="Center">
+			<image scaleImage="FillFrame" hAlign="Center" onErrorType="Blank">
 				<reportElement x="291" y="42" width="260" height="180" uuid="d876be9d-db82-4c8a-864f-8c706d540451"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1483,7 +1483,7 @@ Apartado Postal: 0819-00088
 				<text><![CDATA[Imagen 2]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="291" y="229" width="260" height="33" uuid="337ba1cf-99e1-4724-97b6-30706715ce6a"/>
+				<reportElement x="291" y="223" width="260" height="33" uuid="337ba1cf-99e1-4724-97b6-30706715ce6a"/>
 				<box padding="2">
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1506,7 +1506,7 @@ Apartado Postal: 0819-00088
 				</textElement>
 				<text><![CDATA[Imagen 4]]></text>
 			</staticText>
-			<image hAlign="Center">
+			<image scaleImage="FillFrame" hAlign="Center" onErrorType="Blank">
 				<reportElement x="20" y="299" width="260" height="180" uuid="2c6d4b2d-ba73-4436-8cdc-8c7e02e0cd26"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1516,7 +1516,7 @@ Apartado Postal: 0819-00088
 				</box>
 				<imageExpression><![CDATA[$P{imagen_3}]]></imageExpression>
 			</image>
-			<image hAlign="Center">
+			<image scaleImage="FillFrame" hAlign="Center" onErrorType="Blank">
 				<reportElement x="291" y="299" width="260" height="180" uuid="cd0b9880-ecb2-449f-aae6-5cd11c7cadcd"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1527,7 +1527,7 @@ Apartado Postal: 0819-00088
 				<imageExpression><![CDATA[$P{imagen_4}]]></imageExpression>
 			</image>
 			<textField>
-				<reportElement x="20" y="486" width="260" height="33" uuid="c8eea40a-4651-4eb0-b314-5aff7074fb31"/>
+				<reportElement x="20" y="480" width="260" height="33" uuid="c8eea40a-4651-4eb0-b314-5aff7074fb31"/>
 				<box padding="2">
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1537,7 +1537,7 @@ Apartado Postal: 0819-00088
 				<textFieldExpression><![CDATA["Descripcion 3: " + $P{descripcion3}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="291" y="486" width="260" height="33" uuid="8db394d1-0a93-40b9-bb71-4cbf0e154238"/>
+				<reportElement x="291" y="480" width="260" height="33" uuid="8db394d1-0a93-40b9-bb71-4cbf0e154238"/>
 				<box padding="2">
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>

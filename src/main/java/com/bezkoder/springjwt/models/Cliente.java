@@ -108,6 +108,8 @@ public class Cliente extends Auditable implements Serializable {
  private Set<OrdenTrabajo> ordenTrabajos = new HashSet<>();
  @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
  private Set<ReporteTecnico> reporteTecnicos = new HashSet<>();
+ @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+ private Set<ReporteMantenimiento> reporteMantenimientos  = new HashSet<>();
  @PrePersist
  public void prePersist() {
   createAt = new Date();

@@ -110,6 +110,8 @@ public class EquipoCliente extends Auditable implements Serializable {
 
     @OneToMany(mappedBy = "equipo", cascade = CascadeType.ALL)
     private Set<ReporteTecnico> reporteTecnicos= new HashSet<>();
+    @OneToMany(mappedBy = "equipo", cascade = CascadeType.ALL)
+    private Set<ReporteMantenimiento> reporteMantenimientos = new HashSet<>();
     @PrePersist
     public void prePersist() {
         createAt = new Date();
