@@ -17,6 +17,8 @@ export class ClienteComponent  implements OnInit{
   archivoParaImportar!: File;
    public errores: string[] = [];
    progress = 0;
+   // Variable para almacenar las páginas
+pages!: number;
   constructor(private clientesService: ClienteService) {}
 //Metodo para seleccionar archivo
 seleccionarArchivo(event: Event) {

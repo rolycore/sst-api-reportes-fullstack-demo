@@ -35,6 +35,10 @@ import { CmcformComponent } from './capacidadmedicion/cmcform/cmcform.component'
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { ResetpasswordService } from './_services/resetpassword.service';
 import { DatePipe } from '@angular/common';
+import { ReportemantenimientoComponent } from './reportemantenimiento/reportemantenimiento.component';
+import { ReportemantenimientoService } from './_services/reportemantenimiento.service';
+import { ReportemantformComponent } from './reportemantenimiento/reportemantform/reportemantform.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -58,20 +62,24 @@ import { DatePipe } from '@angular/common';
     ManejoarchivosComponent,
     CapacidadmedicionComponent,
     CmcformComponent,
-    ResetpasswordComponent
+    ResetpasswordComponent,
+    ReportemantenimientoComponent,
+    ReportemantformComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxPaginationModule,
   ],
   providers: [authInterceptorProviders,
     ClienteService,
     EquipoclienteService,
     OrdentrabajoService,
     ReportetecnicoService,
+    ReportemantenimientoService,
     MediaService,
     FileHandlerService,
     ResetpasswordService,

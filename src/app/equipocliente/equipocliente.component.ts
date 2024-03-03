@@ -21,7 +21,8 @@ export class EquipoclienteComponent implements OnInit {
   clientes: any[] = []; // Lista de clientes
   public cliente: Cliente = new Cliente();
   public nombreComercialCliente: string = ''; // Declara una variable para el nombre_comercial del cliente
-
+   // Variable para almacenar las páginas
+   pages!: number;
   constructor(
     private equipoClienteService: EquipoclienteService,
     private clienteService: ClienteService

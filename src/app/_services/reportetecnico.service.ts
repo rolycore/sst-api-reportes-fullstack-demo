@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class ReportetecnicoService {
-  private baseUrl = 'https://appicmetrologia.icmetrologia.com:8080/api/v1/reporte-tecnico';//http://appicmetrologia.icmetrologia.com:8080/api/v1/reporte-tecnico
+  private baseUrl = 'https://localhost:8080/api/v1/reporte-tecnico';//http://appicmetrologia.icmetrologia.com:8080/api/v1/reporte-tecnico
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
   constructor(private http: HttpClient, private router: Router) { }
 //Metodo para los errores y execepciones

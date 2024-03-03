@@ -4,7 +4,7 @@
     <h5 class="card-title">Listado de Reportes Tecnicos</h5>
 
     <div class="d-flex gap-2 my-2">
-      <button class="btn btn-rounded btn-primary" type="button" [routerLink]="['/reportes/reportesform']"><i class="bi bi-person-plus"></i> Crear reporte</button>
+      <button class="btn btn-rounded btn-primary" type="button" [routerLink]="['/reportes/reportesform']"><i class="fa-solid fa-plus"></i>Crear reporte</button>
 
       <!-- <input [(ngModel)]="nombreCliente" placeholder="Nombre del Cliente"> --><!-- Input para ingresar el nombre del cliente a filtrar -->
        <select title="clienteSelect"class="form-control"
@@ -35,7 +35,7 @@
 
     <table class="table table-bordered table-striped w-auto table-hover table-fixed"  *ngIf="reportes?.length">
       <thead>
-        <tr>
+        <tr >
           <th>
             editar
           </th>
@@ -43,13 +43,13 @@
             eliminar
           </th>
           <th>
-           imprimir reporte
+           imprimir
           </th>
-            <th>ID Reporte Técnico</th>
-            <th>Cliente  </th>
+            <th>ID</th>
+            <th>Cliente</th>
             <th>Equipo</th>
-            <th>No. de Reporte Técnico</th>
-            <th>No. de Cotización</th>
+            <th>No. Reporte Técnico</th>
+            <th>No.Cotización</th>
             <th>Técnico</th>
             <th>Hora de Entrada</th>
             <th>Hora de Salida</th>
@@ -106,15 +106,15 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let reporte of reportes">
+        <tr *ngFor="let reporte of reportes.slice().reverse() | paginate: { itemsPerPage: 5, currentPage: pages }">
           <td>
-            <button type="button" name="editar" [routerLink]="['/reportes/reportesform',reporte.idreptec]" class="btn btn-success btn-sm">editar</button>
+            <button type="button" name="editar" [routerLink]="['/reportes/reportesform',reporte.idreptec]" class="btn btn-success btn-sm"><i class="fa-solid fa-pen-to-square"></i></button>
           </td>
           <td>
-            <button type="button" name="eliminar" (click)='delete(reporte)' class="btn btn-danger btn-sm">eliminar</button>
+            <button type="button" name="eliminar" (click)='delete(reporte)' class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></button>
           </td>
           <td>
-            <button type="button" name="imprimir" (click)='exportarPDF(reporte.idreptec)' class="btn btn-primary btn-sm">imprimir</button>
+            <button type="button" name="imprimir" (click)='exportarPDF(reporte.idreptec)' class="btn btn-primary btn-sm"><i class="fa-solid fa-print"></i></button>
           </td>
           <td>{{ reporte.idreptec }}</td>
 	  <td>{{reporte.nombrecliente }}</td>
@@ -177,5 +177,12 @@
       </tbody>
     </table>
   </div>
+
+<!-- ... (código existente) ... -->
+
   </div>
+  <!-- Agrega controles de paginación -->
+<pagination-controls (pageChange)="pages = $event " previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
 </div>
+
+

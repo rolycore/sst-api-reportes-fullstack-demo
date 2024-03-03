@@ -1,0 +1,187 @@
+<div class="card border-primary mb-3">
+  <div class="card-header">Reportes Mantenimiento</div>
+  <div class="card-body text-primary">
+    <h5 class="card-title">Listado de Reportes Mantenimiento</h5>
+
+    <div class="d-flex gap-2 my-2">
+      <button class="btn btn-rounded btn-primary" type="button" [routerLink]="['/mantenimientos/reportemantform']"><i class="fa-solid fa-plus"></i>Crear reporte</button>
+
+      <!-- <input [(ngModel)]="nombreCliente" placeholder="Nombre del Cliente"> --><!-- Input para ingresar el nombre del cliente a filtrar -->
+       <select title="clienteSelect"class="form-control"
+      [(ngModel)]="nombreCliente" (change)="getReportes()">
+      <option value="" disabled selected>Selecciona un cliente</option>
+      <option *ngFor="let cliente of clientes" [value]="cliente.nombre_comercial">{{ cliente.nombre_comercial }}</option>
+    </select>
+   <select title="equipoSelect" class="form-control"
+    [(ngModel)]="nombreEquipo"(change)="filtrarequipo()">
+      <option value="" disabled selected>Selecciona un equipo</option>
+      <option *ngFor="let equipo of equipos" [value]="equipo.nombre">{{ equipo.nombre }}</option>
+    </select>
+   <!--<input id="fechareporte" type="date" [(ngModel)]="fechaReporte" class="form-control"  placeholder="yyyy/MM/dd"  />
+    <button (click)="filtrarfechareporte()">Buscar fecha Reporte </button>-->
+
+   <button class="btn btn-rounded btn-primary"(click)="limpiarFiltro()">Eliminar filtro</button>
+
+    </div>
+    <div *ngIf="reportesm?.length==0" class="alert alert-info">
+      No hay registros en la base de datos!
+    </div>
+    <div *ngIf="loading" class="alert alert-info">
+      Imprimiendo... Por favor, espere.
+    </div>
+
+
+    <div class="table-responsive text-nowrap">
+
+    <table class="table table-bordered table-striped w-auto table-hover table-fixed"  *ngIf="reportesm?.length">
+      <thead>
+        <tr >
+          <th>
+            editar
+          </th>
+          <th>
+            eliminar
+          </th>
+          <th>
+           imprimir
+          </th>
+            <th>ID</th>
+            <th>Cliente</th>
+            <th>Equipo</th>
+            <th>No. Reporte Mantenimiento</th>
+            <th>No.Cotización</th>
+            <th>Técnico</th>
+            <th>Hora de Entrada</th>
+            <th>Hora de Salida</th>
+            <th>Hora de Viaje</th>
+            <th>Fecha de Reporte</th>
+            <th>Contacto</th>
+            <th>Dirección</th>
+            <th>Ubicación del Equipo</th>
+            <th>Fabricante indicador </th>
+            <th>Fabricante marco</th>
+            <th>Fabricante transductor</th>
+            <th>Modelo indicador </th>
+            <th>Modelo transductor </th>
+            <th>Serie indicador </th>
+            <th>Serie marco</th>
+            <th>Serie transductor</th>
+            <th>Capacidad indicador</th>
+            <th>Capacidad marco</th>
+            <th>Capacidad transductor</th>
+            <th>Nota mant. prevent</th>
+            <th>Nota hallazgo</th>
+            <th>Recomendaciones</th>
+            <th>Imagen 1</th>
+            <th>Imagen 2</th>
+            <th>Imagen 3</th>
+            <th>Imagen 4</th>
+            <th>Imagen 5</th>
+            <th>Imagen 6</th>
+            <th>Imagen 7</th>
+            <th>Imagen 8</th>
+            <th>Imagen 9</th>
+            <th>Descripcion 1</th>
+            <th>Descripcion 2</th>
+            <th>Descripcion 3</th>
+            <th>Descripcion 4</th>
+            <th>Descripcion 5</th>
+            <th>Descripcion 6</th>
+            <th>Descripcion 7</th>
+            <th>Descripcion 8</th>
+            <th>descripcion 9</th>
+            <th>Ruta Imagen 1</th>
+            <th>Ruta Imagen 2</th>
+            <th>Ruta Imagen 3</th>
+            <th>Ruta Imagen 4</th>
+            <th>Ruta Imagen 5</th>
+            <th>Ruta Imagen 6</th>
+            <th>Ruta Imagen 7</th>
+            <th>Ruta Imagen 8</th>
+            <th>Ruta Imagen 9</th>
+
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let reportem of reportesm.slice().reverse() | paginate: { itemsPerPage: 5, currentPage: pages }">
+          <td>
+            <button type="button" name="editar" [routerLink]="['/mantenimientos/reportemantform',reportem.idrepmant]" class="btn btn-success btn-sm"><i class="fa-solid fa-pen-to-square"></i></button>
+          </td>
+          <td>
+            <button type="button" name="eliminar" (click)='delete(reportem)' class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></button>
+          </td>
+          <td>
+            <button type="button" name="imprimir" (click)='exportarPDF(reportem.idrepmant)' class="btn btn-primary btn-sm"><i class="fa-solid fa-print"></i></button>
+          </td>
+          <td>{{ reportem.idrepmant }}</td>
+	  <td>{{reportem.nombrecliente }}</td>
+	  <td>{{ reportem.nombreequipo }}</td>
+          <td>{{ reportem.no_reporte}}</td>
+          <td>{{ reportem.no_cotizacion }}</td>
+          <td>{{ reportem.tecnico}}</td>
+          <td>{{ reportem.horaentrada  }}</td>
+          <td>{{ reportem.horasalida }}</td>
+          <td>{{ reportem.horaviajes }}</td>
+          <td>{{ reportem.fechareporte}}</td>
+          <td>{{ reportem.contacto}}</td>
+          <td>{{ reportem.direccion}}</td>
+          <td>{{ reportem.ubicacionequipo }}</td>
+          <td>{{ reportem.fabricanteindicador }}</td>
+          <td>{{ reportem.fabricantemarco }}</td>
+          <td>{{ reportem.fabricantetransductor }}</td>
+          <td>{{ reportem.modeloindicador }}</td>
+          <td>{{ reportem.modelotransductor }}</td>
+          <td>{{ reportem.serieindicador }}</td>
+	  <td>{{ reportem.seriemarco }}</td>
+	  <td>{{ reportem.serietransductor }}</td>
+	  <td>{{ reportem.capacidadindicador}}</td>
+	  <td>{{ reportem.capacidadmarco}}</td>
+
+	  <td>{{ reportem.capacidadtransductor }}</td>
+	  <td>{{ reportem.notamantprevent }}</td>
+
+	  <td>{{ reportem.notahallazgo}}</td>
+	  <td>{{ reportem.recomendaciones}}</td>
+
+	  <td>{{ reportem.imagen_1}}</td>
+	  <td>{{ reportem.imagen_2}}</td>
+	  <td>{{ reportem.imagen_3}}</td>
+	  <td>{{ reportem.imagen_4}}</td>
+	  <td>{{ reportem.imagen_5}}</td>
+	  <td>{{ reportem.imagen_6}}</td>
+	  <td>{{ reportem.imagen_7}}</td>
+	  <td>{{ reportem.imagen_8}}</td>
+	  <td>{{ reportem.imagen_9}}</td>
+	  <td>{{ reportem.descripcion1}}</td>
+	  <td>{{ reportem.descripcion2}}</td>
+	  <td>{{ reportem.descripcion3}}</td>
+	  <td>{{ reportem.descripcion4}}</td>
+	  <td>{{ reportem.descripcion5}}</td>
+	  <td>{{ reportem.descripcion6}}</td>
+	  <td>{{ reportem.descripcion7}}</td>
+	  <td>{{ reportem.descripcion8}}</td>
+	  <td>{{ reportem.descripcion9}}</td>
+	  <td>{{ reportem.rutaImagen1}}</td>
+	  <td>{{ reportem.rutaImagen2}}</td>
+	  <td>{{ reportem.rutaImagen3}}</td>
+	  <td>{{ reportem.rutaImagen4}}</td>
+	  <td>{{ reportem.rutaImagen5}}</td>
+	  <td>{{ reportem.rutaImagen6}}</td>
+	  <td>{{ reportem.rutaImagen7}}</td>
+	  <td>{{ reportem.rutaImagen8}}</td>
+	  <td>{{ reportem.rutaImagen9}}</td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+<!-- ... (código existente) ... -->
+
+  </div>
+  <!-- Agrega controles de paginación -->
+<pagination-controls (pageChange)="pages = $event " previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+</div>
+
+

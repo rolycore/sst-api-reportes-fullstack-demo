@@ -28,7 +28,20 @@ export class ReportetecnicooComponent implements OnInit{
   equipoSeleccionado: number | null = null; // ID del equipo seleccionado
   equipoData: any; // Variable para almacenar los datos del cliente seleccionado
   equipo: EquipoCliente = new EquipoCliente();
+// Variable para almacenar todos los reportes
+allReportes: any[] = [];
 
+// Variable para almacenar los reportes a mostrar en la página actual
+reportesEnPagina: any[] = [];
+
+// Variables para gestionar la paginación
+currentPage = 1;
+itemsPerPage = 5;
+// Variable para almacenar el número total de páginas
+totalPages!: number;
+
+// Variable para almacenar las páginas
+pages!: number;
   constructor(private reporteService: ReportetecnicoService,
     private clienteService: ClienteService,
     private equipoClienteService: EquipoclienteService,
@@ -41,6 +54,8 @@ export class ReportetecnicooComponent implements OnInit{
       this.getReportes();
       this.filtrarequipo();
       this.filtrarfechareporte();
+
+
        // Mover la obtención de la lista de clientes aquí
        this.clienteService.getClientes().subscribe((data: any[]) => {
         this.clientes = data.filter(cliente => cliente.nombre_comercial); // Filtra los clientes con un nombre_comercial definido
@@ -50,6 +65,7 @@ export class ReportetecnicooComponent implements OnInit{
       this.equipos = data.filter(equipo => equipo.nombre);
     });
     }
+
     ajustarFormatoFecha(fecha: string): string {
       // La fecha original es "aaaa/mm/dd", la ajustamos a "mm/dd/aaaa"
       const partes = fecha.split('/');

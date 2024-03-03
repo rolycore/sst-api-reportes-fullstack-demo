@@ -20,6 +20,8 @@ import { ManejoarchivosComponent } from './manejoarchivos/manejoarchivos.compone
 import { CapacidadmedicionComponent } from './capacidadmedicion/capacidadmedicion.component';
 import { CmcformComponent } from './capacidadmedicion/cmcform/cmcform.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
+import { ReportemantenimientoComponent } from './reportemantenimiento/reportemantenimiento.component';
+import { ReportemantformComponent } from './reportemantenimiento/reportemantform/reportemantform.component';
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
@@ -41,6 +43,9 @@ const routes: Routes = [
   {path:'reportetecnico',component:ReportetecnicooComponent },
   {path:'reportes/reportesform',component:ReporteformComponent },
   {path:'reportes/reportesform/:id',component:ReporteformComponent },
+  {path:'mantenimiento',component:ReportemantenimientoComponent},
+  {path:'mantenimientos/reportemantform',component:ReportemantformComponent },
+  {path:'mantenimientos/reportemantform/:id',component:ReportemantformComponent },
   {path:'capacidadmedicion',component:CapacidadmedicionComponent },
   {path:'capacidadmedicion/cmcform',component:CmcformComponent},
   {path:'capacidadmedicion/cmcform/:id',component:CmcformComponent},

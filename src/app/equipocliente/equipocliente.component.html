@@ -3,7 +3,7 @@
   <div class="card-body text-primary">
     <h5 class="card-title">Listado de Equipo Clientes</h5>
     <div class="my-2 text-left">
-      <button class="btn btn-rounded btn-primary" type="button" [routerLink]="['/equipoclientes/equipoform']"><i class="bi bi-person-plus"></i> Crear Equipos</button>
+      <button class="btn btn-rounded btn-primary" type="button" [routerLink]="['/equipoclientes/equipoform']"><i class="fa-solid fa-plus"></i> Agregar</button>
      <!-- <button class="btn btn-rounded btn-secondary"(click)="exportarEquipos()" >Exportar Equipos</button>-->
       <!--<input title="file"class="form-control" placeholder="seleccione un archivo excel" type="file" (change)="seleccionarArchivo($event)" />-->
      <!-- <button  class="btn btn-rounded btn-success "(click)="importar()">Importar Equipos</button>-->
@@ -25,7 +25,7 @@
           <th>
             eliminar
           </th>
-          <th>ID Equipo</th>
+          <th>ID</th>
           <th>Código de Equipo</th>
           <th>Nombre</th>
           <th>Cliente</th>
@@ -62,12 +62,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let equipo of equipos">
+        <tr *ngFor="let equipo of equipos.slice().reverse() | paginate: { itemsPerPage: 5, currentPage: pages }">
           <td>
-            <button type="button" name="editar" [routerLink]="['/equipoclientes/equipoform',equipo.idEquipo]" class="btn btn-success btn-sm">editar</button>
+            <button type="button" name="editar" [routerLink]="['/equipoclientes/equipoform',equipo.idEquipo]" class="btn btn-success btn-sm"><i class="fa-solid fa-pen-to-square"></i></button>
           </td>
           <td>
-            <button type="button" name="eliminar" (click)='delete(equipo)' class="btn btn-danger btn-sm">eliminar</button>
+            <button type="button" name="eliminar" (click)='delete(equipo)' class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></button>
           </td>
           <td>{{ equipo.idEquipo }}</td>
           <td>{{ equipo.codigoequipo }}</td>
@@ -110,4 +110,6 @@
     </table>
   </div>
   </div>
+    <!-- Agrega controles de paginación -->
+<pagination-controls (pageChange)="pages = $event " previousLabel="Anterior" nextLabel="Siguiente" ></pagination-controls>
 </div>

@@ -1,0 +1,64 @@
+import { Cliente } from "./cliente";
+import { EquipoCliente } from "./equipocliente";
+
+export class ReporteMantenimiento{
+  idrepmant!: number;
+  no_reporte!: string;
+  nombrecliente!: string;
+  nombreequipo!: string;
+  tecnico!: string;
+  horaentrada!: string; // Puedes cambiar esto según tus necesidades de manejo de tiempo en TypeScript
+  horasalida!: string; // Puedes cambiar esto según tus necesidades de manejo de tiempo en TypeScript
+  horaviajes!: string;
+  fechareporte!: Date;
+  fecha!: Date;
+  contacto!: string;
+  cargo!: string;
+  direccion!: string;
+  no_cotizacion!: string;
+  ubicacionequipo!: string;
+  fabricanteindicador!: string;
+  fabricantemarco!: string;
+  fabricantetransductor!: string;
+  modeloindicador!: string;
+  modelomarco!: string;
+  modelotransductor!: string;
+  serieindicador!: string;
+  seriemarco!: string;
+  serietransductor!: string;
+  capacidadindicador!: string;
+  capacidadmarco!: string;
+  capacidadtransductor!: string;
+  notamantprevent!: string;
+  notahallazgo!: string;
+  recomendaciones!: string;
+  imagen_1!: string;
+  imagen_2!: string;
+  imagen_3!: string;
+  imagen_4!: string;
+  imagen_5!: string;
+  imagen_6!: string;
+  imagen_7!: string;
+  imagen_8!: string;
+  imagen_9!: string;
+  descripcion1!: string;
+  descripcion2!: string;
+  descripcion3!: string;
+  descripcion4!: string;
+  descripcion5!: string;
+  descripcion6!: string;
+  descripcion7!: string;
+  descripcion8!: string;
+  descripcion9!: string;
+  rutaImagen1!: string;
+  rutaImagen2!: string;
+  rutaImagen3!: string;
+  rutaImagen4!: string;
+  rutaImagen5!: string;
+  rutaImagen6!: string;
+  rutaImagen7!: string;
+  rutaImagen8!: string;
+  rutaImagen9!: string;
+  cliente!: Cliente;
+  equipo!: EquipoCliente;
+}
