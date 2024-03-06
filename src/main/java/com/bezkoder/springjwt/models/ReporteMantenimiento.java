@@ -1,4 +1,5 @@
 package com.bezkoder.springjwt.models;
+
 import com.bezkoder.springjwt.auditoria.modelo.Auditable;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,13 +15,14 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
+
 @Entity
-@Table(name="ReporteMantenimiento")
+@Table(name = "ReporteMantenimiento")
 
 @EqualsAndHashCode(of = "idrepmant", callSuper = false)
 public class ReporteMantenimiento extends Auditable implements Serializable {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idrepmant;
     @Column
     private String no_reporte;
@@ -54,7 +56,7 @@ public class ReporteMantenimiento extends Auditable implements Serializable {
     private String direccion;
     @Column
     private String no_cotizacion;
-    @Column(length = 2000)
+    @Column
     private String ubicacionequipo;
     @Column
     private String fabricanteindicador;
@@ -80,11 +82,12 @@ public class ReporteMantenimiento extends Auditable implements Serializable {
     private String capacidadmarco;
     @Column
     private String capacidadtransductor;
-    @Column
+    @Column(columnDefinition = "LONGTEXT", nullable = true)
     private String notamantprevent;
-    @Column
+
+    @Column(columnDefinition = "LONGTEXT", nullable = true)
     private String notahallazgo;
-    @Column
+    @Column(columnDefinition = "LONGTEXT", nullable = true)
     private String recomendaciones;
     @Column
     private String imagen_1;
@@ -105,6 +108,12 @@ public class ReporteMantenimiento extends Auditable implements Serializable {
     @Column
     private String imagen_9;
     @Column
+    private String imagen_10;
+    @Column
+    private String imagen_11;
+    @Column
+    private String imagen_12;
+    @Column
     private String descripcion1;
     @Column
     private String descripcion2;
@@ -123,24 +132,37 @@ public class ReporteMantenimiento extends Auditable implements Serializable {
     @Column
     private String descripcion9;
     @Column
-    private String rutaImagen1 ;
+    private String descripcion10;
     @Column
-    private String rutaImagen2 ;
+    private String descripcion11;
     @Column
-    private String rutaImagen3 ;
+    private String descripcion12;
     @Column
-    private String rutaImagen4 ;
+    private String rutaImagen1;
     @Column
-    private  String rutaImagen5 ;
+    private String rutaImagen2;
+    @Column
+    private String rutaImagen3;
+    @Column
+    private String rutaImagen4;
+    @Column
+    private String rutaImagen5;
     @Column
     private String rutaImagen6;
     @Column
-    private String rutaImagen7 ;
+    private String rutaImagen7;
     @Column
     private String rutaImagen8;
     @Column
     private String rutaImagen9;
-    private static final long serialVersionUID= 1L;
+    @Column
+    private String rutaImagen10;
+    @Column
+    private String rutaImagen11;
+    @Column
+    private String rutaImagen12;
+    private static final long serialVersionUID = 1L;
+
     public String getHoraEntradaFormatted() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a");
         return horaentrada.format(formatter);
@@ -152,6 +174,7 @@ public class ReporteMantenimiento extends Auditable implements Serializable {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a");
         return horasalida.format(formatter);
     }
+
     public LocalTime getHoraentrada() {
         return horaentrada;
     }
@@ -484,6 +507,30 @@ public class ReporteMantenimiento extends Auditable implements Serializable {
         this.imagen_9 = imagen_9;
     }
 
+    public String getImagen_10() {
+        return imagen_10;
+    }
+
+    public void setImagen_10(String imagen_10) {
+        this.imagen_10 = imagen_10;
+    }
+
+    public String getImagen_11() {
+        return imagen_11;
+    }
+
+    public void setImagen_11(String imagen_11) {
+        this.imagen_11 = imagen_11;
+    }
+
+    public String getImagen_12() {
+        return imagen_12;
+    }
+
+    public void setImagen_12(String imagen_12) {
+        this.imagen_12 = imagen_12;
+    }
+
     public String getDescripcion1() {
         return descripcion1;
     }
@@ -628,6 +675,54 @@ public class ReporteMantenimiento extends Auditable implements Serializable {
         this.rutaImagen9 = rutaImagen9;
     }
 
+    public String getDescripcion10() {
+        return descripcion10;
+    }
+
+    public void setDescripcion10(String descripcion10) {
+        this.descripcion10 = descripcion10;
+    }
+
+    public String getDescripcion11() {
+        return descripcion11;
+    }
+
+    public void setDescripcion11(String descripcion11) {
+        this.descripcion11 = descripcion11;
+    }
+
+    public String getDescripcion12() {
+        return descripcion12;
+    }
+
+    public void setDescripcion12(String descripcion12) {
+        this.descripcion12 = descripcion12;
+    }
+
+    public String getRutaImagen10() {
+        return rutaImagen10;
+    }
+
+    public void setRutaImagen10(String rutaImagen10) {
+        this.rutaImagen10 = rutaImagen10;
+    }
+
+    public String getRutaImagen11() {
+        return rutaImagen11;
+    }
+
+    public void setRutaImagen11(String rutaImagen11) {
+        this.rutaImagen11 = rutaImagen11;
+    }
+
+    public String getRutaImagen12() {
+        return rutaImagen12;
+    }
+
+    public void setRutaImagen12(String rutaImagen12) {
+        this.rutaImagen12 = rutaImagen12;
+    }
+
     public Cliente getCliente() {
         return cliente;
     }
@@ -647,7 +742,18 @@ public class ReporteMantenimiento extends Auditable implements Serializable {
     public ReporteMantenimiento() {
     }
 
-    public ReporteMantenimiento(Long idrepmant, String no_reporte, String nombrecliente, String nombreequipo, String tecnico, LocalTime horaentrada, LocalTime horasalida, String horaviajes, Date fechareporte, Date fecha, String contacto, String cargo, String direccion, String no_cotizacion, String ubicacionequipo, String fabricanteindicador, String fabricantemarco, String fabricantetransductor, String modeloindicador, String modelomarco, String modelotransductor, String serieindicador, String seriemarco, String serietransductor, String capacidadindicador, String capacidadmarco, String capacidadtransductor, String notamantprevent, String notahallazgo, String recomendaciones, String imagen_1, String imagen_2, String imagen_3, String imagen_4, String imagen_5, String imagen_6, String imagen_7, String imagen_8, String imagen_9, String descripcion1, String descripcion2, String descripcion3, String descripcion4, String descripcion5, String descripcion6, String descripcion7, String descripcion8, String descripcion9, Cliente cliente, EquipoCliente equipo) {
+    public ReporteMantenimiento(Long idrepmant,
+                                String no_reporte,
+                                String nombrecliente,
+                                String nombreequipo,
+                                String tecnico,
+                                LocalTime horaentrada,
+                                LocalTime horasalida,
+                                String horaviajes,
+                                Date fechareporte,
+                                Date fecha,
+                                String contacto,
+                                String cargo, String direccion, String no_cotizacion, String ubicacionequipo, String fabricanteindicador, String fabricantemarco, String fabricantetransductor, String modeloindicador, String modelomarco, String modelotransductor, String serieindicador, String seriemarco, String serietransductor, String capacidadindicador, String capacidadmarco, String capacidadtransductor, String notamantprevent, String notahallazgo, String recomendaciones, String imagen_1, String imagen_2, String imagen_3, String imagen_4, String imagen_5, String imagen_6, String imagen_7, String imagen_8, String imagen_9,String imagen_10,String imagen_11, String imagen_12,String descripcion1, String descripcion2, String descripcion3, String descripcion4, String descripcion5, String descripcion6, String descripcion7, String descripcion8, String descripcion9, String descripcion10, String descripcion11, String descripcion12, String rutaImagen1, String rutaImagen2, String rutaImagen3, String rutaImagen4, String rutaImagen5, String rutaImagen6, String rutaImagen7, String rutaImagen8, String rutaImagen9, String rutaImagen10, String rutaImagen11, String rutaImagen12, Cliente cliente, EquipoCliente equipo) {
         this.idrepmant = idrepmant;
         this.no_reporte = no_reporte;
         this.nombrecliente = nombrecliente;
@@ -687,6 +793,9 @@ public class ReporteMantenimiento extends Auditable implements Serializable {
         this.imagen_7 = imagen_7;
         this.imagen_8 = imagen_8;
         this.imagen_9 = imagen_9;
+        this.imagen_10 = imagen_10;
+        this.imagen_11 = imagen_11;
+        this.imagen_12 = imagen_12;
         this.descripcion1 = descripcion1;
         this.descripcion2 = descripcion2;
         this.descripcion3 = descripcion3;
@@ -696,14 +805,30 @@ public class ReporteMantenimiento extends Auditable implements Serializable {
         this.descripcion7 = descripcion7;
         this.descripcion8 = descripcion8;
         this.descripcion9 = descripcion9;
+        this.descripcion10 = descripcion10;
+        this.descripcion11 = descripcion11;
+        this.descripcion12 = descripcion12;
+        this.rutaImagen1 = rutaImagen1;
+        this.rutaImagen2 = rutaImagen2;
+        this.rutaImagen3 = rutaImagen3;
+        this.rutaImagen4 = rutaImagen4;
+        this.rutaImagen5 = rutaImagen5;
+        this.rutaImagen6 = rutaImagen6;
+        this.rutaImagen7 = rutaImagen7;
+        this.rutaImagen8 = rutaImagen8;
+        this.rutaImagen9 = rutaImagen9;
+        this.rutaImagen10 = rutaImagen10;
+        this.rutaImagen11 = rutaImagen11;
+        this.rutaImagen12 = rutaImagen12;
         this.cliente = cliente;
         this.equipo = equipo;
     }
-    @ManyToOne(fetch = FetchType.LAZY, optional=false)
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "idCliente")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Cliente cliente;
-    @ManyToOne(fetch = FetchType.LAZY, optional=false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "idEquipo")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private EquipoCliente equipo;

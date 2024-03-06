@@ -1448,25 +1448,18 @@ Apartado Postal: 0819-00088
 				</box>
 				<imageExpression><![CDATA[$P{imagen_1}]]></imageExpression>
 			</image>
-			<staticText>
-				<reportElement x="105" y="12" width="100" height="30" uuid="5c2fedfd-b72a-4ad2-9057-9d4d5983643c"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Verdana" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Imagen 1]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="20" y="223" width="260" height="33" uuid="1cb94199-a21e-4231-aa61-24642bb46ea7"/>
+			<textField isBlankWhenNull="true">
+				<reportElement x="20" y="223" width="260" height="33" isRemoveLineWhenBlank="true" uuid="1cb94199-a21e-4231-aa61-24642bb46ea7"/>
 				<box padding="2">
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textFieldExpression><![CDATA["Descripcion 1: "+ $P{descripcion1}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{descripcion1}]]></textFieldExpression>
 			</textField>
 			<image scaleImage="FillFrame" hAlign="Center" onErrorType="Blank">
-				<reportElement x="291" y="42" width="260" height="180" uuid="d876be9d-db82-4c8a-864f-8c706d540451"/>
+				<reportElement isPrintRepeatedValues="false" x="291" y="42" width="260" height="180" isRemoveLineWhenBlank="true" uuid="d876be9d-db82-4c8a-864f-8c706d540451"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1475,39 +1468,18 @@ Apartado Postal: 0819-00088
 				</box>
 				<imageExpression><![CDATA[$P{imagen_2}]]></imageExpression>
 			</image>
-			<staticText>
-				<reportElement x="376" y="12" width="100" height="30" uuid="af21a1c7-0a33-485a-9667-d673fb18af8c"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Verdana" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Imagen 2]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="291" y="223" width="260" height="33" uuid="337ba1cf-99e1-4724-97b6-30706715ce6a"/>
+			<textField isBlankWhenNull="true">
+				<reportElement x="291" y="223" width="260" height="33" isRemoveLineWhenBlank="true" uuid="337ba1cf-99e1-4724-97b6-30706715ce6a"/>
 				<box padding="2">
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textFieldExpression><![CDATA["Descripcion 2: " + $P{descripcion2}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{descripcion2}]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="105" y="269" width="100" height="30" uuid="60da660a-c67e-41f1-a2f2-a538694d8350"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Verdana" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Imagen 3]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="376" y="269" width="100" height="30" uuid="54a3a2b1-e3a5-4b63-9321-7c17ecfbd135"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Verdana" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Imagen 4]]></text>
-			</staticText>
 			<image scaleImage="FillFrame" hAlign="Center" onErrorType="Blank">
-				<reportElement x="20" y="299" width="260" height="180" uuid="2c6d4b2d-ba73-4436-8cdc-8c7e02e0cd26"/>
+				<reportElement isPrintRepeatedValues="false" x="20" y="299" width="260" height="180" isRemoveLineWhenBlank="true" uuid="2c6d4b2d-ba73-4436-8cdc-8c7e02e0cd26"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1517,7 +1489,7 @@ Apartado Postal: 0819-00088
 				<imageExpression><![CDATA[$P{imagen_3}]]></imageExpression>
 			</image>
 			<image scaleImage="FillFrame" hAlign="Center" onErrorType="Blank">
-				<reportElement x="291" y="299" width="260" height="180" uuid="cd0b9880-ecb2-449f-aae6-5cd11c7cadcd"/>
+				<reportElement isPrintRepeatedValues="false" x="291" y="299" width="260" height="180" isRemoveLineWhenBlank="true" uuid="cd0b9880-ecb2-449f-aae6-5cd11c7cadcd"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1526,25 +1498,25 @@ Apartado Postal: 0819-00088
 				</box>
 				<imageExpression><![CDATA[$P{imagen_4}]]></imageExpression>
 			</image>
-			<textField>
-				<reportElement x="20" y="480" width="260" height="33" uuid="c8eea40a-4651-4eb0-b314-5aff7074fb31"/>
+			<textField isBlankWhenNull="true">
+				<reportElement x="20" y="480" width="260" height="33" isRemoveLineWhenBlank="true" uuid="c8eea40a-4651-4eb0-b314-5aff7074fb31"/>
 				<box padding="2">
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textFieldExpression><![CDATA["Descripcion 3: " + $P{descripcion3}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{descripcion3}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="291" y="480" width="260" height="33" uuid="8db394d1-0a93-40b9-bb71-4cbf0e154238"/>
+			<textField isBlankWhenNull="true">
+				<reportElement x="291" y="480" width="260" height="33" isRemoveLineWhenBlank="true" uuid="8db394d1-0a93-40b9-bb71-4cbf0e154238"/>
 				<box padding="2">
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textFieldExpression><![CDATA["Descripcion 4: " + $P{descripcion4}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{descripcion4}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="45" y="626" width="160" height="1" uuid="fbd6f4d3-5aaf-4c9d-be3f-3196e7c0aa98"/>

@@ -72,7 +72,7 @@ public class FileSystemStorageService implements StorageService{
             // Redimensionar y comprimir la imagen directamente desde el archivo
             Thumbnails.of(file.getInputStream())
                     .size(maxWidth, maxHeight)
-                    .outputQuality(0.8) // Ajusta la calidad de compresión según tus necesidades
+                    .outputQuality(0.1) // Ajusta la calidad de compresión según tus necesidades
                     .toFile(destinationFile.toFile());
 
             return filename;

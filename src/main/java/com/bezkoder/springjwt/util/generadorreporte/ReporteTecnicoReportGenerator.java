@@ -1,5 +1,6 @@
 package com.bezkoder.springjwt.util.generadorreporte;
 
+import com.bezkoder.springjwt.models.ReporteMantenimiento;
 import com.bezkoder.springjwt.models.ReporteTecnico;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
@@ -48,74 +49,31 @@ public class ReporteTecnicoReportGenerator {
         InputStream jasperStream = resource.getInputStream();
         Resource logoResource = new ClassPathResource("logo-icm-rbg.png");
         InputStream logoInputStream = logoResource.getInputStream();
-      String reporteImagen1 =  reporteTecnico.getRutaImagen1();
-       String reporteImagen2 =  reporteTecnico.getRutaImagen2();
-       String reporteImagen3 =  reporteTecnico.getRutaImagen3();
-       String reporteImagen4 =  reporteTecnico.getRutaImagen4();
-        System.out.println("reporteImagen4 = " + reporteImagen4);
+        InputStream[] inputStreams = new InputStream[4];
+        Map<String, Object> params = new HashMap<>();
 
-    /*    URL urlImagen1 = new URL(reporteImagen1);
-        URL urlImagen2 = new URL(reporteImagen2);
-        URL urlImagen3 = new URL(reporteImagen3);
-        URL urlImagen4 = new URL(reporteImagen4);
-        System.out.println("urlImagen4 = " + urlImagen4);*/
-// Tu URL
-      /*  String url1 = String.valueOf(urlImagen1);
-        String url2 = String.valueOf(urlImagen2);
-        String url3 = String.valueOf(urlImagen3);
-        String url4 = String.valueOf(urlImagen4);
-        System.out.println("url4 = " + url4);*/
-// Parsear la URL
-        URL urlObj1 = new URL(reporteImagen1);
-        URL urlObj2 = new URL(reporteImagen2);
-        URL urlObj3 = new URL(reporteImagen3);
-        URL urlObj4 = new URL(reporteImagen4);
-        System.out.println("urlObj4 = " + urlObj4);
-// Obtener el nombre del archivo
-        String nombreArchivo1 = new File(urlObj1.getPath()).getName();
-        String nombreArchivo2 = new File(urlObj2.getPath()).getName();
-        String nombreArchivo3 = new File(urlObj3.getPath()).getName();
-        String nombreArchivo4 = new File(urlObj4.getPath()).getName();
-        System.out.println("nombreArchivo4 = " + nombreArchivo4);
+// Iterar sobre las rutas de imagen y procesarlas
+        for (int i = 1; i <= 12; i++) {
+            String rutaImagen = obtenerRutaImagen(reporteTecnico, i);
+            System.out.println("dentro del for1 rutaImagen = " + rutaImagen);
+            procesarRutaImagen(rutaImagen, i, inputStreams, params);
 
-// Ahora puedes concatenar el nombre del archivo con la ruta local
-        String archivoImagen1 = "C:/mediafiles/" + nombreArchivo1;//  ruta Local Windows
-        String archivoImagen2 = "C:/mediafiles/" + nombreArchivo2;
-        String archivoImagen3 = "C:/mediafiles/" + nombreArchivo3;
-        String archivoImagen4 = "C:/mediafiles/" + nombreArchivo4;
-        System.out.println("archivoImagen4 = " + archivoImagen4);
+        }
 
+// Luego, puedes pasar los InputStream directamente como parámetros a tu generador de informes
+        int i = 1;
+        for (InputStream inputStream : inputStreams) {
+            params.put("imagen_" + i, inputStream);
+            System.out.println("inputStream dentro del for2 = imagen_" + inputStream);
+            i++;
 
-        Resource rutaImagen1 = new FileSystemResource(archivoImagen1);
-        Resource rutaImagen2 = new FileSystemResource(archivoImagen2);
-        Resource rutaImagen3 = new FileSystemResource(archivoImagen3);
-        Resource rutaImagen4 = new FileSystemResource(archivoImagen4 );
-        //System.out.println(nombreArchivo4); // Esto imprimirá "BAS004-1.jpg"
-        System.out.println(rutaImagen4);    // Esto imprimirá "C:/mediafiles/BAS004-1.jpg"
-
-// Función para obtener el recurso a partir de la URL
-
-
-// Obtener los recursos para cada URL
-        //Resource recurso1 = obtenerRecursoDesdeURL(rutaImagen1);
-       // Resource recurso2 = obtenerRecursoDesdeURL(rutaImagen2);
-       // Resource recurso3 = obtenerRecursoDesdeURL(rutaImagen3);
-        //Resource recurso4 = obtenerRecursoDesdeURL(rutaImagen4);
-// Supongamos que ya tienes los InputStream de tus recursos
-        InputStream inputStream1 = rutaImagen1.getInputStream();
-        InputStream inputStream2 = rutaImagen2.getInputStream();
-        InputStream inputStream3 = rutaImagen3.getInputStream();
-        InputStream inputStream4 = rutaImagen4.getInputStream();
-        System.out.println("Imagen 1 " + inputStream1);
-        System.out.println("Imagen 2 " + inputStream2);
-        System.out.println("Imagen 3 " + inputStream3);
-        System.out.println("Imagen 4 " + inputStream4);
+        }
 
 
 
         //final File imgLogo = ResourceUtils.getFile("classpath:logo-icm-rbg.png");
         final JasperReport report = (JasperReport) JRLoader.loadObject(jasperStream);
-            Map<String, Object> params = new HashMap<>();
+
 
             params.put("cliente", reporteTecnico.getNombrecliente());
             params.put("equipo", reporteTecnico.getNombreequipo());
@@ -170,12 +128,6 @@ public class ReporteTecnicoReportGenerator {
             params.put("fecha", reporteTecnico.getFecha());
             params.put("imgLogo", logoInputStream);
 
-// Luego, puedes pasar los InputStream directamente como parámetros a tu generador de informes
-        params.put("imagen_1", inputStream1);
-        params.put("imagen_2", inputStream2);
-        params.put("imagen_3", inputStream3);
-        params.put("imagen_4", inputStream4);
-
         params.put("descripcion1", reporteTecnico.getDescripcion_1());
         params.put("descripcion2", reporteTecnico.getDescripcion_2());
         params.put("descripcion3", reporteTecnico.getDescripcion_3());
@@ -204,7 +156,46 @@ public class ReporteTecnicoReportGenerator {
             throw new RuntimeException("Error al generar el informe", ex);
         }*/
     }
+    private String obtenerRutaImagen(ReporteTecnico reporteTecnico, int numeroImagen) {
+        switch (numeroImagen) {
+            case 1:
+                //   System.out.println("obtenerRutaImagen - reporteMantenimiento.getRutaImagen1() = " + reporteMantenimiento.getRutaImagen1());
+                return reporteTecnico.getRutaImagen1();
 
+            case 2:
+                // System.out.println("obtenerRutaImagen - reporteMantenimiento.getRutaImagen2() = " + reporteMantenimiento.getRutaImagen2());
+                return reporteTecnico.getRutaImagen2();
+            case 3:
+                //    System.out.println("obtenerRutaImagen - reporteMantenimiento.getRutaImagen2() = " + reporteMantenimiento.getRutaImagen3());
+                return reporteTecnico.getRutaImagen3();
+            case 4: return reporteTecnico.getRutaImagen4();
+            default: return null;
+        }
+    }
+
+    private void procesarRutaImagen(String reporteImagen, int numeroImagen, InputStream[] inputStreams, Map<String, Object> params) throws IOException {
+        // Verificar si la ruta de imagen es nula antes de crear el objeto URL
+        URL urlObj = (reporteImagen != null) ? new URL(reporteImagen) : null;
+
+        // Verificar si la URL es nula antes de continuar
+        if (urlObj != null) {
+            // Obtener el nombre del archivo solo si la URL no es nula
+            String nombreArchivo = new File(urlObj.getPath()).getName();
+            //  System.out.println("nombreArchivo" + numeroImagen + " = " + nombreArchivo);
+
+            // Resto del código relacionado con la URL...
+            String archivoImagen = "/root/mediafiles/" + nombreArchivo; //ruta local windows C:/mediafiles/ ruta local linux /root/mediafiles/
+            Resource rutaImagen = new FileSystemResource(archivoImagen);
+            inputStreams[numeroImagen - 1] = rutaImagen.getInputStream();
+            //   System.out.println("archivoImagen" + numeroImagen + " = " + archivoImagen);
+
+            // Continuar con el resto del código para InputStream, etc.
+        } else {
+            // Lógica para manejar la ausencia de la ruta de imagen
+            System.out.println("La ruta de imagen " + numeroImagen + " es nula");
+            // Puedes agregar aquí la lógica necesaria cuando la ruta es nula
+        }
+    }
     private byte[] exportReportToPdf(JasperPrint jasperPrint) throws JRException {
         JRPdfExporter exporter = new JRPdfExporter();
         exporter.setExporterInput(new SimpleExporterInput(jasperPrint));

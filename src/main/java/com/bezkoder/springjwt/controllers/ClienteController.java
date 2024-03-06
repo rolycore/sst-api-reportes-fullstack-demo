@@ -30,7 +30,7 @@
     import java.util.Set;
     import java.util.stream.Collectors;
 
-    @CrossOrigin(origins = { "https://localhost:4200" })//https://appicmlab.icmetrologia.com
+    @CrossOrigin(origins = { "https://appicmlab.icmetrologia.com" })//https://appicmlab.icmetrologia.com
     @RestController
     @RequestMapping("/api/v1")
     @PreAuthorize("hasRole('ADMIN')")

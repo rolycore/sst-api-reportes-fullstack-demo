@@ -29,7 +29,7 @@ import com.bezkoder.springjwt.repository.UserRepository;
 import com.bezkoder.springjwt.security.jwt.JwtUtils;
 import com.bezkoder.springjwt.security.services.UserDetailsImpl;
 
-@CrossOrigin(origins = "https://localhost:4200", maxAge = 3600)//https://appicmlab.icmetrologia.com
+@CrossOrigin(origins = "https://appicmlab.icmetrologia.com", maxAge = 3600)//https://appicmlab.icmetrologia.com
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {

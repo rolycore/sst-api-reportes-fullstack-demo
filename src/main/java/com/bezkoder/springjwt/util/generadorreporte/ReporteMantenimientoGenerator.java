@@ -16,7 +16,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ResourceUtils;
+
 
 import javax.net.ssl.SSLHandshakeException;
 import javax.transaction.Transactional;
@@ -44,80 +44,30 @@ public class ReporteMantenimientoGenerator {
         InputStream jasperStream = resource.getInputStream();
         Resource logoResource = new ClassPathResource("logo-icm-rbg.png");
         InputStream logoInputStream = logoResource.getInputStream();
-        String reporteImagen1 =  reporteMantenimiento.getRutaImagen1();
-        String reporteImagen2 =  reporteMantenimiento.getRutaImagen2();
-        String reporteImagen3 =  reporteMantenimiento.getRutaImagen3();
-        String reporteImagen4 =  reporteMantenimiento.getRutaImagen4();
-        String reporteImagen5 = reporteMantenimiento.getRutaImagen5();
-        String reporteImagen6 = reporteMantenimiento.getRutaImagen6();
-        String reporteImagen7 = reporteMantenimiento.getRutaImagen7();
-        String reporteImagen8 = reporteMantenimiento.getRutaImagen8();
-        String reporteImagen9 = reporteMantenimiento.getRutaImagen9();
-        System.out.println("reporteImagen4 = " + reporteImagen4);
-
-        // Parsear la URL
-        URL urlObj1 = new URL(reporteImagen1);
-        URL urlObj2 = new URL(reporteImagen2);
-        URL urlObj3 = new URL(reporteImagen3);
-        URL urlObj4 = new URL(reporteImagen4);
-        URL urlObj5 = new URL(reporteImagen5);
-        URL urlObj6 = new URL(reporteImagen6);
-        URL urlObj7 = new URL(reporteImagen7);
-        URL urlObj8 = new URL(reporteImagen8);
-        URL urlObj9 = new URL(reporteImagen9);
-        System.out.println("urlObj4 = " + urlObj4);
-
-        // Obtener el nombre del archivo
-        String nombreArchivo1 = new File(urlObj1.getPath()).getName();
-        String nombreArchivo2 = new File(urlObj2.getPath()).getName();
-        String nombreArchivo3 = new File(urlObj3.getPath()).getName();
-        String nombreArchivo4 = new File(urlObj4.getPath()).getName();
-        String nombreArchivo5 = new File(urlObj5.getPath()).getName();
-        String nombreArchivo6 = new File(urlObj6.getPath()).getName();
-        String nombreArchivo7 = new File(urlObj7.getPath()).getName();
-        String nombreArchivo8 = new File(urlObj8.getPath()).getName();
-        String nombreArchivo9 = new File(urlObj9.getPath()).getName();
-        System.out.println("nombreArchivo4 = " + nombreArchivo4);
-        System.out.println("nombreArchivo4 = " + nombreArchivo9);
-        // Ahora puedes concatenar el nombre del archivo con la ruta local
-        String archivoImagen1 = "C:/mediafiles/" + nombreArchivo1;//  ruta Local Windows
-        String archivoImagen2 = "C:/mediafiles/" + nombreArchivo2;
-        String archivoImagen3 = "C:/mediafiles/" + nombreArchivo3;
-        String archivoImagen4 = "C:/mediafiles/" + nombreArchivo4;
-        String archivoImagen5 = "C:/mediafiles/" + nombreArchivo5;//  ruta Local Windows
-        String archivoImagen6 = "C:/mediafiles/" + nombreArchivo6;
-        String archivoImagen7 = "C:/mediafiles/" + nombreArchivo7;
-        String archivoImagen8 = "C:/mediafiles/" + nombreArchivo8;
-        String archivoImagen9 = "C:/mediafiles/" + nombreArchivo9;
-        System.out.println("archivoImagen4 = " + archivoImagen4);
-
-        Resource rutaImagen1 = new FileSystemResource(archivoImagen1);
-        Resource rutaImagen2 = new FileSystemResource(archivoImagen2);
-        Resource rutaImagen3 = new FileSystemResource(archivoImagen3);
-        Resource rutaImagen4 = new FileSystemResource(archivoImagen4);
-        Resource rutaImagen5 = new FileSystemResource(archivoImagen5);
-        Resource rutaImagen6 = new FileSystemResource(archivoImagen6);
-        Resource rutaImagen7 = new FileSystemResource(archivoImagen7);
-        Resource rutaImagen8 = new FileSystemResource(archivoImagen8);
-        Resource rutaImagen9 = new FileSystemResource(archivoImagen9);
-        //System.out.println(nombreArchivo4); // Esto imprimirá "BAS004-1.jpg"
-        System.out.println(rutaImagen4);    // Esto imprimirá "C:/mediafiles/BAS004-1.jpg"
-        // Supongamos que ya tienes los InputStream de tus recursos
-        InputStream inputStream1 = rutaImagen1.getInputStream();
-        InputStream inputStream2 = rutaImagen2.getInputStream();
-        InputStream inputStream3 = rutaImagen3.getInputStream();
-        InputStream inputStream4 = rutaImagen4.getInputStream();
-        InputStream inputStream5 = rutaImagen5.getInputStream();
-        InputStream inputStream6 = rutaImagen6.getInputStream();
-        InputStream inputStream7 = rutaImagen7.getInputStream();
-        InputStream inputStream8 = rutaImagen8.getInputStream();
-        InputStream inputStream9 = rutaImagen9.getInputStream();
-        System.out.println("Imagen 1 " + inputStream1);
-        System.out.println("Imagen 2 " + inputStream2);
-        System.out.println("Imagen 3 " + inputStream3);
-        System.out.println("Imagen 4 " + inputStream4);
-        final JasperReport report = (JasperReport) JRLoader.loadObject(jasperStream);
+        // Crear un array de InputStream y otro de parámetros para almacenar la información
+        InputStream[] inputStreams = new InputStream[12];
         Map<String, Object> params = new HashMap<>();
+
+// Iterar sobre las rutas de imagen y procesarlas
+        for (int i = 1; i <= 12; i++) {
+            String rutaImagen = obtenerRutaImagen(reporteMantenimiento, i);
+            System.out.println("dentro del for1 rutaImagen = " + rutaImagen);
+            procesarRutaImagen(rutaImagen, i, inputStreams, params);
+
+        }
+
+// Luego, puedes pasar los InputStream directamente como parámetros a tu generador de informes
+        int i = 1;
+        for (InputStream inputStream : inputStreams) {
+            params.put("imagen_" + i, inputStream);
+            System.out.println("inputStream dentro del for2 = imagen_" + inputStream);
+            i++;
+
+        }
+
+
+        final JasperReport report = (JasperReport) JRLoader.loadObject(jasperStream);
+
         params.put("cliente", reporteMantenimiento.getNombrecliente());
         params.put("equipo", reporteMantenimiento.getNombreequipo());
         params.put("no_reporte", reporteMantenimiento.getNo_reporte());
@@ -148,16 +98,7 @@ public class ReporteMantenimientoGenerator {
         params.put("recomendaciones",reporteMantenimiento.getRecomendaciones());
         params.put("capacidadtrasnductor",reporteMantenimiento.getModelotransductor());
         params.put("imgLogo", logoInputStream);
-// Luego, puedes pasar los InputStream directamente como parámetros a tu generador de informes
-        params.put("imagen_1", inputStream1);
-        params.put("imagen_2", inputStream2);
-        params.put("imagen_3", inputStream3);
-        params.put("imagen_4", inputStream4);
-        params.put("imagen_5", inputStream5);
-        params.put("imagen_6", inputStream6);
-        params.put("imagen_7", inputStream7);
-        params.put("imagen_8", inputStream8);
-        params.put("imagen_9", inputStream9);
+
         params.put("descripcion1", reporteMantenimiento.getDescripcion1());
         params.put("descripcion2", reporteMantenimiento.getDescripcion2());
         params.put("descripcion3", reporteMantenimiento.getDescripcion3());
@@ -167,26 +108,75 @@ public class ReporteMantenimientoGenerator {
         params.put("descripcion7", reporteMantenimiento.getDescripcion7());
         params.put("descripcion8", reporteMantenimiento.getDescripcion8());
         params.put("descripcion9", reporteMantenimiento.getDescripcion9());
+        params.put("descripcion10", reporteMantenimiento.getDescripcion10());
+        params.put("descripcion11", reporteMantenimiento.getDescripcion11());
+        params.put("descripcion12", reporteMantenimiento.getDescripcion12());
         JasperPrint jasperPrint = JasperFillManager.fillReport(report, params, new JREmptyDataSource());
         byte[] pdfBytes = exportReportToPdf(jasperPrint);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentDispositionFormData("attachment", "ReporteMantPDF-" + reporteMantenimiento.getIdrepmant() + ".pdf");
-        System.out.println("pdfBytes = " + pdfBytes);
+        System.err.println("pdfBytes = " + pdfBytes);
         return ResponseEntity.ok()
                 .contentLength((long) pdfBytes.length)
                 .contentType(MediaType.APPLICATION_PDF)
                 .headers(headers)
                 .body(pdfBytes).getBody();
 
-        //}
-        /*catch (JRException | FileNotFoundException ex) {
-            throw new RuntimeException("Error al generar el informe", ex);
-        }*/
+
+    }
+    // Métodos para obtener la ruta de imagen y procesarla
+    private String obtenerRutaImagen(ReporteMantenimiento reporteMantenimiento, int numeroImagen) {
+        switch (numeroImagen) {
+            case 1:
+             //   System.out.println("obtenerRutaImagen - reporteMantenimiento.getRutaImagen1() = " + reporteMantenimiento.getRutaImagen1());
+                return reporteMantenimiento.getRutaImagen1();
+
+            case 2:
+               // System.out.println("obtenerRutaImagen - reporteMantenimiento.getRutaImagen2() = " + reporteMantenimiento.getRutaImagen2());
+                return reporteMantenimiento.getRutaImagen2();
+            case 3:
+            //    System.out.println("obtenerRutaImagen - reporteMantenimiento.getRutaImagen2() = " + reporteMantenimiento.getRutaImagen3());
+                return reporteMantenimiento.getRutaImagen3();
+            case 4: return reporteMantenimiento.getRutaImagen4();
+            case 5: return reporteMantenimiento.getRutaImagen5();
+            case 6: return reporteMantenimiento.getRutaImagen6();
+            case 7: return reporteMantenimiento.getRutaImagen7();
+            case 8: return reporteMantenimiento.getRutaImagen8();
+            case 9: return reporteMantenimiento.getRutaImagen9();
+            case 10: return reporteMantenimiento.getRutaImagen10();
+            case 11: return reporteMantenimiento.getRutaImagen11();
+            case 12: return reporteMantenimiento.getRutaImagen12();
+            default: return null;
+        }
+    }
+
+    private void procesarRutaImagen(String reporteImagen, int numeroImagen, InputStream[] inputStreams, Map<String, Object> params) throws IOException {
+        // Verificar si la ruta de imagen es nula antes de crear el objeto URL
+        URL urlObj = (reporteImagen != null) ? new URL(reporteImagen) : null;
+
+        // Verificar si la URL es nula antes de continuar
+        if (urlObj != null) {
+            // Obtener el nombre del archivo solo si la URL no es nula
+            String nombreArchivo = new File(urlObj.getPath()).getName();
+          //  System.out.println("nombreArchivo" + numeroImagen + " = " + nombreArchivo);
+
+            // Resto del código relacionado con la URL...
+            String archivoImagen = "/root/mediafiles/" + nombreArchivo; //C:/mediafiles/ linux /root/mediafiles/
+            Resource rutaImagen = new FileSystemResource(archivoImagen);
+            inputStreams[numeroImagen - 1] = rutaImagen.getInputStream();
+         //   System.out.println("archivoImagen" + numeroImagen + " = " + archivoImagen);
+
+            // Continuar con el resto del código para InputStream, etc.
+        } else {
+            // Lógica para manejar la ausencia de la ruta de imagen
+            System.out.println("La ruta de imagen " + numeroImagen + " es nula");
+            // Puedes agregar aquí la lógica necesaria cuando la ruta es nula
+        }
     }
     private byte[] exportReportToPdf(JasperPrint jasperPrint) throws JRException {
         JRPdfExporter exporter = new JRPdfExporter();
         exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-        exporter.setExporterOutput(new SimpleOutputStreamExporterOutput("reporte_de_tecnico.pdf"));
+        exporter.setExporterOutput(new SimpleOutputStreamExporterOutput("reporte_mantenimiento.pdf"));
 
         SimplePdfReportConfiguration reportConfig = new SimplePdfReportConfiguration();
         reportConfig.setSizePageToContent(true);

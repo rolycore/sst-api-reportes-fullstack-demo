@@ -4,7 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "https://localhost:4200", maxAge = 3600)//https://appicmlab.icmetrologia.com
+@CrossOrigin(origins = "https://appicmlab.icmetrologia.com", maxAge = 3600)//https://appicmlab.icmetrologia.com
 @RestController
 @RequestMapping("/api/test")
 public class TestController {
