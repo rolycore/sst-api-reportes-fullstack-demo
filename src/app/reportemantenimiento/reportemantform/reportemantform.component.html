@@ -12,34 +12,34 @@
       <div class="card-body">
         <ul class="nav nav-pills">
           <li class="nav-item">
-            <a class="nav-link" [class.active]="activeTab === 1" (click)="activeTab = 1">1. Información general</a>
+            <a class="nav-link" [class.active]="activeTab === 1" (click)="activeTab = 1">1. INFORMACIÓN GENERAL</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" [class.active]="activeTab === 2" (click)="activeTab = 2">2. Ubicación del equipo</a>
+            <a class="nav-link" [class.active]="activeTab === 2" (click)="activeTab = 2">2. ÚBICACION DEL EQUIPO</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" [class.active]="activeTab === 3" (click)="activeTab = 3">3. Datos técnicos del equipo</a>
+            <a class="nav-link" [class.active]="activeTab === 3" (click)="activeTab = 3">3. DATOS TÉCNICOS DEL EQUIPO</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" [class.active]="activeTab === 4" (click)="activeTab = 4">4. Mantenimiento preventivo</a>
+            <a class="nav-link" [class.active]="activeTab === 4" (click)="activeTab = 4">4. TRABAJOS REALIZADOS</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" [class.active]="activeTab === 5" (click)="activeTab = 5">5. Hallazgos</a>
+            <a class="nav-link" [class.active]="activeTab === 5" (click)="activeTab = 5">5. OBSERVACIONES EN RECEPCIÓN</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" [class.active]="activeTab === 6" (click)="activeTab = 6">6. Recomendaciones</a>
-          </li><li class="nav-item">
-            <a class="nav-link" [class.active]="activeTab === 7" (click)="activeTab = 7">7. Imagen del equipo y servicio</a>
+            <a class="nav-link" [class.active]="activeTab === 6" (click)="activeTab = 6">6. RECOMENDACIONES</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [class.active]="activeTab === 7" (click)="activeTab = 7">7. FOTOS DEL SERVICIO BRINDADO</a>
           </li>
         </ul>
         <form [formGroup]="formulario" formulario.valid>
           <div *ngIf="activeTab===1">
             <div class="form-group">
- 		<h3>Información General</h3>
+              <h3>Información General</h3>
               <label for="no_reporte" class="col-form-label col-sm-6">No. Reporte Mantenimiento:</label>
-              <input id="no_reporte" type="text" formControlName="no_reporte" class="form-control"
-                [readonly]="true" [(ngModel)]="reportem.no_reporte"
-                placeholder="Ingrese el Numero de Reporte Mantenimiento" />
+              <input id="no_reporte" type="text" formControlName="no_reporte" class="form-control" [readonly]="true"
+                [(ngModel)]="reportem.no_reporte" placeholder="Ingrese el Numero de Reporte Mantenimiento" />
             </div>
             <div class="form-group">
               <label for="no_cotizacion" class="col-form-label col-sm-6">No. de Cotizacion:</label>
@@ -80,7 +80,7 @@
               <label for="horaviajes" class="col-form-label col-sm-6">Horas de viaje:</label>
 
               <input id="horaviajes" type="text" formControlName="horaviajes" class="form-control"
-                [(ngModel)]="reportem.horaviajes" placeholder="Ingrese las horas de viaje"  />
+                [(ngModel)]="reportem.horaviajes" placeholder="Ingrese las horas de viaje" />
 
             </div>
             <div class="form-group">
@@ -118,342 +118,426 @@
               </div>
               <div class="form-group">
                 <label for="cargo" class="col-form-label col-sm-6">Cargo:</label>
-                <input id="cargo" type="text" formControlName="cargo" class="form-control"
-                  [(ngModel)]="reportem.cargo" placeholder="Ingrese el cargo del contacto"
-                  [readonly]="true" />
+                <input id="cargo" type="text" formControlName="cargo" class="form-control" [(ngModel)]="reportem.cargo"
+                  placeholder="Ingrese el cargo del contacto" [readonly]="true" />
               </div>
 
             </div>
 
 
 
-        </div>
+          </div>
 
 
 
 
-      <div *ngIf="activeTab === 2">
-             <div class="form-group">
- 		<h3>Ubicación del equipo</h3>
-              <label for="ubicacionequipo" class="col-form-label col-sm-6" >Ubicacion del equipo:</label>
-              <textarea id="ubicacionequipo" name="ubicacionequipo" class="form-control" placeholder="Ingrese la ubicacion del equipo"[(ngModel)]="reportem.ubicacionequipo" rows="4" cols="50"></textarea>
+          <div *ngIf="activeTab === 2">
+            <div class="form-group">
+              <h3>Ubicación del equipo</h3>
+              <label for="ubicacionequipo" class="col-form-label col-sm-6">Ubicacion del equipo:</label>
+              <textarea id="ubicacionequipo" name="ubicacionequipo" class="form-control"
+                placeholder="Ingrese la ubicacion del equipo" [(ngModel)]="reportem.ubicacionequipo" rows="4"
+                cols="50"></textarea>
             </div>
 
 
 
-      </div>
-      <div *ngIf="activeTab === 3">
-	<h3>{{tituloequipo}}</h3>
-<div class="form-group">
-<label for="equipoSelect">Selecciona un equipo:</label>
-            <select title="equipoSelect" class="form-control" formControlName="equipo" required id="equipoSelect" [(ngModel)]="equipoSeleccionado"(change)="onSelectEquipocliente()">
-              <option value="" disabled>Selecciona un equipo</option>
-              <option *ngFor="let equipo of equiposFiltrados" [value]="equipo.idEquipo">{{ equipo.nombre }}</option>
-            </select>
-            <div class="alert-danger" *ngIf="formulario?.get('equipo')?.errors && formulario?.get('equipo')?.touched">
-              <div *ngIf="formulario?.get('equipo')?.hasError('required')">El Equipo es requerido</div>
+          </div>
+          <div *ngIf="activeTab === 3">
+            <h3>{{tituloequipo}}</h3>
+            <div class="form-group">
+              <label for="equipoSelect">Selecciona un equipo:</label>
+              <select title="equipoSelect" class="form-control" formControlName="equipo" required id="equipoSelect"
+                [(ngModel)]="equipoSeleccionado" (change)="onSelectEquipocliente()">
+                <option value="" disabled>Selecciona un equipo</option>
+                <option *ngFor="let equipo of equiposFiltrados" [value]="equipo.idEquipo">{{ equipo.nombre }}</option>
+              </select>
+              <div class="alert-danger" *ngIf="formulario?.get('equipo')?.errors && formulario?.get('equipo')?.touched">
+                <div *ngIf="formulario?.get('equipo')?.hasError('required')">El Equipo es requerido</div>
+              </div>
+
             </div>
+            <div class="form-group" *ngIf="equipoSeleccionado">
 
- </div>
-      <div class="form-group" *ngIf="equipoSeleccionado">
 
+              <div class="form-group">
+                <label for="nombreequipo" class="col-form-label col-sm-6">Nombre del Equipo:</label>
+                <input id="nombreequipo" type="text" formControlName="nombreequipo" class="form-control"
+                  [(ngModel)]="reportem.nombreequipo" placeholder="Ingrese el Nombre del equipo" [readonly]="true" />
+              </div>
+              <div class="form-group">
+                <label for="fabricanteindicador" class="col-form-label col-sm-6">Fabricante Indicador:</label>
+                <input id="fabricanteindicador" type="text" formControlName="fabricanteindicador" class="form-control"
+                  [(ngModel)]="reportem.fabricanteindicador" placeholder="Ingrese el Fabricante indicador" [readonly]="true"/>
+              </div>
+              <div class="form-group">
+                <label for="fabricantemarco" class="col-form-label col-sm-6">Fabricante Marco / Receptor:</label>
+                <input id="fabricantemarco" type="text" formControlName="fabricantemarco" class="form-control"
+                  [(ngModel)]="reportem.fabricantemarco" placeholder="Ingrese el Fabricante Marco" [readonly]="true"/>
+              </div>
+              <div class="form-group">
+                <label for="fabricantetransductor" class="col-form-label col-sm-6">Fabricante Transductor / Sensor:</label>
+                <input id="fabricantetransductor" type="text" formControlName="fabricantetransductor"
+                  class="form-control" [(ngModel)]="reportem.fabricantetransductor"
+                  placeholder="Ingrese el Fabricante Transductor" [readonly]="true"/>
+              </div>
+              <div class="form-group">
+                <label for="modeloindicador" class="col-form-label col-sm-6">Modelo Indicador:</label>
+                <input id="modeloindicador" type="text" formControlName="modeloindicador" class="form-control"
+                  [(ngModel)]="reportem.modeloindicador" placeholder="Ingrese el Modelo Indicador" [readonly]="true"/>
+              </div>
+              <div class="form-group">
+                <label for="modelomarco" class="col-form-label col-sm-6">Modelo Marco / Receptor:</label>
+                <input id="modelomarco" type="text" formControlName="modelomarco" class="form-control"
+                  [(ngModel)]="reportem.modelomarco" placeholder="Ingrese el Modelo Marco" [readonly]="true"/>
+              </div>
+              <div class="form-group">
+                <label for="modelotransductor" class="col-form-label col-sm-6">Modelo Transductor / Sensor:</label>
+                <input id="modelotransductor" type="text" formControlName="modelotransductor" class="form-control"
+                  [(ngModel)]="reportem.modelotransductor" placeholder="Ingrese el Modelo Transductor" [readonly]="true"/>
+              </div>
+              <div class="form-group">
+                <label for="serieindicador" class="col-form-label col-sm-6">Serie Indicador:</label>
+                <input id="serieindicador" type="text" formControlName="serieindicador" class="form-control"
+                  [(ngModel)]="reportem.serieindicador" placeholder="Ingrese la Serie del Indicador" [readonly]="true"/>
+              </div>
+              <div class="form-group">
+                <label for="seriemarco" class="col-form-label col-sm-6">Serie Marco / Receptor:</label>
+                <input id="seriemarco" type="text" formControlName="seriemarco" class="form-control"
+                  [(ngModel)]="reportem.seriemarco" placeholder="Ingrese la Serie del Marco" [readonly]="true"/>
+              </div>
+              <div class="form-group">
+                <label for="serietransductor" class="col-form-label col-sm-6">Serie Transductor / Sensor:</label>
+                <input id="serietransductor" type="text" formControlName="serietransductor" class="form-control"
+                  [(ngModel)]="reportem.serietransductor" placeholder="Ingrese la Serie del Transductor" [readonly]="true"/>
+              </div>
+              <div class="form-group">
+                <label for="capacidadindicador" class="col-form-label col-sm-6">Capacidad Indicador:</label>
+                <input id="capacidadindicador" type="text" formControlName="capacidadindicador" class="form-control"
+                  [(ngModel)]="reportem.capacidadindicador" placeholder="Ingrese la Capacidad del Indicador" />
+              </div>
+              <div class="form-group">
+                <label for="capacidadmarco" class="col-form-label col-sm-6">Capacidad Marco / Receptor:</label>
+                <input id="capacidadmarco" type="text" formControlName="capacidadmarco" class="form-control"
+                  [(ngModel)]="reportem.capacidadmarco" placeholder="Ingrese la Capacidad del Marco" />
+              </div>
+              <div class="form-group">
+                <label for="capacidadtransductor" class="col-form-label col-sm-6">Capacidad Transductor / Sensor::</label>
+                <input id="capacidadtransductor" type="text" formControlName="capacidadtransductor" class="form-control"
+                  [(ngModel)]="reportem.capacidadtransductor" placeholder="Ingrese la Capacidad del Transductor" />
+              </div>
+
+            </div>
+          </div>
+          <div *ngIf="activeTab === 4">
+            <div class="form-group">
+              <h3>Trabajos Realizados</h3>
+              <label for="notamantprevent" class="col-form-label col-sm-6">Nota De Trabajos Realizados:</label>
+              <textarea id="notamantprevent" name="notamantprevent" class="form-control"
+                placeholder="Ingrese la Nota Mantenimiento prevententivo" rows="4" cols="50"
+                [(ngModel)]="reportem.notamantprevent"></textarea>
+            </div>
+          </div>
+          <div *ngIf="activeTab === 5">
+            <div class="form-group">
+              <h3>Observaciones en Recepción</h3>
+              <label for="notahallazgo" class="col-form-label col-sm-6">Observaciones:</label>
+              <textarea id="notahallazgo" name="notahallazgo" class="form-control"
+                placeholder="Ingrese la Nota de los Hallazgos" rows="4" cols="50"
+                [(ngModel)]="reportem.notahallazgo"></textarea>
+            </div>
+          </div>
+          <div *ngIf="activeTab === 6">
+            <div class="form-group">
+              <h3>Recomendaciones</h3>
+              <label for="recomendaciones" class="col-form-label col-sm-6">Nota Recomendaciones:</label>
+              <textarea id="recomendaciones" name="recomendaciones" class="form-control"
+                placeholder="Ingrese la Nota Mantenimiento prevententivo" rows="4" cols="50"
+                [(ngModel)]="reportem.recomendaciones"></textarea>
+            </div>
+          </div>
+          <div *ngIf="activeTab === 7">
+            <div class="form-group">
+              <h3>Imagenes del equipo y servicio</h3>
+              <label for="fecha" class="col-form-label col-sm-6">Fecha del Mantenimiento:</label>
+
+              <input id="fecha" type="date" formControlName="fecha" class="form-control" [(ngModel)]="reportem.fecha"
+                placeholder="yyyy/MM/dd" />
+              <div class="form-group">
+
+              </div>
+              <label for="imagen_1" class="col-form-label col-sm-6">Foto 1:</label>
+
+              <input class="input-file" id="imagen_1" (change)="capturarFile($event, 0)" type="file"
+                formControlName="imagen_1" class="form-control" placeholder="Ingrese la foto 1" [(ngModel)]="reportem.imagen_1"/>
+
+              <div class="p-1">
+                <small>Se aceptan archivos imágenes de tipo .jpg</small>
+              </div>
+              <button class="btn btn-light" type="button" (click)="clearImage()">Clear</button>
+              <div *ngIf="previsualizacion" class="form-group">
+                <img [src]="previsualizacion" alt="imagen equipo" class="fluid img-thumbnail" width="300"
+                  height="100" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="descripcion1" class="col-form-label col-sm-6">Descripcion 1:</label>
+
+              <input id="descripcion1" type="text" formControlName="descripcion1" class="form-control"
+                [(ngModel)]="reportem.descripcion1" placeholder="Ingrese la descripcion 1" />
+
+            </div>
+            <div class="form-group">
+              <label for="imagen_2" class="col-form-label col-sm-6">Foto 2:</label>
+              <input class="input-file" id="imagen_2" (change)="capturarFile($event, 1)" type="file"
+                formControlName="imagen_2" class="form-control" placeholder="Ingrese la foto 2" [(ngModel)]="reportem.imagen_2"/>
+
+              <div class="p-1">
+                <small>Se aceptan archivos imágenes de tipo .jpg</small>
+              </div>
+              <button class="btn btn-light" type="button" (click)="clearImage1()">Clear</button>
+              <div *ngIf="previsualizacion1" class="form-group">
+                <img [src]="previsualizacion1" alt="imagen equipo" class="fluid img-thumbnail" width="300"
+                  height="100" />
+              </div>
+            </div>
 
             <div class="form-group">
-              <label for="nombreequipo" class="col-form-label col-sm-6">Nombre del Equipo:</label>
-              <input id="nombreequipo" type="text" formControlName="nombreequipo" class="form-control"
-                [(ngModel)]="reportem.nombreequipo" placeholder="Ingrese el Nombre del equipo" [readonly]="true" />
+              <label for="descripcion2" class="col-form-label col-sm-6">Descripcion 2:</label>
+
+              <input id="descripcion2" type="text" formControlName="descripcion2" class="form-control"
+                [(ngModel)]="reportem.descripcion2" placeholder="Ingrese la descripcion 2" />
+
             </div>
-	<div class="form-group">
-            <label for="fabricanteindicador" class="col-form-label col-sm-6">Fabricante indicador:</label>
-            <input id="fabricanteindicador" type="text" formControlName="fabricanteindicador" class="form-control"
-              [(ngModel)]="reportem.fabricanteindicador" placeholder="Ingrese el Fabricante indicador"/>
-          </div>
-          <div class="form-group">
-            <label for="fabricantemarco" class="col-form-label col-sm-6">Fabricante Marco:</label>
-            <input id="fabricantemarco" type="text" formControlName="fabricantemarco" class="form-control"
-              [(ngModel)]="reportem.fabricantemarco" placeholder="Ingrese el Fabricante Marco"/>
-	</div>
-          <div class="form-group">
-            <label for="fabricantetransductor" class="col-form-label col-sm-6">Fabricante Transductor:</label>
-            <input id="fabricantetransductor" type="text" formControlName="fabricantetransductor" class="form-control"
-              [(ngModel)]="reportem.fabricantetransductor" placeholder="Ingrese el Fabricante Transductor" />
-          </div>
-          <div class="form-group">
-            <label for="modeloindicador" class="col-form-label col-sm-6">Modelo Indicador:</label>
-            <input id="modeloindicador" type="text" formControlName="modeloindicador" class="form-control"
-              [(ngModel)]="reportem.modeloindicador" placeholder="Ingrese el Modelo Indicador" />
-          </div>
-          <div class="form-group">
-            <label for="modelomarco" class="col-form-label col-sm-6">Modelo Marco:</label>
-            <input id="modelomarco" type="text" formControlName="modelomarco" class="form-control"
-              [(ngModel)]="reportem.modelomarco" placeholder="Ingrese el Modelo Marco"/>
-          </div>
-          <div class="form-group">
-            <label for="modelotransductor" class="col-form-label col-sm-6">Modelo Transductor:</label>
-            <input id="modelotransductor" type="text" formControlName="modelotransductor" class="form-control"
-              [(ngModel)]="reportem.modelotransductor" placeholder="Ingrese el Modelo Transductor"  />
-          </div>
-          <div class="form-group">
-            <label for="serieindicador" class="col-form-label col-sm-6">Serie Indicador:</label>
-            <input id="serieindicador" type="text" formControlName="serieindicador" class="form-control"
-              [(ngModel)]="reportem.serieindicador" placeholder="Ingrese la Serie del Indicador"  />
-          </div>
-          <div class="form-group">
-            <label for="seriemarco" class="col-form-label col-sm-6">Serie Marco:</label>
-            <input id="seriemarco" type="text" formControlName="seriemarco" class="form-control"
-              [(ngModel)]="reportem.seriemarco" placeholder="Ingrese la Serie del Marco"  />
-          </div>
-          <div class="form-group">
-            <label for="serietransductor" class="col-form-label col-sm-6">Serie Transductor:</label>
-            <input id="serietransductor" type="text" formControlName="serietransductor" class="form-control"
-              [(ngModel)]="reportem.serietransductor" placeholder="Ingrese la Serie del Transductor"  />
-          </div>
-          <div class="form-group">
-            <label for="capacidadindicador" class="col-form-label col-sm-6">Capacidad Indicador:</label>
-            <input id="capacidadindicador" type="text" formControlName="capacidadindicador" class="form-control"
-              [(ngModel)]="reportem.capacidadindicador" placeholder="Ingrese la Capacidad del Indicador"  />
-          </div>
-          <div class="form-group">
-            <label for="capacidadmarco" class="col-form-label col-sm-6">Capacidad Marco:</label>
-            <input id="capacidadmarco" type="text" formControlName="capacidadmarco" class="form-control"
-              [(ngModel)]="reportem.capacidadmarco" placeholder="Ingrese la Capacidad del Marco"  />
-          </div>
-          <div class="form-group">
-            <label for="capacidadtransductor" class="col-form-label col-sm-6">Capacidad Transductor:</label>
-            <input id="capacidadtransductor" type="text" formControlName="capacidadtransductor" class="form-control"
-              [(ngModel)]="reportem.capacidadtransductor" placeholder="Ingrese la Capacidad del Transductor"  />
-          </div>
-
-        </div>
-      </div>
-      <div *ngIf="activeTab === 4">
-	<div class="form-group">
- 		<h3>Mantenimiento preventivo</h3>
-              <label for="notamantprevent" class="col-form-label col-sm-6" >Nota Mantenimiento prevententivo:</label>
-              <textarea id="notamantprevent" name="notamantprevent" class="form-control" placeholder="Ingrese la Nota Mantenimiento prevententivo" rows="4" cols="50" [(ngModel)]="reportem.notamantprevent"></textarea>
+            <div class="form-group">
+              <label for="imagen_3" class="col-form-label col-sm-6">Foto 3:</label>
+              <input class="input-file" id="imagen_3" (change)="capturarFile($event, 2)" type="file"
+                formControlName="imagen_3" class="form-control" placeholder="Ingrese la foto 3" [(ngModel)]="reportem.imagen_3"/>
+              <div class="alert alert-danger"
+                *ngIf="formulario?.get('imagen_3')?.invalid && formulario?.get('imagen_3')?.touched">
+                La Foto es requerida
+              </div>
+              <div class="p-1">
+                <small>Se aceptan archivos imágenes de tipo .jpg</small>
+              </div>
+              <button class="btn btn-light" type="button" (click)="clearImage2()">Clear</button>
+              <div *ngIf="previsualizacion2" class="form-group">
+                <img [src]="previsualizacion2" alt="imagen equipo" class="fluid img-thumbnail" width="300"
+                  height="100" />
+              </div>
             </div>
-	</div>
-      <div *ngIf="activeTab === 5">
-        <div class="form-group">
- 		<h3>Hallazgos generados en el mantenimiento</h3>
-              <label for="notahallazgo" class="col-form-label col-sm-6" >Nota Hallazgo:</label>
-              <textarea id="notahallazgo" name="notahallazgo" class="form-control" placeholder="Ingrese la Nota de los Hallazgos" rows="4" cols="50" [(ngModel)]="reportem.notahallazgo"></textarea>
+
+            <div class="form-group">
+              <label for="descripcion3" class="col-form-label col-sm-6">Descripcion 3:</label>
+
+              <input id="descripcion3" type="text" formControlName="descripcion3" class="form-control"
+                [(ngModel)]="reportem.descripcion3" placeholder="Ingrese la descripcion 3" />
+
             </div>
-      </div>
-      <div *ngIf="activeTab === 6">
-               <div class="form-group">
- 		<h3>Recomendaciones</h3>
-              <label for="recomendaciones" class="col-form-label col-sm-6" >Nota Mantenimiento prevententivo:</label>
-              <textarea id="recomendaciones" name="recomendaciones" class="form-control" placeholder="Ingrese la Nota Mantenimiento prevententivo" rows="4" cols="50" [(ngModel)]="reportem.recomendaciones" ></textarea>
+            <div class="form-group">
+              <label for="imagen_4" class="col-form-label col-sm-6">Foto 4:</label>
+              <input class="input-file" id="imagen_4" (change)="capturarFile($event, 3)" type="file"
+                formControlName="imagen_4" class="form-control" placeholder="Ingrese la foto 4" [(ngModel)]="reportem.imagen_4"/>
+
+              <div class="p-1">
+                <small>Se aceptan archivos imágenes de tipo .jpg</small>
+              </div>
+              <button class="btn btn-light" type="button" (click)="clearImage3()">Clear</button>
+              <div *ngIf="previsualizacion3" class="form-group">
+                <img [src]="previsualizacion3" alt="imagen equipo" class="fluid img-thumbnail" width="300"
+                  height="100" />
+              </div>
             </div>
+            <div class="form-group">
+              <label for="descripcion4" class="col-form-label col-sm-6">Descripcion 4:</label>
+
+              <input id="descripcion4" type="text" formControlName="descripcion4" class="form-control"
+                [(ngModel)]="reportem.descripcion4" placeholder="Ingrese la descripcion 4" />
+
+            </div>
+            <div class="form-group">
+              <label for="imagen_5" class="col-form-label col-sm-6">Foto 5:</label>
+              <input class="input-file" id="imagen_5" (change)="capturarFile($event, 4)" type="file"
+                formControlName="imagen_5" class="form-control" placeholder="Ingrese la foto 5" [(ngModel)]="reportem.imagen_5"/>
+
+              <div class="p-1">
+                <small>Se aceptan archivos imágenes de tipo .jpg</small>
+              </div>
+              <button class="btn btn-light" type="button" (click)="clearImage4()">Clear</button>
+              <div *ngIf="previsualizacion4" class="form-group">
+                <img [src]="previsualizacion4" alt="imagen equipo" class="fluid img-thumbnail" width="300"
+                  height="100" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="descripcion5" class="col-form-label col-sm-6">Descripcion 5:</label>
+
+              <input id="descripcion5" type="text" formControlName="descripcion5" class="form-control"
+                [(ngModel)]="reportem.descripcion5" placeholder="Ingrese la descripcion 5" />
+
+            </div>
+            <div class="form-group">
+              <label for="imagen_6" class="col-form-label col-sm-6">Foto 6:</label>
+              <input class="input-file" id="imagen_6" (change)="capturarFile($event, 5)" type="file"
+                formControlName="imagen6" class="form-control" placeholder="Ingrese la foto 6" [(ngModel)]="reportem.imagen_6"/>
+
+              <div class="p-1">
+                <small>Se aceptan archivos imágenes de tipo .jpg</small>
+              </div>
+              <button class="btn btn-light" type="button" (click)="clearImage5()">Clear</button>
+              <div *ngIf="previsualizacion5" class="form-group">
+                <img [src]="previsualizacion5" alt="imagen equipo" class="fluid img-thumbnail" width="300"
+                  height="100" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="descripcion6" class="col-form-label col-sm-6">Descripcion 6:</label>
+
+              <input id="descripcion6" type="text" formControlName="descripcion6" class="form-control"
+                [(ngModel)]="reportem.descripcion6" placeholder="Ingrese la descripcion 6" />
+
+            </div>
+            <div class="form-group">
+              <label for="imagen_7" class="col-form-label col-sm-6">Foto 7:</label>
+              <input class="input-file" id="imagen_7" (change)="capturarFile($event, 6)" type="file"
+                formControlName="imagen_7" class="form-control" placeholder="Ingrese la foto 7" [(ngModel)]="reportem.imagen_7"/>
+
+              <div class="p-1">
+                <small>Se aceptan archivos imágenes de tipo .jpg</small>
+              </div>
+              <button class="btn btn-light" type="button" (click)="clearImage6()">Clear</button>
+              <div *ngIf="previsualizacion6" class="form-group">
+                <img [src]="previsualizacion6" alt="imagen equipo" class="fluid img-thumbnail" width="300"
+                  height="100" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="descripcion7" class="col-form-label col-sm-6">Descripcion 7:</label>
+
+              <input id="descripcion7" type="text" formControlName="descripcion7" class="form-control"
+                [(ngModel)]="reportem.descripcion7" placeholder="Ingrese la descripcion 4" />
+
+            </div>
+            <div class="form-group">
+              <label for="imagen_8" class="col-form-label col-sm-6">Foto 8:</label>
+              <input class="input-file" id="imagen_8" (change)="capturarFile($event, 7)" type="file"
+                formControlName="imagen_8" class="form-control" placeholder="Ingrese la foto 8" [(ngModel)]="reportem.imagen_8"/>
+
+              <div class="p-1">
+                <small>Se aceptan archivos imágenes de tipo .jpg</small>
+              </div>
+              <button class="btn btn-light" type="button" (click)="clearImage7()">Clear</button>
+              <div *ngIf="previsualizacion7" class="form-group">
+                <img [src]="previsualizacion7" alt="imagen equipo" class="fluid img-thumbnail" width="300"
+                  height="100" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="descripcion8" class="col-form-label col-sm-6">Descripcion 8:</label>
+
+              <input id="descripcion8" type="text" formControlName="descripcion4" class="form-control"
+                [(ngModel)]="reportem.descripcion8" placeholder="Ingrese la descripcion 8" />
+
+            </div>
+            <div class="form-group">
+              <label for="imagen_9" class="col-form-label col-sm-6">Foto 9:</label>
+              <input class="input-file" id="imagen_9" (change)="capturarFile($event, 8)" type="file"
+                formControlName="imagen_9" class="form-control" placeholder="Ingrese la foto 9" [(ngModel)]="reportem.imagen_9"/>
+
+              <div class="p-1">
+                <small>Se aceptan archivos imágenes de tipo .jpg</small>
+              </div>
+              <button class="btn btn-light" type="button" (click)="clearImage8()">Clear</button>
+              <div *ngIf="previsualizacion8" class="form-group">
+                <img [src]="previsualizacion8" alt="imagen equipo" class="fluid img-thumbnail" width="300"
+                  height="100" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="descripcion9" class="col-form-label col-sm-6">Descripcion 9:</label>
+
+              <input id="descripcion9" type="text" formControlName="descripcion9" class="form-control"
+                [(ngModel)]="reportem.descripcion9" placeholder="Ingrese la descripcion 9" />
+
+            </div>
+            <div class="form-group">
+              <label for="imagen_10" class="col-form-label col-sm-6">Foto 10:</label>
+              <input class="input-file" id="imagen_10" (change)="capturarFile($event, 9)" type="file"
+                formControlName="imagen_10" class="form-control" placeholder="Ingrese la foto 10" [(ngModel)]="reportem.imagen_10"/>
+
+              <div class="p-1">
+                <small>Se aceptan archivos imágenes de tipo .jpg</small>
+              </div>
+              <button class="btn btn-light" type="button" (click)="clearImage9()">Clear</button>
+              <div *ngIf="previsualizacion9" class="form-group">
+                <img [src]="previsualizacion9" alt="imagen equipo" class="fluid img-thumbnail" width="300"
+                  height="100" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="descripcion10" class="col-form-label col-sm-6">Descripcion 10:</label>
+
+              <input id="descripcion10" type="text" formControlName="descripcion10" class="form-control"
+                [(ngModel)]="reportem.descripcion10" placeholder="Ingrese la descripcion 9" />
+
+            </div>
+            <div class="form-group">
+              <label for="imagen_11" class="col-form-label col-sm-6">Foto 11:</label>
+              <input class="input-file" id="imagen_11" (change)="capturarFile($event, 10)" type="file"
+                formControlName="imagen_11" class="form-control" placeholder="Ingrese la foto 11" [(ngModel)]="reportem.imagen_11"/>
+
+              <div class="p-1">
+                <small>Se aceptan archivos imágenes de tipo .jpg</small>
+              </div>
+              <button class="btn btn-light" type="button" (click)="clearImage8()">Clear</button>
+              <div *ngIf="previsualizacion10" class="form-group">
+                <img [src]="previsualizacion10" alt="imagen equipo" class="fluid img-thumbnail" width="300"
+                  height="100" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="descripcion11" class="col-form-label col-sm-6">Descripcion 11:</label>
+
+              <input id="descripcion11" type="text" formControlName="descripcion11" class="form-control"
+                [(ngModel)]="reportem.descripcion11" placeholder="Ingrese la descripcion 11" />
+
+            </div>
+            <div class="form-group">
+              <label for="imagen_12" class="col-form-label col-sm-6">Foto 12:</label>
+              <input class="input-file" id="imagen_12" (change)="capturarFile($event, 11)" type="file"
+                formControlName="imagen_12" class="form-control" placeholder="Ingrese la foto 12" [(ngModel)]="reportem.imagen_12"/>
+
+              <div class="p-1">
+                <small>Se aceptan archivos imágenes de tipo .jpg</small>
+              </div>
+              <button class="btn btn-light" type="button" (click)="clearImage8()">Clear</button>
+              <div *ngIf="previsualizacion11" class="form-group">
+                <img [src]="previsualizacion11" alt="imagen equipo" class="fluid img-thumbnail" width="300"
+                  height="100" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="descripcion12" class="col-form-label col-sm-6">Descripcion 12:</label>
+
+              <input id="descripcion12" type="text" formControlName="descripcion12" class="form-control"
+                [(ngModel)]="reportem.descripcion12" placeholder="Ingrese la descripcion 12" />
+
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-sm-6">
+              <button class="btn btn-primary" role="button" (click)="crearReporte()"
+                *ngIf="!reportem.idrepmant else elseBlock">Crear</button>
+              <!-- *ngIf="!cliente.id"-->
+              <ng-template #elseBlock>
+                <button class="btn btn-primary" role="button" (click)="updateReporte()"
+                  [disabled]="!formulario.valid">Editar</button>
+              </ng-template>
+            </div>
+          </div>
+        </form>
       </div>
-        <div *ngIf="activeTab === 7">
-        <div class="form-group">
-	<h3>Imagenes del equipo y servicio</h3>
-  <label for="fecha" class="col-form-label col-sm-6">Fecha del Mantenimiento:</label>
-
-  <input id="fecha" type="date" formControlName="fecha" class="form-control"
-    [(ngModel)]="reportem.fecha" placeholder="yyyy/MM/dd" />
-          <label for="imagen_1" class="col-form-label col-sm-6">Foto 1:</label>
-
-          <input class="input-file" id="imagen_1" (change)="capturarFile($event, 0)" type="file" formControlName="imagen_1" class="form-control"
-            placeholder="Ingrese la foto 1" />
-
-            <div class="p-1">
-                <small>Se aceptan archivos imágenes de tipo .jpg</small>
-              </div>
-          <button class="btn btn-light" type="button" (click)="clearImage()">Clear</button>
-          <div *ngIf="previsualizacion" class="form-group">
-            <img [src]="previsualizacion" alt="imagen equipo" class="fluid img-thumbnail" width="300" height="100" />
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="descripcion1" class="col-form-label col-sm-6">Descripcion 1:</label>
-
-          <input id="descripcion1" type="text" formControlName="descripcion1" class="form-control" [(ngModel)]="reportem.descripcion1"
-            placeholder="Ingrese la descripcion 1" />
-
-        </div>
-        <div class="form-group">
-          <label for="imagen_2" class="col-form-label col-sm-6">Foto 2:</label>
-          <input class="input-file" id="imagen_2" (change)="capturarFile($event, 1)" type="file" formControlName="imagen_2" class="form-control"
-            placeholder="Ingrese la foto 2" />
-
-            <div class="p-1">
-                <small>Se aceptan archivos imágenes de tipo .jpg</small>
-              </div>
-          <button class="btn btn-light"  type="button" (click)="clearImage1()">Clear</button>
-          <div *ngIf="previsualizacion1" class="form-group">
-            <img [src]="previsualizacion1" alt="imagen equipo" class="fluid img-thumbnail" width="300" height="100" />
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="descripcion2" class="col-form-label col-sm-6">Descripcion 2:</label>
-
-          <input id="descripcion2" type="text" formControlName="descripcion2" class="form-control" [(ngModel)]="reportem.descripcion2"
-            placeholder="Ingrese la descripcion 2" />
-
-        </div>
-        <div class="form-group">
-          <label for="imagen_3" class="col-form-label col-sm-6">Foto 3:</label>
-          <input class="input-file" id="imagen_3" (change)="capturarFile($event, 2)" type="file" formControlName="imagen_3" class="form-control"
-            placeholder="Ingrese la foto 3" />
-          <div class="alert alert-danger" *ngIf="formulario?.get('imagen_3')?.invalid && formulario?.get('imagen_3')?.touched">
-            La Foto es requerida
-          </div>
-            <div class="p-1">
-                <small>Se aceptan archivos imágenes de tipo .jpg</small>
-              </div>
-          <button class="btn btn-light" type="button" (click)="clearImage2()">Clear</button>
-          <div *ngIf="previsualizacion2" class="form-group">
-            <img [src]="previsualizacion2" alt="imagen equipo" class="fluid img-thumbnail" width="300" height="100" />
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="descripcion3" class="col-form-label col-sm-6">Descripcion 3:</label>
-
-          <input id="descripcion3" type="text" formControlName="descripcion3" class="form-control" [(ngModel)]="reportem.descripcion3"
-            placeholder="Ingrese la descripcion 3" />
-
-        </div>
-        <div class="form-group">
-          <label for="imagen_4" class="col-form-label col-sm-6">Foto 4:</label>
-          <input class="input-file" id="imagen_4" (change)="capturarFile($event, 3)" type="file" formControlName="imagen_4" class="form-control"
-            placeholder="Ingrese la foto 4" />
-
-            <div class="p-1">
-                <small>Se aceptan archivos imágenes de tipo .jpg</small>
-              </div>
-          <button class="btn btn-light"  type="button" (click)="clearImage3()">Clear</button>
-          <div *ngIf="previsualizacion3" class="form-group">
-            <img [src]="previsualizacion3" alt="imagen equipo" class="fluid img-thumbnail" width="300" height="100" />
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="descripcion4" class="col-form-label col-sm-6">Descripcion 4:</label>
-
-          <input id="descripcion4" type="text" formControlName="descripcion4" class="form-control" [(ngModel)]="reportem.descripcion4"
-            placeholder="Ingrese la descripcion 4" />
-
-        </div>
-        <div class="form-group">
-          <label for="imagen_5" class="col-form-label col-sm-6">Foto 5:</label>
-          <input class="input-file" id="imagen_5" (change)="capturarFile($event, 4)" type="file" formControlName="imagen_5" class="form-control"
-            placeholder="Ingrese la foto 5" />
-
-            <div class="p-1">
-                <small>Se aceptan archivos imágenes de tipo .jpg</small>
-              </div>
-          <button class="btn btn-light" type="button" (click)="clearImage4()">Clear</button>
-          <div *ngIf="previsualizacion4" class="form-group">
-            <img [src]="previsualizacion4" alt="imagen equipo" class="fluid img-thumbnail" width="300" height="100" />
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="descripcion5" class="col-form-label col-sm-6">Descripcion 5:</label>
-
-          <input id="descripcion5" type="text" formControlName="descripcion5" class="form-control" [(ngModel)]="reportem.descripcion5"
-            placeholder="Ingrese la descripcion 5" />
-
-        </div>
-        <div class="form-group">
-          <label for="imagen_6" class="col-form-label col-sm-6">Foto 6:</label>
-          <input class="input-file" id="imagen_6" (change)="capturarFile($event, 5)" type="file" formControlName="imagen6" class="form-control"
-            placeholder="Ingrese la foto 6" />
-
-            <div class="p-1">
-                <small>Se aceptan archivos imágenes de tipo .jpg</small>
-              </div>
-          <button class="btn btn-light"  type="button" (click)="clearImage5()">Clear</button>
-          <div *ngIf="previsualizacion5" class="form-group">
-            <img [src]="previsualizacion5" alt="imagen equipo" class="fluid img-thumbnail" width="300" height="100" />
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="descripcion6" class="col-form-label col-sm-6">Descripcion 6:</label>
-
-          <input id="descripcion6" type="text" formControlName="descripcion6" class="form-control" [(ngModel)]="reportem.descripcion6"
-            placeholder="Ingrese la descripcion 6" />
-
-        </div>
-        <div class="form-group">
-          <label for="imagen_7" class="col-form-label col-sm-6">Foto 7:</label>
-          <input class="input-file" id="imagen_7" (change)="capturarFile($event, 6)" type="file" formControlName="imagen_7" class="form-control"
-            placeholder="Ingrese la foto 7" />
-
-            <div class="p-1">
-                <small>Se aceptan archivos imágenes de tipo .jpg</small>
-              </div>
-          <button class="btn btn-light" type="button" (click)="clearImage6()">Clear</button>
-          <div *ngIf="previsualizacion6" class="form-group">
-            <img [src]="previsualizacion6" alt="imagen equipo" class="fluid img-thumbnail" width="300" height="100" />
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="descripcion7" class="col-form-label col-sm-6">Descripcion 7:</label>
-
-          <input id="descripcion7" type="text" formControlName="descripcion7" class="form-control" [(ngModel)]="reportem.descripcion7"
-            placeholder="Ingrese la descripcion 4" />
-
-        </div>
-        <div class="form-group">
-          <label for="imagen_8" class="col-form-label col-sm-6">Foto 8:</label>
-          <input class="input-file" id="imagen_8" (change)="capturarFile($event, 7)" type="file" formControlName="imagen_8" class="form-control"
-            placeholder="Ingrese la foto 8" />
-
-            <div class="p-1">
-                <small>Se aceptan archivos imágenes de tipo .jpg</small>
-              </div>
-          <button class="btn btn-light"  type="button" (click)="clearImage7()">Clear</button>
-          <div *ngIf="previsualizacion7" class="form-group">
-            <img [src]="previsualizacion7" alt="imagen equipo" class="fluid img-thumbnail" width="300" height="100" />
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="descripcion8" class="col-form-label col-sm-6">Descripcion 8:</label>
-
-          <input id="descripcion8" type="text" formControlName="descripcion4" class="form-control" [(ngModel)]="reportem.descripcion8"
-            placeholder="Ingrese la descripcion 8" />
-
-        </div>
-        <div class="form-group">
-          <label for="imagen_9" class="col-form-label col-sm-6">Foto 9:</label>
-          <input class="input-file" id="imagen_9" (change)="capturarFile($event, 8)" type="file" formControlName="imagen_9" class="form-control"
-            placeholder="Ingrese la foto 9" />
-
-            <div class="p-1">
-                <small>Se aceptan archivos imágenes de tipo .jpg</small>
-              </div>
-          <button class="btn btn-light"  type="button" (click)="clearImage8()">Clear</button>
-          <div *ngIf="previsualizacion8" class="form-group">
-            <img [src]="previsualizacion8" alt="imagen equipo" class="fluid img-thumbnail" width="300" height="100" />
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="descripcion9" class="col-form-label col-sm-6">Descripcion 9:</label>
-
-          <input id="descripcion9" type="text" formControlName="descripcion9" class="form-control" [(ngModel)]="reportem.descripcion9"
-            placeholder="Ingrese la descripcion 9" />
-
-        </div>
-      </div>
-
-      <div class="form-group row">
-        <div class="col-sm-6">
-          <button class="btn btn-primary" role="button" (click)="crearReporte()"
-            *ngIf="!reportem.idrepmant else elseBlock">Crear</button>
-          <!-- *ngIf="!cliente.id"-->
-          <ng-template #elseBlock>
-            <button class="btn btn-primary" role="button" (click)="updateReporte()"
-              [disabled]="!formulario.valid">Editar</button>
-          </ng-template>
-        </div>
-      </div>
-      </form>
     </div>
   </div>
 </div>
-</div>
-

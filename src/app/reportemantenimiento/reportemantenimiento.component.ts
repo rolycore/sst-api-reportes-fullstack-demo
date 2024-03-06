@@ -14,6 +14,8 @@ import { ReportemantenimientoService } from '../_services/reportemantenimiento.s
 })
 export class ReportemantenimientoComponent implements OnInit{
   loading: boolean = false;
+  isloadingFailed = false;
+  errorMessage = '';
   reportesm!:ReporteMantenimiento[];
   reportem: ReporteMantenimiento = new ReporteMantenimiento();
   nombreCliente!: string; // Propiedad para almacenar el nombre del cliente a filtrar
@@ -176,7 +178,9 @@ swalWithBootstrapButtons.fire({
 
 }
 exportarPDF(idrepmant:number) {
-this.loading = true; // Activa la bandera de carga
+  this.loading = true; // Activa la bandera de carga
+  this.errorMessage = '';
+  this.isloadingFailed = false;
 this.reporteService.generateReport(idrepmant).subscribe(
   (response) => {
     console.log('respuesta: ',response)
@@ -198,6 +202,9 @@ this.reporteService.generateReport(idrepmant).subscribe(
     }
   },
   (error) => {
+    this.errorMessage = 'Ocurrio un fallo! en la impresión favor verificar reporte, y vuelva a intentarlo';
+    this.isloadingFailed = true;
+    this.loading = false; // se desactiva la bandera de carga
     console.error('Error al exportar el PDF', error);
     Swal.fire({ icon: 'error', title: 'Oops...', text: 'Ocurrio un error al Imprimir el reporte!' });
 

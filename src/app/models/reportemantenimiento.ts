@@ -41,6 +41,9 @@ export class ReporteMantenimiento{
   imagen_7!: string;
   imagen_8!: string;
   imagen_9!: string;
+  imagen_10!: string;
+  imagen_11!: string;
+  imagen_12!: string;
   descripcion1!: string;
   descripcion2!: string;
   descripcion3!: string;
@@ -50,6 +53,9 @@ export class ReporteMantenimiento{
   descripcion7!: string;
   descripcion8!: string;
   descripcion9!: string;
+  descripcion10!: string;
+  descripcion11!: string;
+  descripcion12!: string;
   rutaImagen1!: string;
   rutaImagen2!: string;
   rutaImagen3!: string;
@@ -59,6 +65,9 @@ export class ReporteMantenimiento{
   rutaImagen7!: string;
   rutaImagen8!: string;
   rutaImagen9!: string;
+  rutaImagen10!: string;
+  rutaImagen11!: string;
+  rutaImagen12!: string;
   cliente!: Cliente;
   equipo!: EquipoCliente;
 }

@@ -14,6 +14,8 @@ import { EquipoclienteService } from 'src/app/_services/equipocliente.service';
 })
 export class ReportetecnicooComponent implements OnInit{
   loading: boolean = false;
+  isloadingFailed = false;
+  errorMessage = '';
   reportes!:ReporteTecnico[];
   reporte: ReporteTecnico = new ReporteTecnico();
   nombreCliente!: string; // Propiedad para almacenar el nombre del cliente a filtrar
@@ -202,6 +204,8 @@ delete(reporte: ReporteTecnico):void{
 }
 exportarPDF(idreptec:number) {
   this.loading = true; // Activa la bandera de carga
+  this.errorMessage = '';
+  this.isloadingFailed = false;
   this.reporteService.generateReport(idreptec).subscribe(
     (response) => {
       console.log('respuesta: ',response)
@@ -223,6 +227,9 @@ exportarPDF(idreptec:number) {
       }
     },
     (error) => {
+      this.errorMessage = 'Ocurrio un fallo! en la impresión favor verificar reporte, y vuelva a intentarlo';
+      this.isloadingFailed = true;
+      this.loading = false; // se desactiva la bandera de carga
       console.error('Error al exportar el PDF', error);
       Swal.fire({ icon: 'error', title: 'Oops...', text: 'Ocurrio un error al Imprimir el reporte!' });
 

@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
   providedIn: 'root'
 })
 export class MediaService {
-  private urlEndpoint: string = 'https://localhost:8080/media';//appicmetrologia.icmetrologia.com
+  private urlEndpoint: string = 'https://appicmetrologia.icmetrologia.com:8080/media';//appicmetrologia.icmetrologia.com
   private rutaUpload: string ='upload';
   constructor(
     private http: HttpClient

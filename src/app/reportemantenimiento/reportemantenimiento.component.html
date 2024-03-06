@@ -26,6 +26,11 @@
     <div *ngIf="reportesm?.length==0" class="alert alert-info">
       No hay registros en la base de datos!
     </div>
+    <div class="form-group" *ngIf="isloadingFailed">
+      <div class="alert alert-danger" role="alert">
+        Fallo impresión: {{ errorMessage }}
+      </div>
+    </div>
     <div *ngIf="loading" class="alert alert-info">
       Imprimiendo... Por favor, espere.
     </div>
@@ -81,6 +86,9 @@
             <th>Imagen 7</th>
             <th>Imagen 8</th>
             <th>Imagen 9</th>
+            <th>Imagen 10</th>
+            <th>Imagen 11</th>
+            <th>Imagen 12</th>
             <th>Descripcion 1</th>
             <th>Descripcion 2</th>
             <th>Descripcion 3</th>
@@ -90,6 +98,9 @@
             <th>Descripcion 7</th>
             <th>Descripcion 8</th>
             <th>descripcion 9</th>
+            <th>descripcion 10</th>
+            <th>descripcion 11</th>
+            <th>descripcion 12</th>
             <th>Ruta Imagen 1</th>
             <th>Ruta Imagen 2</th>
             <th>Ruta Imagen 3</th>
@@ -99,6 +110,9 @@
             <th>Ruta Imagen 7</th>
             <th>Ruta Imagen 8</th>
             <th>Ruta Imagen 9</th>
+            <th>Ruta Imagen 10</th>
+            <th>Ruta Imagen 11</th>
+            <th>Ruta Imagen 12</th>
 
 
         </tr>
@@ -153,6 +167,9 @@
 	  <td>{{ reportem.imagen_7}}</td>
 	  <td>{{ reportem.imagen_8}}</td>
 	  <td>{{ reportem.imagen_9}}</td>
+    <td>{{ reportem.imagen_10}}</td>
+    <td>{{ reportem.imagen_11}}</td>
+    <td>{{ reportem.imagen_12}}</td>
 	  <td>{{ reportem.descripcion1}}</td>
 	  <td>{{ reportem.descripcion2}}</td>
 	  <td>{{ reportem.descripcion3}}</td>
@@ -162,6 +179,9 @@
 	  <td>{{ reportem.descripcion7}}</td>
 	  <td>{{ reportem.descripcion8}}</td>
 	  <td>{{ reportem.descripcion9}}</td>
+    <td>{{ reportem.descripcion10}}</td>
+    <td>{{ reportem.descripcion11}}</td>
+    <td>{{ reportem.descripcion12}}</td>
 	  <td>{{ reportem.rutaImagen1}}</td>
 	  <td>{{ reportem.rutaImagen2}}</td>
 	  <td>{{ reportem.rutaImagen3}}</td>
@@ -171,6 +191,9 @@
 	  <td>{{ reportem.rutaImagen7}}</td>
 	  <td>{{ reportem.rutaImagen8}}</td>
 	  <td>{{ reportem.rutaImagen9}}</td>
+    <td>{{ reportem.rutaImagen10}}</td>
+    <td>{{ reportem.rutaImagen11}}</td>
+    <td>{{ reportem.rutaImagen12}}</td>
 
         </tr>
       </tbody>

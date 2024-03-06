@@ -13,7 +13,7 @@ import { MediaService } from './media.service';
 export class EquipoclienteService {
 
 
-  private baseUrl = 'https://localhost:8080/api/v1/equipos-clientes'; // http://appicmetrologia.icmetrologia.com:8080/api/v1/equipos-clientesReemplaza con la URL de tu backend
+  private baseUrl = 'https://appicmetrologia.icmetrologia.com:8080/api/v1/equipos-clientes'; // http://appicmetrologia.icmetrologia.com:8080/api/v1/equipos-clientesReemplaza con la URL de tu backend
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
   private httpHeadersMultipart = new HttpHeaders({'Content-Type': 'multipart/form-data'});
   private headersBoundary = new HttpHeaders({

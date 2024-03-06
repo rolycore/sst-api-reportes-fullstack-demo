@@ -10,7 +10,7 @@ import {catchError,map, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ClienteService {
-  private urlEndpoint: string = 'https://localhost:8080/api/v1/clientes'; //http://appicmetrologia.icmetrologia.com:8080/api/v1/clientes
+  private urlEndpoint: string = 'https://appicmetrologia.icmetrologia.com:8080/api/v1/clientes'; //http://appicmetrologia.icmetrologia.com:8080/api/v1/clientes
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
   private httpHeadersMultipart = new HttpHeaders({'Content-Type': 'multipart/form-data'});
   constructor(private http: HttpClient, private router: Router) {}

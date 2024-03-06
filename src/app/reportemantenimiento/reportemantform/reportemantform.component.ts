@@ -58,6 +58,9 @@ export class ReportemantformComponent implements OnInit {
   public previsualizacion6!: string;
   public previsualizacion7!: string;
   public previsualizacion8!: string;
+  public previsualizacion9!: string;
+  public previsualizacion10!: string;
+  public previsualizacion11!: string;
   public archivos: any = [];
   archivoCapturado: File | undefined; // Declarar la propiedad archivoCapturado
   archivoCapturado1: File | undefined; // Declarar la propiedad archivoCapturado
@@ -68,6 +71,9 @@ export class ReportemantformComponent implements OnInit {
   archivoCapturado6: File | undefined; // Declarar la propiedad archivoCapturado
   archivoCapturado7: File | undefined; // Declarar la propiedad archivoCapturado
   archivoCapturado8: File | undefined; // Declarar la propiedad archivoCapturado
+  archivoCapturado9: File | undefined; // Declarar la propiedad archivoCapturado
+  archivoCapturado10: File | undefined; // Declarar la propiedad archivoCapturado
+  archivoCapturado11: File | undefined; // Declarar la propiedad archivoCapturado
   nombreArchivo: string | undefined; // Declarar la propiedad nombreArchivo
   nombreArchivo1: string | undefined; // Declarar la propiedad nombreArchivo
   nombreArchivo2: string | undefined; // Declarar la propiedad nombreArchivo
@@ -77,6 +83,9 @@ export class ReportemantformComponent implements OnInit {
   nombreArchivo6: string | undefined; // Declarar la propiedad nombreArchivo
   nombreArchivo7: string | undefined; // Declarar la propiedad nombreArchivo
   nombreArchivo8: string | undefined; // Declarar la propiedad nombreArchivo
+  nombreArchivo9: string | undefined; // Declarar la propiedad nombreArchivo
+  nombreArchivo10: string | undefined; // Declarar la propiedad nombreArchivo
+  nombreArchivo11: string | undefined; // Declarar la propiedad nombreArchivo
   rutasImagenes: string[] = [];
   previsualizaciones: any;
 
@@ -98,31 +107,52 @@ export class ReportemantformComponent implements OnInit {
         // Asignar la imagen previsualizada a la variable correspondiente según el índice
         switch (indice) {
           case 0:
+            this.reportem.imagen_1 = archivoCapturado.name ,
             this.previsualizacion = imagen.base;
             break;
           case 1:
+            this.reportem.imagen_2 = archivoCapturado.name,
             this.previsualizacion1 = imagen.base;
             break;
           case 2:
+            this.reportem.imagen_3  = archivoCapturado.name,
             this.previsualizacion2 = imagen.base;
             break;
           case 3:
+            this.reportem.imagen_4 = archivoCapturado.name,
             this.previsualizacion3 = imagen.base;
             break;
           case 4:
+            this.reportem.imagen_5 =  archivoCapturado.name,
             this.previsualizacion4 = imagen.base;
             break;
           case 5:
+            this.reportem.imagen_6 = archivoCapturado.name,
             this.previsualizacion5 = imagen.base;
             break;
           case 6:
+            this.reportem.imagen_7 = archivoCapturado.name,
             this.previsualizacion6 = imagen.base;
             break;
           case 7:
+            this.reportem.imagen_8  = archivoCapturado.name,
             this.previsualizacion7 = imagen.base;
             break;
           case 8:
+            this.reportem.imagen_9 = archivoCapturado.name,
             this.previsualizacion8 = imagen.base;
+            break;
+          case 9:
+            this.reportem.imagen_10  = archivoCapturado.name,
+            this.previsualizacion9 = imagen.base;
+            break;
+          case 10:
+            this.reportem.imagen_11 = archivoCapturado.name,
+            this.previsualizacion10 = imagen.base;
+            break;
+          case 11:
+            this.reportem.imagen_12 = archivoCapturado.name,
+            this.previsualizacion11 = imagen.base;
             break;
           default:
             break;
@@ -159,23 +189,35 @@ export class ReportemantformComponent implements OnInit {
                 break;
               case 4:
                 this.reportem.rutaImagen5 = response.uri;
-                console.log('fileName5: ', this.reportem.rutaImagen4);
+                console.log('fileName5: ', this.reportem.rutaImagen5);
                 break;
               case 5:
                 this.reportem.rutaImagen6 = response.uri;
-                console.log('fileName6: ', this.reportem.rutaImagen4);
+                console.log('fileName6: ', this.reportem.rutaImagen6);
                 break;
               case 6:
                 this.reportem.rutaImagen7 = response.uri;
-                console.log('fileName7: ', this.reportem.rutaImagen4);
+                console.log('fileName7: ', this.reportem.rutaImagen7);
                 break;
               case 7:
                 this.reportem.rutaImagen8 = response.uri;
-                console.log('fileName8: ', this.reportem.rutaImagen4);
+                console.log('fileName8: ', this.reportem.rutaImagen8);
                 break;
               case 8:
                 this.reportem.rutaImagen9 = response.uri;
-                console.log('fileName9: ', this.reportem.rutaImagen4);
+                console.log('fileName9: ', this.reportem.rutaImagen9);
+                break;
+              case 9:
+                this.reportem.rutaImagen10 = response.uri;
+                console.log('fileName10: ', this.reportem.rutaImagen10);
+                break;
+              case 10:
+                this.reportem.rutaImagen11 = response.uri;
+                console.log('fileName11: ', this.reportem.rutaImagen11);
+                break;
+              case 11:
+                this.reportem.rutaImagen12 = response.uri;
+                console.log('fileName12: ', this.reportem.rutaImagen12);
                 break;
               default:
                 break;
@@ -207,8 +249,8 @@ export class ReportemantformComponent implements OnInit {
     this.previsualizacion2 = '';
     this.archivos = [];
   }
-     clearImage3(): any {
-    this.previsualizacion3= '';
+  clearImage3(): any {
+    this.previsualizacion3 = '';
     this.archivos = [];
   }
   clearImage4(): any {
@@ -223,99 +265,120 @@ export class ReportemantformComponent implements OnInit {
     this.previsualizacion6 = '';
     this.archivos = [];
   }
-     clearImage7(): any {
-    this.previsualizacion7= '';
+  clearImage7(): any {
+    this.previsualizacion7 = '';
     this.archivos = [];
   }
   clearImage8(): any {
-    this.previsualizacion8= '';
+    this.previsualizacion8 = '';
+    this.archivos = [];
+  }
+  clearImage9(): any {
+    this.previsualizacion9 = '';
+    this.archivos = [];
+  }
+  clearImage10(): any {
+    this.previsualizacion10 = '';
+    this.archivos = [];
+  }
+  clearImage11(): any {
+    this.previsualizacion11 = '';
     this.archivos = [];
   }
 
   cargarReporte(): void {
- //cargando datos de equipo a la orden
- this.reportem.equipo = this.equipo;
- //cargando datos del cliente a la orden
- this.reportem.cliente = this.cliente;
- this.activateRoute.params.subscribe((params) => {
-  let id = params['id'];
-  if (id) {
-    this.reproteMantenimientoService.listById(id).subscribe((reportem) => {
-      this.reportem = reportem;
-      this.formulario?.patchValue({
-        cliente: this.reportem.cliente,
-        equipo: this.reportem.equipo,
-        nombrecliente:this.reportem.nombrecliente,
-        nombreequipo: this.reportem.nombreequipo,
-        no_reporte: this.reportem.no_reporte,
-        no_cotizacion: this.reportem.no_cotizacion,
-        tecnico: this.reportem.tecnico,
-        horaentrada: this.reportem.horaentrada,
-        horasalida: this.reportem.horasalida,
-        horaviajes: this.reportem.horaviajes,
-        fechareporte: this.reportem.fechareporte, // this.datePipe.transform(this.reporte.fechareporte, 'yyyy/MM/dd')
-        contacto: this.reportem.contacto,
-        cargo: this.reportem.cargo,
-        direccion: this.reportem.direccion,
-        ubicacionequipo: this.reportem.ubicacionequipo,
-        fabricanteindicador: this.reportem.fabricanteindicador,
-  fabricantemarco: this.reportem.fabricantemarco,
-  fabricantetransductor: this.reportem.fabricantetransductor,
-  modeloindicador: this.reportem.modeloindicador,
-  modelomarco: this.reportem.modelomarco,
-  modelotransductor: this.reportem.modelotransductor,
-  serieindicador: this.reportem.serieindicador,
-  seriemarco: this.reportem.seriemarco,
-  serietransductor: this.reportem.serietransductor,
-  capacidadindicador: this.reportem.capacidadindicador,
-  capacidadmarco: this.reportem.capacidadmarco,
-  capacidadtransductor: this.reportem.capacidadtransductor,
-  notamantprevent: this.reportem.notamantprevent,
-  notahallazgo: this.reportem.notahallazgo,
-  recomendaciones: this.reportem.recomendaciones,
-  imagen_1: this.reportem.imagen_1,
-  imagen_2: this.reportem.imagen_2,
-  imagen_3: this.reportem.imagen_3,
-  imagen_4: this.reportem.imagen_4,
-  imagen_5: this.reportem.imagen_5,
-  imagen_6: this.reportem.imagen_6,
-  imagen_7: this.reportem.imagen_7,
-  imagen_8: this.reportem.imagen_8,
-  imagen_9: this.reportem.imagen_9,
-  descripcion1: this.reportem.descripcion1,
-  descripcion2: this.reportem.descripcion2,
-  descripcion3: this.reportem.descripcion3,
-  descripcion4: this.reportem.descripcion4,
-  descripcion5: this.reportem.descripcion5,
-  descripcion6: this.reportem.descripcion6,
-  descripcion7: this.reportem.descripcion7,
-  descripcion8: this.reportem.descripcion8,
-  descripcion9: this.reportem.descripcion9,
-  rutaImagen1: this.reportem.rutaImagen1,
-  rutaImagen2: this.reportem.rutaImagen2,
-  rutaImagen3: this.reportem.rutaImagen3,
-  rutaImagen4: this.reportem.rutaImagen4,
-  rutaImagen5: this.reportem.rutaImagen5,
-  rutaImagen6: this.reportem.rutaImagen6,
-  rutaImagen7: this.reportem.rutaImagen7,
-  rutaImagen8: this.reportem.rutaImagen8,
-  rutaImagen9: this.reportem.rutaImagen9,
-      });
+    //cargando datos de equipo a la orden
+    this.reportem.equipo = this.equipo;
+    //cargando datos del cliente a la orden
+    this.reportem.cliente = this.cliente;
+    this.activateRoute.params.subscribe((params) => {
+      let id = params['id'];
+      if (id) {
+        this.reproteMantenimientoService.listById(id).subscribe((reportem) => {
+          this.reportem = reportem;
+          this.formulario?.patchValue({
+            cliente: this.reportem.cliente,
+            equipo: this.reportem.equipo,
+            nombrecliente: this.reportem.nombrecliente,
+            nombreequipo: this.reportem.nombreequipo,
+            no_reporte: this.reportem.no_reporte,
+            no_cotizacion: this.reportem.no_cotizacion,
+            tecnico: this.reportem.tecnico,
+            horaentrada: this.reportem.horaentrada,
+            horasalida: this.reportem.horasalida,
+            horaviajes: this.reportem.horaviajes,
+            fechareporte: this.reportem.fechareporte, // this.datePipe.transform(this.reporte.fechareporte, 'yyyy/MM/dd')
+            contacto: this.reportem.contacto,
+            cargo: this.reportem.cargo,
+            direccion: this.reportem.direccion,
+            ubicacionequipo: this.reportem.ubicacionequipo,
+            fabricanteindicador: this.reportem.fabricanteindicador,
+            fabricantemarco: this.reportem.fabricantemarco,
+            fabricantetransductor: this.reportem.fabricantetransductor,
+            modeloindicador: this.reportem.modeloindicador,
+            modelomarco: this.reportem.modelomarco,
+            modelotransductor: this.reportem.modelotransductor,
+            serieindicador: this.reportem.serieindicador,
+            seriemarco: this.reportem.seriemarco,
+            serietransductor: this.reportem.serietransductor,
+            capacidadindicador: this.reportem.capacidadindicador,
+            capacidadmarco: this.reportem.capacidadmarco,
+            capacidadtransductor: this.reportem.capacidadtransductor,
+            notamantprevent: this.reportem.notamantprevent,
+            notahallazgo: this.reportem.notahallazgo,
+            recomendaciones: this.reportem.recomendaciones,
+            imagen_1: this.reportem.imagen_1,
+            imagen_2: this.reportem.imagen_2,
+            imagen_3: this.reportem.imagen_3,
+            imagen_4: this.reportem.imagen_4,
+            imagen_5: this.reportem.imagen_5,
+            imagen_6: this.reportem.imagen_6,
+            imagen_7: this.reportem.imagen_7,
+            imagen_8: this.reportem.imagen_8,
+            imagen_9: this.reportem.imagen_9,
+            imagen_10: this.reportem.imagen_10,
+            imagen_11: this.reportem.imagen_11,
+            imagen_12: this.reportem.imagen_12,
+            descripcion1: this.reportem.descripcion1,
+            descripcion2: this.reportem.descripcion2,
+            descripcion3: this.reportem.descripcion3,
+            descripcion4: this.reportem.descripcion4,
+            descripcion5: this.reportem.descripcion5,
+            descripcion6: this.reportem.descripcion6,
+            descripcion7: this.reportem.descripcion7,
+            descripcion8: this.reportem.descripcion8,
+            descripcion9: this.reportem.descripcion9,
+            descripcion10: this.reportem.descripcion10,
+            descripcion11: this.reportem.descripcion11,
+            descripcion12: this.reportem.descripcion12,
+            rutaImagen1: this.reportem.rutaImagen1,
+            rutaImagen2: this.reportem.rutaImagen2,
+            rutaImagen3: this.reportem.rutaImagen3,
+            rutaImagen4: this.reportem.rutaImagen4,
+            rutaImagen5: this.reportem.rutaImagen5,
+            rutaImagen6: this.reportem.rutaImagen6,
+            rutaImagen7: this.reportem.rutaImagen7,
+            rutaImagen8: this.reportem.rutaImagen8,
+            rutaImagen9: this.reportem.rutaImagen9,
+            rutaImagen10: this.reportem.rutaImagen10,
+            rutaImagen11: this.reportem.rutaImagen11,
+            rutaImagen12: this.reportem.rutaImagen12,
+          });
+        });
+      }
     });
   }
-});
-}
   ngOnInit(): void {
     this.cargarReporte();
     this.formulario = this.formBuilder.group({
       no_reporte: [''],
       cliente: ['', Validators.required],
       equipo: ['', Validators.required],
-      nombrecliente:[''],
+      nombrecliente: [''],
       nombreequipo: [''],
       tecnico: [''],
-      horaentrada:[''],// Puedes cambiar esto según tus necesidades de manejo de tiempo en TypeScript
-      horasalida: [''],// Puedes cambiar esto según tus necesidades de manejo de tiempo en TypeScript
+      horaentrada: [''], // Puedes cambiar esto según tus necesidades de manejo de tiempo en TypeScript
+      horasalida: [''], // Puedes cambiar esto según tus necesidades de manejo de tiempo en TypeScript
       horaviajes: [''],
       fechareporte: [''],
       fecha: [''],
@@ -348,6 +411,9 @@ export class ReportemantformComponent implements OnInit {
       imagen_7: [''],
       imagen_8: [''],
       imagen_9: [''],
+      imagen_10: [''],
+      imagen_11: [''],
+      imagen_12: [''],
       descripcion1: [''],
       descripcion2: [''],
       descripcion3: [''],
@@ -357,6 +423,9 @@ export class ReportemantformComponent implements OnInit {
       descripcion7: [''],
       descripcion8: [''],
       descripcion9: [''],
+      descripcion10: [''],
+      descripcion11: [''],
+      descripcion12: [''],
       rutaImagen1: [''],
       rutaImagen2: [''],
       rutaImagen3: [''],
@@ -366,309 +435,323 @@ export class ReportemantformComponent implements OnInit {
       rutaImagen7: [''],
       rutaImagen8: [''],
       rutaImagen9: [''],
-
+      rutaImagen10: [''],
+      rutaImagen11: [''],
+      rutaImagen12: [''],
     });
- // Mover la obtención de la lista de clientes aquí
- this.clienteService.getClientes().subscribe((data: any[]) => {
-  this.clientes = data;
-});
-// Mover la obtención de la lista de equipos aquí
-this.equipoClienteService.findAllEquipos().subscribe((data: any[]) => {
-  this.equipos = data;
-});
-this.cargarReporte();
-  }
-
- // Función que se ejecuta cuando se selecciona un cliente en el select
- onSelectCliente(): void {
-  // Obtener el ID del cliente seleccionado
-  const idClienteSeleccionado = this.clienteSeleccionado;
-
-  // Llamar al servicio para obtener los datos del cliente por su ID
-  this.clienteService
-    .getCliente(idClienteSeleccionado)
-    .subscribe((cliente: Cliente) => {
-      // Actualizar los campos de entrada con los datos del cliente
-      this.clienteData = cliente;
-      this.reportem.nombrecliente = cliente.nombre_comercial;
-      this.reportem.direccion = cliente.direccion;
-      this.reportem.contacto = cliente.nombre_contacto;
-      this.reportem.cargo = cliente.cargo_servicio;
-
-
-      console.log('Data cliente:', this.clienteData);
-
+    // Mover la obtención de la lista de clientes aquí
+    this.clienteService.getClientes().subscribe((data: any[]) => {
+      this.clientes = data;
     });
-  console.log('ID cliente seleccionado: ', idClienteSeleccionado);
-   // Filtrar la lista de equipos para mostrar solo los equipos del cliente seleccionado
-   if (idClienteSeleccionado) {
-    this.equipoClienteService.getEquiposPorCliente(idClienteSeleccionado).subscribe((equipos) => {
-      this.equiposFiltrados = equipos;
+    // Mover la obtención de la lista de equipos aquí
+    this.equipoClienteService.findAllEquipos().subscribe((data: any[]) => {
+      this.equipos = data;
     });
-  } else {
-    this.equiposFiltrados = []; // Limpia la lista de equipos si no se ha seleccionado un cliente.
+    this.cargarReporte();
   }
-   console.log('ID Equipo filtrado: ',this.equiposFiltrados)
 
-}
+  // Función que se ejecuta cuando se selecciona un cliente en el select
+  onSelectCliente(): void {
+    // Obtener el ID del cliente seleccionado
+    const idClienteSeleccionado = this.clienteSeleccionado;
 
-// Función que se ejecuta cuando se selecciona un equipocliente en el select
-onSelectEquipocliente(): void {
-  // Obtener el ID del equipocliente seleccionado
-  const idEquipoSeleccionado = this.equipoSeleccionado;
+    // Llamar al servicio para obtener los datos del cliente por su ID
+    this.clienteService
+      .getCliente(idClienteSeleccionado)
+      .subscribe((cliente: Cliente) => {
+        // Actualizar los campos de entrada con los datos del cliente
+        this.clienteData = cliente;
+        this.reportem.nombrecliente = cliente.nombre_comercial;
+        this.reportem.direccion = cliente.direccion;
+        this.reportem.contacto = cliente.nombre_contacto;
+        this.reportem.cargo = cliente.cargo_servicio;
 
-  if (idEquipoSeleccionado) {
-    this.equipoClienteService.getEquipo(idEquipoSeleccionado).subscribe((equipo) => {
-      this.equipoData = equipo;
-           // Asignar los datos a las propiedades correspondientes
-     this.reportem.nombreequipo=equipo.nombre;
-     this.reportem.fabricanteindicador =equipo.fabricante_indicador;
-     this.reportem.modeloindicador = equipo.modelo_indicador;
-     this.reportem.serieindicador = equipo.serie_indicador;
-
-
-      console.log('Data equipo: ', this.equipoData);
-    });
+        console.log('Data cliente:', this.clienteData);
+      });
+    console.log('ID cliente seleccionado: ', idClienteSeleccionado);
+    // Filtrar la lista de equipos para mostrar solo los equipos del cliente seleccionado
+    if (idClienteSeleccionado) {
+      this.equipoClienteService
+        .getEquiposPorCliente(idClienteSeleccionado)
+        .subscribe((equipos) => {
+          this.equiposFiltrados = equipos;
+        });
+    } else {
+      this.equiposFiltrados = []; // Limpia la lista de equipos si no se ha seleccionado un cliente.
+    }
+    console.log('ID Equipo filtrado: ', this.equiposFiltrados);
   }
-}
-crearReporte(): void{
-  // Crear un objeto ClienteId con solo el idCliente
-  const idClienteSeleccionado = this.formulario.get('cliente')?.value;
 
-if (!idClienteSeleccionado) {
-  console.error('Debes seleccionar un cliente.');
-  return;
-}
- const clienteId: ClienteId = { idCliente: idClienteSeleccionado };
+  // Función que se ejecuta cuando se selecciona un equipocliente en el select
+  onSelectEquipocliente(): void {
+    // Obtener el ID del equipocliente seleccionado
+    const idEquipoSeleccionado = this.equipoSeleccionado;
 
- // Luego, puedes convertir este objeto a un objeto de tipo Cliente si es necesario
-const cliente: Cliente = {
-...clienteId, nombre: '', apellido: '', email: '',
-createAt:  new Date(),
-telefono_empresa: '',
-cod_cliente: '',
-razon_social: '',
-nombre_comercial: '',
-ruc: '',
-dv: '',
-direccion: '',
-telefono_jefe: '',
-celular_jefe: '',
-correo_electronico: '',
-actividad_economica: '',
-abreviatura: '',
-nombre_contacto: '',
-cargo_servicio: '',
-celular_servicio: '',
-correo_servicio: '',
-telefono_servicio: '',
-nombre_cobro: '',
-cargo_cobro: '',
-telefono_cobro: '',
-celular_cobro: '',
-correo_cobro: '',
-activo: false,
-equipos: [],
-ordenTrabajos: [],
-reporteTecnicos: []
-};
-// Asignar el cliente a la Orden
-this.reportem.cliente=cliente;
+    if (idEquipoSeleccionado) {
+      this.equipoClienteService
+        .getEquipo(idEquipoSeleccionado)
+        .subscribe((equipo) => {
+          this.equipoData = equipo;
+          // Asignar los datos a las propiedades correspondientes
+          this.reportem.nombreequipo = equipo.nombre;
+          this.reportem.fabricanteindicador = equipo.fabricante_indicador;
+          this.reportem.serieindicador = equipo.serie_indicador;
+          this.reportem.fabricantemarco = equipo.fabricante_receptor;
+          this.reportem.fabricantetransductor = equipo.fabricante_sensor;
+          this.reportem.modeloindicador = equipo.modelo_indicador;
+          this.reportem.modelomarco = equipo.modelo_receptor;
+          this.reportem.modelotransductor = equipo.modelo_sensor;
+          this.reportem.seriemarco = equipo.serie_receptor;
+          this.reportem.serietransductor = equipo.serie_sensor;
 
-const idEquipoSeleccionado = this.formulario.get('equipo')?.value;
-if (!idEquipoSeleccionado) {
-console.error('Debes seleccionar un cliente.');
-return;
-}
-// Crear un objeto ClienteId con solo el idCliente
-const equipoId: EquipoId = { idEquipo: idEquipoSeleccionado };
-const equipo: EquipoCliente={
-...equipoId,
-codigoequipo: '',
-codigoequipocliente:'',
-nombre: '',
-nombrecliente:'',
-marca:'',
-modelo:'',
-numero_serie:'',
-capacidad:'',
-categoria_equipo: '',
-capacidad_maxima: '',
-capacidad_minima: '',
-resolucion: '',
-divisiones: '',
-observaciones: '',
-// imagen_equipo: File = new File(fileBits, fileName, options),
-unidad_medida: '',
-instrumento: '',
-mide: '',
-lista_precio: '',
-cmc_equipo: '',
-fabricante_receptor: '',
-modelo_receptor: '',
-serie_receptor: '',
-id_interno_receptor: '',
-fabricante_sensor: '',
-modelo_sensor: '',
-id_interno_sensor: '',
-serie_sensor: '',
-fabricante_indicador: '',
-modelo_indicador: '',
-serie_indicador: '',
-id_interno_indicador: '',
-createAt: new Date(),
-activo: false,
-cliente: new Cliente
-}
 
-this.reportem.equipo=equipo;
-// Aquí puedes realizar la validación adicional del formulario antes de proceder
-
-// Luego, puedes enviar una solicitud a tu servicio para crear la orden de trabajo
-// Asegúrate de que este servicio maneje adecuadamente la creación en el backend
-this.reproteMantenimientoService.create(this.reportem).subscribe(
-  (reporte) => {
-    this.router.navigate(['/mantenimiento']);
-    Swal.fire(
-      'Nuevo Reporte Creado',
-      `El reporte mantenimiento con numero ${reporte.no_reporte} ha sido creada con éxito!`,
-      'success'
-    );
-  },
-  (err) => {
-    this.errores = err.error.errors ? (err.error.errors as string[]) : [];
-    console.error('Código del error desde el backend: ' + err.status);
-    Swal.fire(
-      'Error al Crear orden: ' + err.error.errors.mensaje + err.status,
-      err.error.errors,
-      'error'
-    );
+          console.log('Data equipo: ', this.equipoData);
+        });
+    }
   }
-);
+  crearReporte(): void {
+    // Crear un objeto ClienteId con solo el idCliente
+    const idClienteSeleccionado = this.formulario.get('cliente')?.value;
 
-}
+    if (!idClienteSeleccionado) {
+      console.error('Debes seleccionar un cliente.');
+      return;
+    }
+    const clienteId: ClienteId = { idCliente: idClienteSeleccionado };
 
-updateReporte():void{
-  // Crear un objeto ClienteId con solo el idCliente
-  const idClienteSeleccionado = this.formulario.get('cliente')?.value;
+    // Luego, puedes convertir este objeto a un objeto de tipo Cliente si es necesario
+    const cliente: Cliente = {
+      ...clienteId,
+      nombre: '',
+      apellido: '',
+      email: '',
+      createAt: new Date(),
+      telefono_empresa: '',
+      cod_cliente: '',
+      razon_social: '',
+      nombre_comercial: '',
+      ruc: '',
+      dv: '',
+      direccion: '',
+      telefono_jefe: '',
+      celular_jefe: '',
+      correo_electronico: '',
+      actividad_economica: '',
+      abreviatura: '',
+      nombre_contacto: '',
+      cargo_servicio: '',
+      celular_servicio: '',
+      correo_servicio: '',
+      telefono_servicio: '',
+      nombre_cobro: '',
+      cargo_cobro: '',
+      telefono_cobro: '',
+      celular_cobro: '',
+      correo_cobro: '',
+      activo: false,
+      equipos: [],
+      ordenTrabajos: [],
+      reporteTecnicos: [],
+    };
+    // Asignar el cliente a la Orden
+    this.reportem.cliente = cliente;
 
-  if (!idClienteSeleccionado) {
-    console.error('Debes seleccionar un cliente.');
-    return;
-  }
-   const clienteId: ClienteId = { idCliente: idClienteSeleccionado };
+    const idEquipoSeleccionado = this.formulario.get('equipo')?.value;
+    if (!idEquipoSeleccionado) {
+      console.error('Debes seleccionar un cliente.');
+      return;
+    }
+    // Crear un objeto ClienteId con solo el idCliente
+    const equipoId: EquipoId = { idEquipo: idEquipoSeleccionado };
+    const equipo: EquipoCliente = {
+      ...equipoId,
+      codigoequipo: '',
+      codigoequipocliente: '',
+      nombre: '',
+      nombrecliente: '',
+      marca: '',
+      modelo: '',
+      numero_serie: '',
+      capacidad: '',
+      categoria_equipo: '',
+      capacidad_maxima: '',
+      capacidad_minima: '',
+      resolucion: '',
+      divisiones: '',
+      observaciones: '',
+      // imagen_equipo: File = new File(fileBits, fileName, options),
+      unidad_medida: '',
+      instrumento: '',
+      mide: '',
+      lista_precio: '',
+      cmc_equipo: '',
+      fabricante_receptor: '',
+      modelo_receptor: '',
+      serie_receptor: '',
+      id_interno_receptor: '',
+      fabricante_sensor: '',
+      modelo_sensor: '',
+      id_interno_sensor: '',
+      serie_sensor: '',
+      fabricante_indicador: '',
+      modelo_indicador: '',
+      serie_indicador: '',
+      id_interno_indicador: '',
+      createAt: new Date(),
+      activo: false,
+      cliente: new Cliente(),
+    };
 
-   // Luego, puedes convertir este objeto a un objeto de tipo Cliente si es necesario
-const cliente: Cliente = {
-  ...clienteId, nombre: '', apellido: '', email: '',
-  createAt:  new Date(),
-  telefono_empresa: '',
-  cod_cliente: '',
-  razon_social: '',
-  nombre_comercial: '',
-  ruc: '',
-  dv: '',
-  direccion: '',
-  telefono_jefe: '',
-  celular_jefe: '',
-  correo_electronico: '',
-  actividad_economica: '',
-  abreviatura: '',
-  nombre_contacto: '',
-  cargo_servicio: '',
-  celular_servicio: '',
-  correo_servicio: '',
-  telefono_servicio: '',
-  nombre_cobro: '',
-  cargo_cobro: '',
-  telefono_cobro: '',
-  celular_cobro: '',
-  correo_cobro: '',
-  activo: false,
-  equipos: [],
-  ordenTrabajos: [],
-  reporteTecnicos: []
-};
-// Asignar el cliente a la Orden
-this.reportem.cliente=cliente;
+    this.reportem.equipo = equipo;
+    // Aquí puedes realizar la validación adicional del formulario antes de proceder
 
-const idEquipoSeleccionado = this.formulario.get('equipo')?.value;
-if (!idEquipoSeleccionado) {
-  console.error('Debes seleccionar un cliente.');
-  return;
-}
- // Crear un objeto ClienteId con solo el idCliente
-const equipoId: EquipoId = { idEquipo: idEquipoSeleccionado };
-const equipo: EquipoCliente={
-...equipoId,
-codigoequipo: '',
-codigoequipocliente:'',
-nombre: '',
-nombrecliente:'',
-marca:'',
-modelo:'',
-numero_serie:'',
-capacidad:'',
-categoria_equipo: '',
-capacidad_maxima: '',
-capacidad_minima: '',
-resolucion: '',
-divisiones: '',
-observaciones: '',
-// imagen_equipo: File = new File(fileBits, fileName, options),
-unidad_medida: '',
-instrumento: '',
-mide: '',
-lista_precio: '',
-cmc_equipo: '',
-fabricante_receptor: '',
-modelo_receptor: '',
-serie_receptor: '',
-id_interno_receptor: '',
-fabricante_sensor: '',
-modelo_sensor: '',
-id_interno_sensor: '',
-serie_sensor: '',
-fabricante_indicador: '',
-modelo_indicador: '',
-serie_indicador: '',
-id_interno_indicador: '',
-createAt: new Date(),
-activo: false,
-cliente: new Cliente
-}
-
-this.reportem.equipo=equipo;
-// Aquí puedes realizar la validación adicional del formulario antes de proceder
-
-// Luego, puedes enviar una solicitud a tu servicio para crear la orden de trabajo
-// Asegúrate de que este servicio maneje adecuadamente la creación en el backend
-this.reproteMantenimientoService.update(this.reportem).subscribe(
-  (reporte) => {
-    this.router.navigate(['/mantenimiento']);
-    Swal.fire(
-      'Reporte Actualizado',
-      `El reporte mantenimiento con numero ${this.reportem.no_reporte} ha sido actualizado con éxito!`,
-      'success'
-    );
-  },
-  (err) => {
-    this.errores = err.error.errors ? (err.error.errors as string[]) : [];
-    console.error('Código del error desde el backend: ' + err.status);
-    Swal.fire(
-      'Error al Crear orden: ' + err.error.errors.mensaje + err.status,
-      err.error.errors,
-      'error'
+    // Luego, puedes enviar una solicitud a tu servicio para crear la orden de trabajo
+    // Asegúrate de que este servicio maneje adecuadamente la creación en el backend
+    this.reproteMantenimientoService.create(this.reportem).subscribe(
+      (reporte) => {
+        this.router.navigate(['/mantenimiento']);
+        Swal.fire(
+          'Nuevo Reporte Creado',
+          `El reporte mantenimiento con numero ${reporte.no_reporte} ha sido creada con éxito!`,
+          'success'
+        );
+      },
+      (err) => {
+        this.errores = err.error.errors ? (err.error.errors as string[]) : [];
+        console.error('Código del error desde el backend: ' + err.status);
+        Swal.fire(
+          'Error al Crear orden: ' + err.error.errors.mensaje + err.status,
+          err.error.errors,
+          'error'
+        );
+      }
     );
   }
-);
+
+  updateReporte(): void {
+    // Crear un objeto ClienteId con solo el idCliente
+    const idClienteSeleccionado = this.formulario.get('cliente')?.value;
+
+    if (!idClienteSeleccionado) {
+      console.error('Debes seleccionar un cliente.');
+      return;
+    }
+    const clienteId: ClienteId = { idCliente: idClienteSeleccionado };
+
+    // Luego, puedes convertir este objeto a un objeto de tipo Cliente si es necesario
+    const cliente: Cliente = {
+      ...clienteId,
+      nombre: '',
+      apellido: '',
+      email: '',
+      createAt: new Date(),
+      telefono_empresa: '',
+      cod_cliente: '',
+      razon_social: '',
+      nombre_comercial: '',
+      ruc: '',
+      dv: '',
+      direccion: '',
+      telefono_jefe: '',
+      celular_jefe: '',
+      correo_electronico: '',
+      actividad_economica: '',
+      abreviatura: '',
+      nombre_contacto: '',
+      cargo_servicio: '',
+      celular_servicio: '',
+      correo_servicio: '',
+      telefono_servicio: '',
+      nombre_cobro: '',
+      cargo_cobro: '',
+      telefono_cobro: '',
+      celular_cobro: '',
+      correo_cobro: '',
+      activo: false,
+      equipos: [],
+      ordenTrabajos: [],
+      reporteTecnicos: [],
+    };
+    // Asignar el cliente a la Orden
+    this.reportem.cliente = cliente;
+
+    const idEquipoSeleccionado = this.formulario.get('equipo')?.value;
+    if (!idEquipoSeleccionado) {
+      console.error('Debes seleccionar un cliente.');
+      return;
+    }
+    // Crear un objeto ClienteId con solo el idCliente
+    const equipoId: EquipoId = { idEquipo: idEquipoSeleccionado };
+    const equipo: EquipoCliente = {
+      ...equipoId,
+      codigoequipo: '',
+      codigoequipocliente: '',
+      nombre: '',
+      nombrecliente: '',
+      marca: '',
+      modelo: '',
+      numero_serie: '',
+      capacidad: '',
+      categoria_equipo: '',
+      capacidad_maxima: '',
+      capacidad_minima: '',
+      resolucion: '',
+      divisiones: '',
+      observaciones: '',
+      // imagen_equipo: File = new File(fileBits, fileName, options),
+      unidad_medida: '',
+      instrumento: '',
+      mide: '',
+      lista_precio: '',
+      cmc_equipo: '',
+      fabricante_receptor: '',
+      modelo_receptor: '',
+      serie_receptor: '',
+      id_interno_receptor: '',
+      fabricante_sensor: '',
+      modelo_sensor: '',
+      id_interno_sensor: '',
+      serie_sensor: '',
+      fabricante_indicador: '',
+      modelo_indicador: '',
+      serie_indicador: '',
+      id_interno_indicador: '',
+      createAt: new Date(),
+      activo: false,
+      cliente: new Cliente(),
+    };
+
+    this.reportem.equipo = equipo;
+    // Aquí puedes realizar la validación adicional del formulario antes de proceder
+
+    // Luego, puedes enviar una solicitud a tu servicio para crear la orden de trabajo
+    // Asegúrate de que este servicio maneje adecuadamente la creación en el backend
+    this.reproteMantenimientoService.update(this.reportem).subscribe(
+      (reporte) => {
+        this.router.navigate(['/mantenimiento']);
+        Swal.fire(
+          'Reporte Actualizado',
+          `El reporte mantenimiento con numero ${this.reportem.no_reporte} ha sido actualizado con éxito!`,
+          'success'
+        );
+      },
+      (err) => {
+        this.errores = err.error.errors ? (err.error.errors as string[]) : [];
+        console.error('Código del error desde el backend: ' + err.status);
+        Swal.fire(
+          'Error al Crear orden: ' + err.error.errors.mensaje + err.status,
+          err.error.errors,
+          'error'
+        );
+      }
+    );
   }
 
-  exportarPDF(idrepmant:number) {
+  exportarPDF(idrepmant: number) {
     this.loading = true; // Activa la bandera de carga
     this.reproteMantenimientoService.generateReport(idrepmant).subscribe(
       (response) => {
-        console.log('respuesta: ',response)
+        console.log('respuesta: ', response);
         if (response.body instanceof Blob) {
           // Convierte el Blob a una URL
           const blob = new Blob([response.body], { type: 'application/pdf' });
@@ -683,17 +766,23 @@ this.reproteMantenimientoService.update(this.reportem).subscribe(
         } else {
           this.loading = false; // se desactiva la bandera de carga
           console.error('El resultado de la solicitud no es un Blob válido');
-          Swal.fire({ icon: 'error', title: 'Oops...', text: 'El resultado de la solicitud no es un Blob válido' });
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'El resultado de la solicitud no es un Blob válido',
+          });
         }
       },
       (error) => {
         console.error('Error al exportar el PDF', error);
-        Swal.fire({ icon: 'error', title: 'Oops...', text: 'Ocurrio un error al Imprimir el reporte!' });
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Ocurrio un error al Imprimir el reporte!',
+        });
 
         // Maneja el error aquí (por ejemplo, muestra un mensaje al usuario)
       }
     );
   }
-
-
 }
