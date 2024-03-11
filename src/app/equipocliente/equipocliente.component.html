@@ -2,11 +2,18 @@
   <div class="card-header">Equipo Clientes</div>
   <div class="card-body text-primary">
     <h5 class="card-title">Listado de Equipo Clientes</h5>
-    <div class="my-2 text-left">
+    <div class="d-flex gap-2 my-2">
       <button class="btn btn-rounded btn-primary" type="button" [routerLink]="['/equipoclientes/equipoform']"><i class="fa-solid fa-plus"></i> Agregar</button>
      <!-- <button class="btn btn-rounded btn-secondary"(click)="exportarEquipos()" >Exportar Equipos</button>-->
       <!--<input title="file"class="form-control" placeholder="seleccione un archivo excel" type="file" (change)="seleccionarArchivo($event)" />-->
      <!-- <button  class="btn btn-rounded btn-success "(click)="importar()">Importar Equipos</button>-->
+     <!-- <input [(ngModel)]="nombreCliente" placeholder="Nombre del Cliente"> --><!-- Input para ingresar el nombre del cliente a filtrar -->
+     <select title="clienteSelect"class="form-control"
+     [(ngModel)]="nombreCliente" (change)="loadEquiposClientes()">
+     <option value="" disabled selected>Selecciona un cliente</option>
+     <option *ngFor="let cliente of clientes" [value]="cliente.nombre_comercial">{{ cliente.nombre_comercial }}</option>
+   </select>
+   <button class="btn btn-rounded btn-primary"(click)="limpiarFiltro()">Eliminar filtro</button>
     </div>
     <div *ngIf="loading" class="alert alert-info">
       Cargando... Por favor, espere.
@@ -64,10 +71,10 @@
       <tbody>
         <tr *ngFor="let equipo of equipos.slice().reverse() | paginate: { itemsPerPage: 5, currentPage: pages }">
           <td>
-            <button type="button" name="editar" [routerLink]="['/equipoclientes/equipoform',equipo.idEquipo]" class="btn btn-success btn-sm"><i class="fa-solid fa-pen-to-square"></i></button>
+            <button title="editar"type="button" name="editar" [routerLink]="['/equipoclientes/equipoform',equipo.idEquipo]" class="btn btn-success btn-sm"><i class="fa-solid fa-pen-to-square"></i></button>
           </td>
           <td>
-            <button type="button" name="eliminar" (click)='delete(equipo)' class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></button>
+            <button title="borrar" type="button" name="eliminar" (click)='delete(equipo)' class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></button>
           </td>
           <td>{{ equipo.idEquipo }}</td>
           <td>{{ equipo.codigoequipo }}</td>

@@ -120,13 +120,13 @@
       <tbody>
         <tr *ngFor="let reportem of reportesm.slice().reverse() | paginate: { itemsPerPage: 5, currentPage: pages }">
           <td>
-            <button type="button" name="editar" [routerLink]="['/mantenimientos/reportemantform',reportem.idrepmant]" class="btn btn-success btn-sm"><i class="fa-solid fa-pen-to-square"></i></button>
+            <button title="editar"type="button" name="editar" [routerLink]="['/mantenimientos/reportemantform',reportem.idrepmant]" class="btn btn-success btn-sm"><i class="fa-solid fa-pen-to-square"></i></button>
           </td>
           <td>
-            <button type="button" name="eliminar" (click)='delete(reportem)' class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></button>
+            <button title="borrar"type="button" name="eliminar" (click)='delete(reportem)' class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></button>
           </td>
           <td>
-            <button type="button" name="imprimir" (click)='exportarPDF(reportem.idrepmant)' class="btn btn-primary btn-sm"><i class="fa-solid fa-print"></i></button>
+            <button title="imprimir"type="button" name="imprimir" (click)='exportarPDF(reportem.idrepmant)' class="btn btn-primary btn-sm"><i class="fa-solid fa-print"></i></button>
           </td>
           <td>{{ reportem.idrepmant }}</td>
 	  <td>{{reportem.nombrecliente }}</td>

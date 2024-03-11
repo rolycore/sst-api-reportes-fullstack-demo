@@ -1,7 +1,7 @@
-import { Cliente } from "./cliente";
-import { EquipoCliente } from "./equipocliente";
+import { Cliente } from './cliente';
+import { EquipoCliente } from './equipocliente';
 
-export class ReporteMantenimiento{
+export class ReporteMantenimiento {
   idrepmant!: number;
   no_reporte!: string;
   nombrecliente!: string;
@@ -68,6 +68,23 @@ export class ReporteMantenimiento{
   rutaImagen10!: string;
   rutaImagen11!: string;
   rutaImagen12!: string;
+  ev_desgaste!: boolean;
+  ev_aflojamiento!: boolean;
+  ev_vibraciones!: boolean;
+  ev_fallas!: boolean;
+  ev_corrocion!: boolean;
+  ev_condiciones_ambiantales!: boolean;
+  ev_utiliza_masa!: boolean;
+  ev_identifica_masa!: boolean;
+  inspeccion_estructura_maq!: boolean;
+  imam_ascendente!: boolean;
+  imam_ajustar!: boolean;
+  ipcm_platos!: boolean;
+  ipcm_plato_inferior!: boolean;
+  ipcm_pruebas!: boolean;
+  va_accesorios!: boolean;
+  va_usada!: boolean;
+  observaciones!: string;
   cliente!: Cliente;
   equipo!: EquipoCliente;
 }

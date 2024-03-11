@@ -43,6 +43,14 @@ constructor(private reporteService: ReportemantenimientoService,
     this.getReportes();
     this.filtrarequipo();
     this.filtrarfechareporte();
+        // Mover la obtención de la lista de clientes aquí
+        this.clienteService.getClientes().subscribe((data: any[]) => {
+          this.clientes = data.filter(cliente => cliente.nombre_comercial); // Filtra los clientes con un nombre_comercial definido
+        });
+            // Mover la obtención de la lista de equipos aquí
+      this.equipoClienteService.findAllEquipos().subscribe((data: any[]) => {
+        this.equipos = data.filter(equipo => equipo.nombre);
+      });
   }
 
   ajustarFormatoFecha(fecha: string): string {

@@ -3,7 +3,7 @@
     <div class="card bg-dark text-white">
       <div class="card-header">{{titulo}}</div>
       <div class="my-2 text-left">
-        <button class="btn btn-rounded btn-secondary" type="button" (click)="exportarPDF(reportem.idrepmant)"><i
+        <button class="btn btn-rounded btn-secondary" title="exportar" type="button" (click)="exportarPDF(reportem.idrepmant)"><i
             class="bi bi-person-plus"></i><i class="fa-solid fa-print"></i></button>
       </div>
       <div *ngIf="loading" class="alert alert-info">
@@ -18,19 +18,26 @@
             <a class="nav-link" [class.active]="activeTab === 2" (click)="activeTab = 2">2. ÚBICACION DEL EQUIPO</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" [class.active]="activeTab === 3" (click)="activeTab = 3">3. DATOS TÉCNICOS DEL EQUIPO</a>
+            <a class="nav-link" [class.active]="activeTab === 3" (click)="activeTab = 3">3. DATOS TÉCNICOS DEL
+              EQUIPO</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" [class.active]="activeTab === 4" (click)="activeTab = 4">4. TRABAJOS REALIZADOS</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" [class.active]="activeTab === 5" (click)="activeTab = 5">5. OBSERVACIONES EN RECEPCIÓN</a>
+            <a class="nav-link" [class.active]="activeTab === 5" (click)="activeTab = 5">5. OBSERVACIONES EN
+              RECEPCIÓN</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" [class.active]="activeTab === 6" (click)="activeTab = 6">6. RECOMENDACIONES</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" [class.active]="activeTab === 7" (click)="activeTab = 7">7. FOTOS DEL SERVICIO BRINDADO</a>
+            <a class="nav-link" [class.active]="activeTab === 7" (click)="activeTab = 7">7. FOTOS DEL SERVICIO
+              BRINDADO</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [class.active]="activeTab === 8" (click)="activeTab = 8">8. INSPECCIÓN GENERAL DE LA
+              MÁQUINA DE ENSAYO</a>
           </li>
         </ul>
         <form [formGroup]="formulario" formulario.valid>
@@ -168,48 +175,53 @@
               <div class="form-group">
                 <label for="fabricanteindicador" class="col-form-label col-sm-6">Fabricante Indicador:</label>
                 <input id="fabricanteindicador" type="text" formControlName="fabricanteindicador" class="form-control"
-                  [(ngModel)]="reportem.fabricanteindicador" placeholder="Ingrese el Fabricante indicador" [readonly]="true"/>
+                  [(ngModel)]="reportem.fabricanteindicador" placeholder="Ingrese el Fabricante indicador"
+                  [readonly]="true" />
               </div>
               <div class="form-group">
                 <label for="fabricantemarco" class="col-form-label col-sm-6">Fabricante Marco / Receptor:</label>
                 <input id="fabricantemarco" type="text" formControlName="fabricantemarco" class="form-control"
-                  [(ngModel)]="reportem.fabricantemarco" placeholder="Ingrese el Fabricante Marco" [readonly]="true"/>
+                  [(ngModel)]="reportem.fabricantemarco" placeholder="Ingrese el Fabricante Marco" [readonly]="true" />
               </div>
               <div class="form-group">
-                <label for="fabricantetransductor" class="col-form-label col-sm-6">Fabricante Transductor / Sensor:</label>
+                <label for="fabricantetransductor" class="col-form-label col-sm-6">Fabricante Transductor /
+                  Sensor:</label>
                 <input id="fabricantetransductor" type="text" formControlName="fabricantetransductor"
                   class="form-control" [(ngModel)]="reportem.fabricantetransductor"
-                  placeholder="Ingrese el Fabricante Transductor" [readonly]="true"/>
+                  placeholder="Ingrese el Fabricante Transductor" [readonly]="true" />
               </div>
               <div class="form-group">
                 <label for="modeloindicador" class="col-form-label col-sm-6">Modelo Indicador:</label>
                 <input id="modeloindicador" type="text" formControlName="modeloindicador" class="form-control"
-                  [(ngModel)]="reportem.modeloindicador" placeholder="Ingrese el Modelo Indicador" [readonly]="true"/>
+                  [(ngModel)]="reportem.modeloindicador" placeholder="Ingrese el Modelo Indicador" [readonly]="true" />
               </div>
               <div class="form-group">
                 <label for="modelomarco" class="col-form-label col-sm-6">Modelo Marco / Receptor:</label>
                 <input id="modelomarco" type="text" formControlName="modelomarco" class="form-control"
-                  [(ngModel)]="reportem.modelomarco" placeholder="Ingrese el Modelo Marco" [readonly]="true"/>
+                  [(ngModel)]="reportem.modelomarco" placeholder="Ingrese el Modelo Marco" [readonly]="true" />
               </div>
               <div class="form-group">
                 <label for="modelotransductor" class="col-form-label col-sm-6">Modelo Transductor / Sensor:</label>
                 <input id="modelotransductor" type="text" formControlName="modelotransductor" class="form-control"
-                  [(ngModel)]="reportem.modelotransductor" placeholder="Ingrese el Modelo Transductor" [readonly]="true"/>
+                  [(ngModel)]="reportem.modelotransductor" placeholder="Ingrese el Modelo Transductor"
+                  [readonly]="true" />
               </div>
               <div class="form-group">
                 <label for="serieindicador" class="col-form-label col-sm-6">Serie Indicador:</label>
                 <input id="serieindicador" type="text" formControlName="serieindicador" class="form-control"
-                  [(ngModel)]="reportem.serieindicador" placeholder="Ingrese la Serie del Indicador" [readonly]="true"/>
+                  [(ngModel)]="reportem.serieindicador" placeholder="Ingrese la Serie del Indicador"
+                  [readonly]="true" />
               </div>
               <div class="form-group">
                 <label for="seriemarco" class="col-form-label col-sm-6">Serie Marco / Receptor:</label>
                 <input id="seriemarco" type="text" formControlName="seriemarco" class="form-control"
-                  [(ngModel)]="reportem.seriemarco" placeholder="Ingrese la Serie del Marco" [readonly]="true"/>
+                  [(ngModel)]="reportem.seriemarco" placeholder="Ingrese la Serie del Marco" [readonly]="true" />
               </div>
               <div class="form-group">
                 <label for="serietransductor" class="col-form-label col-sm-6">Serie Transductor / Sensor:</label>
                 <input id="serietransductor" type="text" formControlName="serietransductor" class="form-control"
-                  [(ngModel)]="reportem.serietransductor" placeholder="Ingrese la Serie del Transductor" [readonly]="true"/>
+                  [(ngModel)]="reportem.serietransductor" placeholder="Ingrese la Serie del Transductor"
+                  [readonly]="true" />
               </div>
               <div class="form-group">
                 <label for="capacidadindicador" class="col-form-label col-sm-6">Capacidad Indicador:</label>
@@ -222,7 +234,8 @@
                   [(ngModel)]="reportem.capacidadmarco" placeholder="Ingrese la Capacidad del Marco" />
               </div>
               <div class="form-group">
-                <label for="capacidadtransductor" class="col-form-label col-sm-6">Capacidad Transductor / Sensor::</label>
+                <label for="capacidadtransductor" class="col-form-label col-sm-6">Capacidad Transductor /
+                  Sensor::</label>
                 <input id="capacidadtransductor" type="text" formControlName="capacidadtransductor" class="form-control"
                   [(ngModel)]="reportem.capacidadtransductor" placeholder="Ingrese la Capacidad del Transductor" />
               </div>
@@ -269,7 +282,8 @@
               <label for="imagen_1" class="col-form-label col-sm-6">Foto 1:</label>
 
               <input class="input-file" id="imagen_1" (change)="capturarFile($event, 0)" type="file"
-                formControlName="imagen_1" class="form-control" placeholder="Ingrese la foto 1" [(ngModel)]="reportem.imagen_1"/>
+                formControlName="imagen_1" class="form-control" placeholder="Ingrese la foto 1"
+                [(ngModel)]="reportem.imagen_1" />
 
               <div class="p-1">
                 <small>Se aceptan archivos imágenes de tipo .jpg</small>
@@ -280,6 +294,7 @@
                   height="100" />
               </div>
             </div>
+
             <div class="form-group">
               <label for="descripcion1" class="col-form-label col-sm-6">Descripcion 1:</label>
 
@@ -290,7 +305,8 @@
             <div class="form-group">
               <label for="imagen_2" class="col-form-label col-sm-6">Foto 2:</label>
               <input class="input-file" id="imagen_2" (change)="capturarFile($event, 1)" type="file"
-                formControlName="imagen_2" class="form-control" placeholder="Ingrese la foto 2" [(ngModel)]="reportem.imagen_2"/>
+                formControlName="imagen_2" class="form-control" placeholder="Ingrese la foto 2"
+                [(ngModel)]="reportem.imagen_2" />
 
               <div class="p-1">
                 <small>Se aceptan archivos imágenes de tipo .jpg</small>
@@ -312,7 +328,8 @@
             <div class="form-group">
               <label for="imagen_3" class="col-form-label col-sm-6">Foto 3:</label>
               <input class="input-file" id="imagen_3" (change)="capturarFile($event, 2)" type="file"
-                formControlName="imagen_3" class="form-control" placeholder="Ingrese la foto 3" [(ngModel)]="reportem.imagen_3"/>
+                formControlName="imagen_3" class="form-control" placeholder="Ingrese la foto 3"
+                [(ngModel)]="reportem.imagen_3" />
               <div class="alert alert-danger"
                 *ngIf="formulario?.get('imagen_3')?.invalid && formulario?.get('imagen_3')?.touched">
                 La Foto es requerida
@@ -337,7 +354,8 @@
             <div class="form-group">
               <label for="imagen_4" class="col-form-label col-sm-6">Foto 4:</label>
               <input class="input-file" id="imagen_4" (change)="capturarFile($event, 3)" type="file"
-                formControlName="imagen_4" class="form-control" placeholder="Ingrese la foto 4" [(ngModel)]="reportem.imagen_4"/>
+                formControlName="imagen_4" class="form-control" placeholder="Ingrese la foto 4"
+                [(ngModel)]="reportem.imagen_4" />
 
               <div class="p-1">
                 <small>Se aceptan archivos imágenes de tipo .jpg</small>
@@ -358,7 +376,8 @@
             <div class="form-group">
               <label for="imagen_5" class="col-form-label col-sm-6">Foto 5:</label>
               <input class="input-file" id="imagen_5" (change)="capturarFile($event, 4)" type="file"
-                formControlName="imagen_5" class="form-control" placeholder="Ingrese la foto 5" [(ngModel)]="reportem.imagen_5"/>
+                formControlName="imagen_5" class="form-control" placeholder="Ingrese la foto 5"
+                [(ngModel)]="reportem.imagen_5" />
 
               <div class="p-1">
                 <small>Se aceptan archivos imágenes de tipo .jpg</small>
@@ -379,7 +398,8 @@
             <div class="form-group">
               <label for="imagen_6" class="col-form-label col-sm-6">Foto 6:</label>
               <input class="input-file" id="imagen_6" (change)="capturarFile($event, 5)" type="file"
-                formControlName="imagen6" class="form-control" placeholder="Ingrese la foto 6" [(ngModel)]="reportem.imagen_6"/>
+                formControlName="imagen6" class="form-control" placeholder="Ingrese la foto 6"
+                [(ngModel)]="reportem.imagen_6" />
 
               <div class="p-1">
                 <small>Se aceptan archivos imágenes de tipo .jpg</small>
@@ -400,7 +420,8 @@
             <div class="form-group">
               <label for="imagen_7" class="col-form-label col-sm-6">Foto 7:</label>
               <input class="input-file" id="imagen_7" (change)="capturarFile($event, 6)" type="file"
-                formControlName="imagen_7" class="form-control" placeholder="Ingrese la foto 7" [(ngModel)]="reportem.imagen_7"/>
+                formControlName="imagen_7" class="form-control" placeholder="Ingrese la foto 7"
+                [(ngModel)]="reportem.imagen_7" />
 
               <div class="p-1">
                 <small>Se aceptan archivos imágenes de tipo .jpg</small>
@@ -421,7 +442,8 @@
             <div class="form-group">
               <label for="imagen_8" class="col-form-label col-sm-6">Foto 8:</label>
               <input class="input-file" id="imagen_8" (change)="capturarFile($event, 7)" type="file"
-                formControlName="imagen_8" class="form-control" placeholder="Ingrese la foto 8" [(ngModel)]="reportem.imagen_8"/>
+                formControlName="imagen_8" class="form-control" placeholder="Ingrese la foto 8"
+                [(ngModel)]="reportem.imagen_8" />
 
               <div class="p-1">
                 <small>Se aceptan archivos imágenes de tipo .jpg</small>
@@ -442,7 +464,8 @@
             <div class="form-group">
               <label for="imagen_9" class="col-form-label col-sm-6">Foto 9:</label>
               <input class="input-file" id="imagen_9" (change)="capturarFile($event, 8)" type="file"
-                formControlName="imagen_9" class="form-control" placeholder="Ingrese la foto 9" [(ngModel)]="reportem.imagen_9"/>
+                formControlName="imagen_9" class="form-control" placeholder="Ingrese la foto 9"
+                [(ngModel)]="reportem.imagen_9" />
 
               <div class="p-1">
                 <small>Se aceptan archivos imágenes de tipo .jpg</small>
@@ -463,7 +486,8 @@
             <div class="form-group">
               <label for="imagen_10" class="col-form-label col-sm-6">Foto 10:</label>
               <input class="input-file" id="imagen_10" (change)="capturarFile($event, 9)" type="file"
-                formControlName="imagen_10" class="form-control" placeholder="Ingrese la foto 10" [(ngModel)]="reportem.imagen_10"/>
+                formControlName="imagen_10" class="form-control" placeholder="Ingrese la foto 10"
+                [(ngModel)]="reportem.imagen_10" />
 
               <div class="p-1">
                 <small>Se aceptan archivos imágenes de tipo .jpg</small>
@@ -484,7 +508,8 @@
             <div class="form-group">
               <label for="imagen_11" class="col-form-label col-sm-6">Foto 11:</label>
               <input class="input-file" id="imagen_11" (change)="capturarFile($event, 10)" type="file"
-                formControlName="imagen_11" class="form-control" placeholder="Ingrese la foto 11" [(ngModel)]="reportem.imagen_11"/>
+                formControlName="imagen_11" class="form-control" placeholder="Ingrese la foto 11"
+                [(ngModel)]="reportem.imagen_11" />
 
               <div class="p-1">
                 <small>Se aceptan archivos imágenes de tipo .jpg</small>
@@ -505,7 +530,8 @@
             <div class="form-group">
               <label for="imagen_12" class="col-form-label col-sm-6">Foto 12:</label>
               <input class="input-file" id="imagen_12" (change)="capturarFile($event, 11)" type="file"
-                formControlName="imagen_12" class="form-control" placeholder="Ingrese la foto 12" [(ngModel)]="reportem.imagen_12"/>
+                formControlName="imagen_12" class="form-control" placeholder="Ingrese la foto 12"
+                [(ngModel)]="reportem.imagen_12" />
 
               <div class="p-1">
                 <small>Se aceptan archivos imágenes de tipo .jpg</small>
@@ -523,6 +549,152 @@
                 [(ngModel)]="reportem.descripcion12" placeholder="Ingrese la descripcion 12" />
 
             </div>
+          </div>
+          <div *ngIf="activeTab === 8">
+            <div class="form-group">
+              <h3>EXAMEN VISUAL</h3>
+              <strong>NOTA: Marque la Casilla para SI o Desmarque la Casilla para NO</strong>
+              <p>La máquina se ve afectada negativamente por</p>
+              <div class="form-group">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" id="ev_desgaste" formControlName="ev_desgaste"
+                    [(ngModel)]="reportem.ev_desgaste">
+                  <label class="form-check-label" for="ev_desgaste">Desgastes / Defectos </label>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" id="ev_aflojamiento" formControlName="ev_aflojamiento"
+                    [(ngModel)]="reportem.ev_aflojamiento">
+                  <label class="form-check-label" for="ev_aflojamiento">Aflojamiento</label>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" id="ev_vibraciones" formControlName="ev_vibraciones"
+                    [(ngModel)]="reportem.ev_vibraciones">
+                  <label class="form-check-label" for="ev_vibraciones">Vibraciones</label>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" id="ev_fallas" formControlName="ev_fallas"
+                    [(ngModel)]="reportem.ev_fallas">
+                  <label class="form-check-label" for="ev_fallas">Fallas</label>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" id="ev_corrocion" formControlName="ev_corrocion"
+                    [(ngModel)]="reportem.ev_corrocion">
+                  <label class="form-check-label" for="ev_corrocion">Corrosión</label>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" id="ev_condiciones_ambiantales"
+                    formControlName="ev_condiciones_ambiantales" [(ngModel)]="reportem.ev_condiciones_ambiantales">
+                  <label class="form-check-label" for="ev_condiciones_ambiantales">Condiciones ambientales muy
+                    variables</label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <h3>INSPECCIÓN DE LA ESTRUCTURA DE LA MÁQUINA</h3>
+              <div class="form-group">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input form-control" type="checkbox" id="inspeccion_estructura_maq"
+                    formControlName="inspeccion_estructura_maq" [(ngModel)]="reportem.inspeccion_estructura_maq">
+                  <label class="form-check-label" for="inspeccion_estructura_maq">La estructura de aplicación de carga,
+                    junto con los platos de aplicación de carga (COMPRESIÓN) o
+                    los sujetadores (TENSIÓN), permiten ejercer una aplicación de carga axial</label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <h3>INSPECCIÓN DEL MECANISMO ACCIONADOR DE LA MÁQUINA</h3>
+              <div class="form-group">
+                <div class="form-group">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input form-control" type="checkbox" id="imam_ascendente"
+                      formControlName="imam_ascendente" [(ngModel)]="reportem.imam_ascendente">
+                    <label class="form-check-label" for="imam_ascendente">Se puede realizar la aplicación de carga
+                      (ascendente y/o descendente) pausada y
+                      uniformemente</label>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input form-control" type="checkbox" id="imam_ajustar"
+                      formControlName="imam_ajustar" [(ngModel)]="reportem.imam_ajustar">
+                    <label class="form-check-label" for="imam_ajustar">Se puede ajustar la velocidad de aplicación de
+                      carga para obtener lecturas con suficiente
+                      precisión:</label>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+            <div class="form-group">
+              <h3>INSPECCIÓN DE LOS PLATOS DE CARGA DE LAS MÁQUINAS (SÓLO COMPRESIÓN)</h3>
+              <div class="form-group">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input form-control" type="checkbox" id="ipcm_platos"
+                    formControlName="ipcm_platos" [(ngModel)]="reportem.ipcm_platos">
+                  <label class="form-check-label" for="ipcm_platos">Los platos de carga y/o los quesos metálicos cumplen
+                    con la capacidad y especificaciones de la
+                    máquina de ensayo</label>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input form-control" type="checkbox" id="ipcm_plato_inferior"
+                    formControlName="ipcm_plato_inferior" [(ngModel)]="reportem.ipcm_plato_inferior">
+                  <label class="form-check-label" for="ipcm_plato_inferio">El plato de carga inferior está nivelado con
+                    suficiente precisión para las pruebas que realiza</label>
+                </div>
+
+
+              </div>
+              <div class="form-group">
+
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input form-control" type="checkbox" id="ipcm_pruebas"
+                    formControlName="ipcm_pruebas" [(ngModel)]="reportem.ipcm_pruebas">
+                  <label class="form-check-label" for="ipcm_pruebas">Para pruebas a flexión, el plato de carga superior
+                    permite una rotación (aprox. 3°)para
+                    ajustarse a las probetas a ensayar</label>
+                </div>
+
+
+              </div>
+            </div>
+            <div class="form-group">
+              <h3>VERIFICACIÓN DE ACCESORIOS</h3>
+              <div class="form-group">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input form-control" type="checkbox" id="va_accesorios"
+                    formControlName="va_accesorios" [(ngModel)]="reportem.va_accesorios">
+                  <label class="form-check-label" for="va_accesorios">Posee la máquina de ensayo accesorios adicionales
+                    (indicadores de carga)</label>
+                </div>
+
+
+              </div>
+              <div class="form-group">
+
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input form-control" type="checkbox" id="va_usada" formControlName="va_usada"
+                    [(ngModel)]="reportem.va_usada">
+                  <label class="form-check-label" for="instalacion">La máquina de ensayo es usada con estos accesorios
+                    adicionales:</label>
+                </div>
+
+
+              </div>
+            </div>
+
           </div>
 
           <div class="form-group row">

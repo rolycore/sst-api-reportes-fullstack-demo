@@ -15,12 +15,14 @@ export class EquipoclienteComponent implements OnInit {
   loading: boolean = false;
   equipos!: EquipoCliente[];
   equipo: EquipoCliente = new EquipoCliente();
-
+  nombreEquipo!:string;
+  nombreCliente!: string; // Propiedad para almacenar el nombre del cliente a filtrar
   archivoParaImportar!: File;
   public errores: string[] = [];
+  cliente: Cliente = new Cliente();
   clientes: any[] = []; // Lista de clientes
-  public cliente: Cliente = new Cliente();
-  public nombreComercialCliente: string = ''; // Declara una variable para el nombre_comercial del cliente
+  clienteSeleccionado: number | null = null; // ID del cliente seleccionado
+  clienteData: any; // Variable para almacenar los datos del cliente seleccionado
    // Variable para almacenar las páginas
    pages!: number;
   constructor(
@@ -56,8 +58,13 @@ export class EquipoclienteComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.nombreCliente = '';
     this.loadEquiposClientes();
 
+       // Mover la obtención de la lista de clientes aquí
+       this.clienteService.getClientes().subscribe((data: any[]) => {
+        this.clientes = data.filter(cliente => cliente.nombre_comercial); // Filtra los clientes con un nombre_comercial definido
+      });
 
    // console.log('cliente equipo:', this.equipo.cliente.toString());
   }
@@ -70,11 +77,14 @@ export class EquipoclienteComponent implements OnInit {
       .findAllEquipos()
       .pipe(
         tap((equipos) => {
+          if (this.nombreCliente) {
+            equipos = equipos.filter((equipos) => equipos.nombrecliente === this.nombreCliente);
+          }
+
           this.equipos = equipos;
           console.log('Equipos.Component: tap 3');
           equipos.forEach((equipos) => {
             console.log(equipos.nombre);
-            console.log(this.nombreComercialCliente);
           });
         })
       )
@@ -205,5 +215,9 @@ export class EquipoclienteComponent implements OnInit {
   }
   reloadPage(): void {
     window.location.reload();
+  }
+  limpiarFiltro() {
+    this.nombreCliente = ''; // Restablecer el filtro
+
   }
 }

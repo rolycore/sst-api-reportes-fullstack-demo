@@ -4,9 +4,9 @@
     <h5 class="card-title">Listado de Clientes</h5>
 <div class="d-flex gap-2 justify-content-center my-2">
   <button class="btn btn-rounded btn-primary" type="button" [routerLink]="['/clientes/form']"><i class="fa-solid fa-plus"></i>Agregar</button>
-  <button class="btn btn-rounded btn-secondary"(click)="exportarClientes()" ><i class="fa-solid fa-download"></i></button>
+  <button title="exportar"class="btn btn-rounded btn-secondary"(click)="exportarClientes()" ><i class="fa-solid fa-download"></i></button>
   <input title="file"class="form-control" placeholder="seleccione un archivo excel" type="file" (change)="seleccionarArchivo($event)" />
-  <button  class="btn btn-rounded btn-success "(click)="importar()"><i class="fa-solid fa-arrow-up-from-bracket"></i></button>
+  <button  title="importar"class="btn btn-rounded btn-success "(click)="importar()"><i class="fa-solid fa-arrow-up-from-bracket"></i></button>
 </div>
 <div *ngIf="loading" class="alert alert-info">
   Cargando... Por favor, espere.
@@ -59,10 +59,10 @@
         <tr *ngFor="let cliente of clientes.slice().reverse()  | paginate: { itemsPerPage: 5, currentPage: pages }">
 
           <td>
-            <button type="button" name="editar" [routerLink]="['/clientes/form',cliente.idCliente]" class="btn btn-success btn-sm"><i class="fa-solid fa-pen-to-square"></i></button>
+            <button title="editar"type="button" name="editar" [routerLink]="['/clientes/form',cliente.idCliente]" class="btn btn-success btn-sm"><i class="fa-solid fa-pen-to-square"></i></button>
           </td>
           <td>
-            <button type="button" name="eliminar" (click)='delete(cliente)' class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></button>
+            <button title="borrar"type="button" name="eliminar" (click)='delete(cliente)' class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></button>
           </td>
           <td>{{ cliente.idCliente }}</td>
           <td>{{cliente.nombre_comercial}}</td>

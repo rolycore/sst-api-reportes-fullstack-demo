@@ -107,52 +107,52 @@ export class ReportemantformComponent implements OnInit {
         // Asignar la imagen previsualizada a la variable correspondiente según el índice
         switch (indice) {
           case 0:
-            this.reportem.imagen_1 = archivoCapturado.name ,
-            this.previsualizacion = imagen.base;
+            (this.reportem.imagen_1 = archivoCapturado.name),
+              (this.previsualizacion = imagen.base);
             break;
           case 1:
-            this.reportem.imagen_2 = archivoCapturado.name,
-            this.previsualizacion1 = imagen.base;
+            (this.reportem.imagen_2 = archivoCapturado.name),
+              (this.previsualizacion1 = imagen.base);
             break;
           case 2:
-            this.reportem.imagen_3  = archivoCapturado.name,
-            this.previsualizacion2 = imagen.base;
+            (this.reportem.imagen_3 = archivoCapturado.name),
+              (this.previsualizacion2 = imagen.base);
             break;
           case 3:
-            this.reportem.imagen_4 = archivoCapturado.name,
-            this.previsualizacion3 = imagen.base;
+            (this.reportem.imagen_4 = archivoCapturado.name),
+              (this.previsualizacion3 = imagen.base);
             break;
           case 4:
-            this.reportem.imagen_5 =  archivoCapturado.name,
-            this.previsualizacion4 = imagen.base;
+            (this.reportem.imagen_5 = archivoCapturado.name),
+              (this.previsualizacion4 = imagen.base);
             break;
           case 5:
-            this.reportem.imagen_6 = archivoCapturado.name,
-            this.previsualizacion5 = imagen.base;
+            (this.reportem.imagen_6 = archivoCapturado.name),
+              (this.previsualizacion5 = imagen.base);
             break;
           case 6:
-            this.reportem.imagen_7 = archivoCapturado.name,
-            this.previsualizacion6 = imagen.base;
+            (this.reportem.imagen_7 = archivoCapturado.name),
+              (this.previsualizacion6 = imagen.base);
             break;
           case 7:
-            this.reportem.imagen_8  = archivoCapturado.name,
-            this.previsualizacion7 = imagen.base;
+            (this.reportem.imagen_8 = archivoCapturado.name),
+              (this.previsualizacion7 = imagen.base);
             break;
           case 8:
-            this.reportem.imagen_9 = archivoCapturado.name,
-            this.previsualizacion8 = imagen.base;
+            (this.reportem.imagen_9 = archivoCapturado.name),
+              (this.previsualizacion8 = imagen.base);
             break;
           case 9:
-            this.reportem.imagen_10  = archivoCapturado.name,
-            this.previsualizacion9 = imagen.base;
+            (this.reportem.imagen_10 = archivoCapturado.name),
+              (this.previsualizacion9 = imagen.base);
             break;
           case 10:
-            this.reportem.imagen_11 = archivoCapturado.name,
-            this.previsualizacion10 = imagen.base;
+            (this.reportem.imagen_11 = archivoCapturado.name),
+              (this.previsualizacion10 = imagen.base);
             break;
           case 11:
-            this.reportem.imagen_12 = archivoCapturado.name,
-            this.previsualizacion11 = imagen.base;
+            (this.reportem.imagen_12 = archivoCapturado.name),
+              (this.previsualizacion11 = imagen.base);
             break;
           default:
             break;
@@ -363,6 +363,24 @@ export class ReportemantformComponent implements OnInit {
             rutaImagen10: this.reportem.rutaImagen10,
             rutaImagen11: this.reportem.rutaImagen11,
             rutaImagen12: this.reportem.rutaImagen12,
+            ev_desgaste: this.reportem.ev_desgaste,
+            ev_aflojamiento: this.reportem.ev_aflojamiento,
+            ev_vibraciones: this.reportem.ev_vibraciones,
+            ev_fallas: this.reportem.ev_fallas,
+            ev_corrocion: this.reportem.ev_corrocion,
+            ev_condiciones_ambiantales:
+              this.reportem.ev_condiciones_ambiantales,
+            ev_utiliza_masa: this.reportem.ev_utiliza_masa,
+            ev_identifica_masa: this.reportem.ev_identifica_masa,
+            inspeccion_estructura_maq: this.reportem.inspeccion_estructura_maq,
+            imam_ascendente: this.reportem.imam_ascendente,
+            imam_ajustar: this.reportem.imam_ajustar,
+            ipcm_platos: this.reportem.ipcm_platos,
+            ipcm_plato_inferior: this.reportem.ipcm_plato_inferior,
+            ipcm_pruebas: this.reportem.ipcm_pruebas,
+            va_accesorios: this.reportem.va_accesorios,
+            va_usada: this.reportem.va_usada,
+            observaciones: this.reportem.observaciones,
           });
         });
       }
@@ -438,6 +456,23 @@ export class ReportemantformComponent implements OnInit {
       rutaImagen10: [''],
       rutaImagen11: [''],
       rutaImagen12: [''],
+      ev_desgaste:[''],
+      ev_aflojamiento:[''],
+      ev_vibraciones:[''],
+      ev_fallas:[''],
+      ev_corrocion:[''],
+      ev_condiciones_ambiantales:[''],
+      ev_utiliza_masa:[''],
+      ev_identifica_masa:[''],
+      inspeccion_estructura_maq:[''],
+      imam_ascendente:[''],
+      imam_ajustar:[''],
+      ipcm_platos:[''],
+      ipcm_plato_inferior:[''],
+      ipcm_pruebas:[''],
+      va_accesorios:[''],
+      va_usada:[''],
+      observaciones:[''],
     });
     // Mover la obtención de la lista de clientes aquí
     this.clienteService.getClientes().subscribe((data: any[]) => {
@@ -503,7 +538,6 @@ export class ReportemantformComponent implements OnInit {
           this.reportem.modelotransductor = equipo.modelo_sensor;
           this.reportem.seriemarco = equipo.serie_receptor;
           this.reportem.serietransductor = equipo.serie_sensor;
-
 
           console.log('Data equipo: ', this.equipoData);
         });
