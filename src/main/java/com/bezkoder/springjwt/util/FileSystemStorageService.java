@@ -66,20 +66,23 @@ public class FileSystemStorageService implements StorageService{
                 throw new RuntimeException("Failed to store empty file.");
             }
 
-            String filename = file.getOriginalFilename();
-            Path destinationFile = rootLocation.resolve(Paths.get(filename)).normalize().toAbsolutePath();
+            String originalFilename = file.getOriginalFilename();
+            String filenameWithoutSpaces = originalFilename.replaceAll(" ", "_");
+
+            Path destinationFile = rootLocation.resolve(Paths.get(filenameWithoutSpaces)).normalize().toAbsolutePath();
 
             // Redimensionar y comprimir la imagen directamente desde el archivo
             Thumbnails.of(file.getInputStream())
                     .size(maxWidth, maxHeight)
-                    .outputQuality(0.1) // Ajusta la calidad de compresión según tus necesidades
+                    .outputQuality(0.8) // Ajusta la calidad de compresión según tus necesidades
                     .toFile(destinationFile.toFile());
 
-            return filename;
+            return filenameWithoutSpaces;
         } catch (IOException e) {
             throw new RuntimeException("Failed to store or resize file. ", e);
         }
     }
+
 
     @Override
     public Resource loadAsResource(String filename) {

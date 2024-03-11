@@ -40,89 +40,112 @@ public class ReporteMantenimientoGenerator {
     }
 
     public byte[] generateReport(ReporteMantenimiento reporteMantenimiento)throws JRException, IOException, SSLHandshakeException, MalformedURLException {
-        Resource resource = new ClassPathResource("reporte_mantenimiento.jasper");
-        InputStream jasperStream = resource.getInputStream();
-        Resource logoResource = new ClassPathResource("logo-icm-rbg.png");
-        InputStream logoInputStream = logoResource.getInputStream();
-        // Crear un array de InputStream y otro de parámetros para almacenar la información
-        InputStream[] inputStreams = new InputStream[12];
-        Map<String, Object> params = new HashMap<>();
+        try {
+            Resource resource = new ClassPathResource("reporte_mantenimiento.jasper");
+            InputStream jasperStream = resource.getInputStream();
+            Resource logoResource = new ClassPathResource("logo-icm-rbg.png");
+            InputStream logoInputStream = logoResource.getInputStream();
+            // Cargar el subreporte
+            Resource subreportResource = new ClassPathResource("reporte_checklist_mantenimiento.jasper");
+            InputStream subreportStream = subreportResource.getInputStream();
+            final JasperReport subreport = (JasperReport) JRLoader.loadObject(subreportStream);
+            // Crear un array de InputStream y otro de parámetros para almacenar la información
+            InputStream[] inputStreams = new InputStream[12];
+            Map<String, Object> params = new HashMap<>();
 
 // Iterar sobre las rutas de imagen y procesarlas
-        for (int i = 1; i <= 12; i++) {
-            String rutaImagen = obtenerRutaImagen(reporteMantenimiento, i);
-            System.out.println("dentro del for1 rutaImagen = " + rutaImagen);
-            procesarRutaImagen(rutaImagen, i, inputStreams, params);
+            for (int i = 1; i <= 12; i++) {
+                String rutaImagen = obtenerRutaImagen(reporteMantenimiento, i);
+                System.out.println("dentro del for1 rutaImagen = " + rutaImagen);
+                procesarRutaImagen(rutaImagen, i, inputStreams, params);
+                // Asignar el InputStream directamente como parámetro al generador de informes
+                params.put("imagen_" + i, inputStreams[i - 1]);
+            }
 
+
+            // Cargar el informe principal
+            final JasperReport report = (JasperReport) JRLoader.loadObject(jasperStream);
+
+            params.put("cliente", reporteMantenimiento.getNombrecliente());
+            params.put("equipo", reporteMantenimiento.getNombreequipo());
+            params.put("no_reporte", reporteMantenimiento.getNo_reporte());
+            params.put("no_cotizacion", reporteMantenimiento.getNo_cotizacion());
+            params.put("tecnico", reporteMantenimiento.getTecnico());
+            params.put("horaentrada", reporteMantenimiento.getHoraEntradaFormatted());
+            params.put("horasalida", reporteMantenimiento.getHoraSalidaFormatted());
+            params.put("horaviajes", reporteMantenimiento.getHoraviajes());
+            params.put("fechareporte", reporteMantenimiento.getFechareporte());
+            params.put("contacto", reporteMantenimiento.getContacto());
+            params.put("cargo", reporteMantenimiento.getCargo());
+            params.put("direccion", reporteMantenimiento.getDireccion());
+            params.put("ubicacionequipo", reporteMantenimiento.getUbicacionequipo());
+            params.put("fabricanteindicador", reporteMantenimiento.getFabricanteindicador());
+            params.put("fabricantemarco", reporteMantenimiento.getFabricantemarco());
+            params.put("fabricantetransductor", reporteMantenimiento.getFabricantetransductor());
+            params.put("modeloindicador", reporteMantenimiento.getModeloindicador());
+            params.put("modelomarco", reporteMantenimiento.getModelomarco());
+            params.put("modelotransductor", reporteMantenimiento.getModelotransductor());
+            params.put("serieindicador", reporteMantenimiento.getSerieindicador());
+            params.put("seriemarco", reporteMantenimiento.getSeriemarco());
+            params.put("serietransductor", reporteMantenimiento.getSerietransductor());
+            params.put("capacidadindicador", reporteMantenimiento.getCapacidadindicador());
+            params.put("capacidadmarco", reporteMantenimiento.getCapacidadmarco());
+            params.put("capacidadtransductor", reporteMantenimiento.getCapacidadtransductor());
+            params.put("notamantprevent", reporteMantenimiento.getNotamantprevent());
+            params.put("notahallazgos", reporteMantenimiento.getNotahallazgo());
+            params.put("recomendaciones", reporteMantenimiento.getRecomendaciones());
+            params.put("capacidadtrasnductor", reporteMantenimiento.getModelotransductor());
+            params.put("imgLogo", logoInputStream);
+
+            params.put("descripcion1", reporteMantenimiento.getDescripcion1());
+            params.put("descripcion2", reporteMantenimiento.getDescripcion2());
+            params.put("descripcion3", reporteMantenimiento.getDescripcion3());
+            params.put("descripcion4", reporteMantenimiento.getDescripcion4());
+            params.put("descripcion5", reporteMantenimiento.getDescripcion5());
+            params.put("descripcion6", reporteMantenimiento.getDescripcion6());
+            params.put("descripcion7", reporteMantenimiento.getDescripcion7());
+            params.put("descripcion8", reporteMantenimiento.getDescripcion8());
+            params.put("descripcion9", reporteMantenimiento.getDescripcion9());
+            params.put("descripcion10", reporteMantenimiento.getDescripcion10());
+            params.put("descripcion11", reporteMantenimiento.getDescripcion11());
+            params.put("descripcion12", reporteMantenimiento.getDescripcion12());
+            params.put("ev_desgaste", reporteMantenimiento.isEv_desgaste());
+            params.put("ev_aflojamiento", reporteMantenimiento.isEv_aflojamiento());
+            params.put("ev_fallas", reporteMantenimiento.isEv_fallas());
+            params.put("ev_vibraciones", reporteMantenimiento.isEv_vibraciones());
+            params.put("ev_condiciones_ambiantales", reporteMantenimiento.isEv_condiciones_ambiantales());
+
+            params.put("ev_corrocion", reporteMantenimiento.isEv_corrocion());
+
+            params.put("inspeccion_estructura_maq", reporteMantenimiento.isInspeccion_estructura_maq());
+            params.put("imam_ascendente", reporteMantenimiento.isImam_ascendente());
+            params.put("ipcm_platos", reporteMantenimiento.isIpcm_platos());
+            params.put("imam_ajustar", reporteMantenimiento.isImam_ajustar());
+            params.put("ipcm_plato_inferior", reporteMantenimiento.isIpcm_plato_inferior());
+            params.put("ipcm_pruebas", reporteMantenimiento.isIpcm_pruebas());
+            params.put("va_accesorios", reporteMantenimiento.isVa_accesorios());
+            params.put("va_usada", reporteMantenimiento.isVa_usada());
+
+            // Agregar el subreporte como parámetro
+            params.put("subreport", subreport);
+           // System.out.println("subreport = " + subreport.toString());
+            JasperPrint jasperPrint = JasperFillManager.fillReport(report, params, new JREmptyDataSource());
+            byte[] pdfBytes = exportReportToPdf(jasperPrint);
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentDispositionFormData("attachment", "ReporteMantPDF-" + reporteMantenimiento.getIdrepmant() + ".pdf");
+
+            return ResponseEntity.ok()
+                    .contentLength((long) pdfBytes.length)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .headers(headers)
+                    .body(pdfBytes).getBody();
+        } catch (JRException e) {
+            e.printStackTrace();
+            // Puedes lanzar la excepción o manejarla de alguna manera adecuada a tus necesidades.
+            // Por ejemplo, podrías devolver un informe de error en lugar del informe PDF.
+            throw new RuntimeException("Error durante la generación del informe", e);
         }
-
-// Luego, puedes pasar los InputStream directamente como parámetros a tu generador de informes
-        int i = 1;
-        for (InputStream inputStream : inputStreams) {
-            params.put("imagen_" + i, inputStream);
-            System.out.println("inputStream dentro del for2 = imagen_" + inputStream);
-            i++;
-
-        }
-
-
-        final JasperReport report = (JasperReport) JRLoader.loadObject(jasperStream);
-
-        params.put("cliente", reporteMantenimiento.getNombrecliente());
-        params.put("equipo", reporteMantenimiento.getNombreequipo());
-        params.put("no_reporte", reporteMantenimiento.getNo_reporte());
-        params.put("no_cotizacion", reporteMantenimiento.getNo_cotizacion());
-        params.put("tecnico", reporteMantenimiento.getTecnico());
-        params.put("horaentrada", reporteMantenimiento.getHoraEntradaFormatted());
-        params.put("horasalida", reporteMantenimiento.getHoraSalidaFormatted());
-        params.put("horaviajes", reporteMantenimiento.getHoraviajes());
-        params.put("fechareporte", reporteMantenimiento.getFechareporte() );
-        params.put("contacto", reporteMantenimiento.getContacto());
-        params.put("cargo",reporteMantenimiento.getCargo());
-        params.put("direccion", reporteMantenimiento.getDireccion());
-        params.put("ubicacionequipo",reporteMantenimiento.getUbicacionequipo());
-        params.put("fabricanteindicador",reporteMantenimiento.getFabricanteindicador());
-        params.put("fabricantemarco",reporteMantenimiento.getFabricantemarco());
-        params.put("fabricantetransductor",reporteMantenimiento.getFabricantetransductor());
-        params.put("modeloindicador",reporteMantenimiento.getModeloindicador());
-        params.put("modelomarco",reporteMantenimiento.getModelomarco());
-        params.put("modelotransductor",reporteMantenimiento.getModelotransductor());
-        params.put("serieindicador",reporteMantenimiento.getSerieindicador());
-        params.put("seriemarco",reporteMantenimiento.getSeriemarco());
-        params.put("serietransductor",reporteMantenimiento.getSerietransductor());
-        params.put("capacidadindicador",reporteMantenimiento.getCapacidadindicador());
-        params.put("capacidadmarco",reporteMantenimiento.getCapacidadmarco());
-        params.put("capacidadtransductor",reporteMantenimiento.getCapacidadtransductor());
-        params.put("notamantprevent",reporteMantenimiento.getNotamantprevent());
-        params.put("notahallazgos",reporteMantenimiento.getNotahallazgo());
-        params.put("recomendaciones",reporteMantenimiento.getRecomendaciones());
-        params.put("capacidadtrasnductor",reporteMantenimiento.getModelotransductor());
-        params.put("imgLogo", logoInputStream);
-
-        params.put("descripcion1", reporteMantenimiento.getDescripcion1());
-        params.put("descripcion2", reporteMantenimiento.getDescripcion2());
-        params.put("descripcion3", reporteMantenimiento.getDescripcion3());
-        params.put("descripcion4", reporteMantenimiento.getDescripcion4());
-        params.put("descripcion5", reporteMantenimiento.getDescripcion5());
-        params.put("descripcion6", reporteMantenimiento.getDescripcion6());
-        params.put("descripcion7", reporteMantenimiento.getDescripcion7());
-        params.put("descripcion8", reporteMantenimiento.getDescripcion8());
-        params.put("descripcion9", reporteMantenimiento.getDescripcion9());
-        params.put("descripcion10", reporteMantenimiento.getDescripcion10());
-        params.put("descripcion11", reporteMantenimiento.getDescripcion11());
-        params.put("descripcion12", reporteMantenimiento.getDescripcion12());
-        JasperPrint jasperPrint = JasperFillManager.fillReport(report, params, new JREmptyDataSource());
-        byte[] pdfBytes = exportReportToPdf(jasperPrint);
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentDispositionFormData("attachment", "ReporteMantPDF-" + reporteMantenimiento.getIdrepmant() + ".pdf");
-        System.err.println("pdfBytes = " + pdfBytes);
-        return ResponseEntity.ok()
-                .contentLength((long) pdfBytes.length)
-                .contentType(MediaType.APPLICATION_PDF)
-                .headers(headers)
-                .body(pdfBytes).getBody();
-
-
     }
     // Métodos para obtener la ruta de imagen y procesarla
     private String obtenerRutaImagen(ReporteMantenimiento reporteMantenimiento, int numeroImagen) {

@@ -82,12 +82,12 @@ public class ReporteMantenimiento extends Auditable implements Serializable {
     private String capacidadmarco;
     @Column
     private String capacidadtransductor;
-    @Column(columnDefinition = "LONGTEXT", nullable = true)
+    @Column(columnDefinition = "LONGTEXT")
     private String notamantprevent;
 
-    @Column(columnDefinition = "LONGTEXT", nullable = true)
+    @Column(columnDefinition = "LONGTEXT")
     private String notahallazgo;
-    @Column(columnDefinition = "LONGTEXT", nullable = true)
+    @Column(columnDefinition = "LONGTEXT")
     private String recomendaciones;
     @Column
     private String imagen_1;
@@ -161,6 +161,37 @@ public class ReporteMantenimiento extends Auditable implements Serializable {
     private String rutaImagen11;
     @Column
     private String rutaImagen12;
+
+    @Column(nullable = true)
+    private boolean ev_desgaste;
+    @Column(nullable = true)
+    private boolean ev_aflojamiento;
+    @Column(nullable = true)
+    private boolean ev_vibraciones;
+    @Column(nullable = true)
+    private boolean ev_fallas;
+    @Column(nullable = true)
+    private boolean ev_corrocion;
+    @Column(nullable = true)
+    private boolean ev_condiciones_ambiantales;
+
+    @Column(nullable = true)
+    private boolean inspeccion_estructura_maq;
+    @Column(nullable = true)
+    private boolean imam_ascendente;
+    @Column(nullable = true)
+    private boolean imam_ajustar;
+    @Column(nullable = true)
+    private boolean ipcm_platos;
+    @Column(nullable = true)
+    private boolean ipcm_plato_inferior;
+    @Column(nullable = true)
+    private boolean ipcm_pruebas;
+    @Column(nullable = true)
+    private boolean va_accesorios;
+    @Column(nullable = true)
+    private boolean va_usada;
+
     private static final long serialVersionUID = 1L;
 
     public String getHoraEntradaFormatted() {
@@ -723,6 +754,120 @@ public class ReporteMantenimiento extends Auditable implements Serializable {
         this.rutaImagen12 = rutaImagen12;
     }
 
+
+    public boolean isEv_desgaste() {
+        return ev_desgaste;
+    }
+
+    public void setEv_desgaste(boolean ev_desgaste) {
+        this.ev_desgaste = ev_desgaste;
+    }
+
+    public boolean isEv_aflojamiento() {
+        return ev_aflojamiento;
+    }
+
+    public void setEv_aflojamiento(boolean ev_aflojamiento) {
+        this.ev_aflojamiento = ev_aflojamiento;
+    }
+
+    public boolean isEv_vibraciones() {
+        return ev_vibraciones;
+    }
+
+    public void setEv_vibraciones(boolean ev_vibraciones) {
+        this.ev_vibraciones = ev_vibraciones;
+    }
+
+    public boolean isEv_fallas() {
+        return ev_fallas;
+    }
+
+    public void setEv_fallas(boolean ev_fallas) {
+        this.ev_fallas = ev_fallas;
+    }
+
+    public boolean isEv_corrocion() {
+        return ev_corrocion;
+    }
+
+    public void setEv_corrocion(boolean ev_corrocion) {
+        this.ev_corrocion = ev_corrocion;
+    }
+
+    public boolean isEv_condiciones_ambiantales() {
+        return ev_condiciones_ambiantales;
+    }
+
+    public void setEv_condiciones_ambiantales(boolean ev_condiciones_ambiantales) {
+        this.ev_condiciones_ambiantales = ev_condiciones_ambiantales;
+    }
+
+    public boolean isInspeccion_estructura_maq() {
+        return inspeccion_estructura_maq;
+    }
+
+    public void setInspeccion_estructura_maq(boolean inspeccion_estructura_maq) {
+        this.inspeccion_estructura_maq = inspeccion_estructura_maq;
+    }
+
+    public boolean isImam_ascendente() {
+        return imam_ascendente;
+    }
+
+    public void setImam_ascendente(boolean imam_ascendente) {
+        this.imam_ascendente = imam_ascendente;
+    }
+
+    public boolean isImam_ajustar() {
+        return imam_ajustar;
+    }
+
+    public void setImam_ajustar(boolean imam_ajustar) {
+        this.imam_ajustar = imam_ajustar;
+    }
+
+    public boolean isIpcm_platos() {
+        return ipcm_platos;
+    }
+
+    public void setIpcm_platos(boolean ipcm_platos) {
+        this.ipcm_platos = ipcm_platos;
+    }
+
+    public boolean isIpcm_plato_inferior() {
+        return ipcm_plato_inferior;
+    }
+
+    public void setIpcm_plato_inferior(boolean ipcm_plato_inferior) {
+        this.ipcm_plato_inferior = ipcm_plato_inferior;
+    }
+
+    public boolean isIpcm_pruebas() {
+        return ipcm_pruebas;
+    }
+
+    public void setIpcm_pruebas(boolean ipcm_pruebas) {
+        this.ipcm_pruebas = ipcm_pruebas;
+    }
+
+    public boolean isVa_accesorios() {
+        return va_accesorios;
+    }
+
+    public void setVa_accesorios(boolean va_accesorios) {
+        this.va_accesorios = va_accesorios;
+    }
+
+    public boolean isVa_usada() {
+        return va_usada;
+    }
+
+    public void setVa_usada(boolean va_usada) {
+        this.va_usada = va_usada;
+    }
+
+
     public Cliente getCliente() {
         return cliente;
     }
@@ -742,18 +887,7 @@ public class ReporteMantenimiento extends Auditable implements Serializable {
     public ReporteMantenimiento() {
     }
 
-    public ReporteMantenimiento(Long idrepmant,
-                                String no_reporte,
-                                String nombrecliente,
-                                String nombreequipo,
-                                String tecnico,
-                                LocalTime horaentrada,
-                                LocalTime horasalida,
-                                String horaviajes,
-                                Date fechareporte,
-                                Date fecha,
-                                String contacto,
-                                String cargo, String direccion, String no_cotizacion, String ubicacionequipo, String fabricanteindicador, String fabricantemarco, String fabricantetransductor, String modeloindicador, String modelomarco, String modelotransductor, String serieindicador, String seriemarco, String serietransductor, String capacidadindicador, String capacidadmarco, String capacidadtransductor, String notamantprevent, String notahallazgo, String recomendaciones, String imagen_1, String imagen_2, String imagen_3, String imagen_4, String imagen_5, String imagen_6, String imagen_7, String imagen_8, String imagen_9,String imagen_10,String imagen_11, String imagen_12,String descripcion1, String descripcion2, String descripcion3, String descripcion4, String descripcion5, String descripcion6, String descripcion7, String descripcion8, String descripcion9, String descripcion10, String descripcion11, String descripcion12, String rutaImagen1, String rutaImagen2, String rutaImagen3, String rutaImagen4, String rutaImagen5, String rutaImagen6, String rutaImagen7, String rutaImagen8, String rutaImagen9, String rutaImagen10, String rutaImagen11, String rutaImagen12, Cliente cliente, EquipoCliente equipo) {
+    public ReporteMantenimiento(Long idrepmant, String no_reporte, String nombrecliente, String nombreequipo, String tecnico, LocalTime horaentrada, LocalTime horasalida, String horaviajes, Date fechareporte, Date fecha, String contacto, String cargo, String direccion, String no_cotizacion, String ubicacionequipo, String fabricanteindicador, String fabricantemarco, String fabricantetransductor, String modeloindicador, String modelomarco, String modelotransductor, String serieindicador, String seriemarco, String serietransductor, String capacidadindicador, String capacidadmarco, String capacidadtransductor, String notamantprevent, String notahallazgo, String recomendaciones, String imagen_1, String imagen_2, String imagen_3, String imagen_4, String imagen_5, String imagen_6, String imagen_7, String imagen_8, String imagen_9, String imagen_10, String imagen_11, String imagen_12, String descripcion1, String descripcion2, String descripcion3, String descripcion4, String descripcion5, String descripcion6, String descripcion7, String descripcion8, String descripcion9, String descripcion10, String descripcion11, String descripcion12, String rutaImagen1, String rutaImagen2, String rutaImagen3, String rutaImagen4, String rutaImagen5, String rutaImagen6, String rutaImagen7, String rutaImagen8, String rutaImagen9, String rutaImagen10, String rutaImagen11, String rutaImagen12, boolean ev_desgaste, boolean ev_aflojamiento, boolean ev_vibraciones, boolean ev_fallas, boolean ev_corrocion, boolean ev_condiciones_ambiantales, boolean inspeccion_estructura_maq, boolean imam_ascendente, boolean imam_ajustar, boolean ipcm_platos, boolean ipcm_plato_inferior, boolean ipcm_pruebas, boolean va_accesorios, boolean va_usada, Cliente cliente, EquipoCliente equipo) {
         this.idrepmant = idrepmant;
         this.no_reporte = no_reporte;
         this.nombrecliente = nombrecliente;
@@ -820,6 +954,20 @@ public class ReporteMantenimiento extends Auditable implements Serializable {
         this.rutaImagen10 = rutaImagen10;
         this.rutaImagen11 = rutaImagen11;
         this.rutaImagen12 = rutaImagen12;
+        this.ev_desgaste = ev_desgaste;
+        this.ev_aflojamiento = ev_aflojamiento;
+        this.ev_vibraciones = ev_vibraciones;
+        this.ev_fallas = ev_fallas;
+        this.ev_corrocion = ev_corrocion;
+        this.ev_condiciones_ambiantales = ev_condiciones_ambiantales;
+        this.inspeccion_estructura_maq = inspeccion_estructura_maq;
+        this.imam_ascendente = imam_ascendente;
+        this.imam_ajustar = imam_ajustar;
+        this.ipcm_platos = ipcm_platos;
+        this.ipcm_plato_inferior = ipcm_plato_inferior;
+        this.ipcm_pruebas = ipcm_pruebas;
+        this.va_accesorios = va_accesorios;
+        this.va_usada = va_usada;
         this.cliente = cliente;
         this.equipo = equipo;
     }

@@ -53,7 +53,16 @@ public class ReporteTecnicoReportGenerator {
         Map<String, Object> params = new HashMap<>();
 
 // Iterar sobre las rutas de imagen y procesarlas
-        for (int i = 1; i <= 12; i++) {
+        for (int i = 1; i <= 4; i++) {
+            String rutaImagen = obtenerRutaImagen(reporteTecnico, i);
+
+            // Procesar la ruta de la imagen y asignar al parámetro correspondiente
+            procesarRutaImagen(rutaImagen, i, inputStreams, params);
+
+            // Asignar el InputStream directamente como parámetro al generador de informes
+            params.put("imagen_" + i, inputStreams[i - 1]);
+        }
+     /*    for (int i = 1; i <= 4; i++) {
             String rutaImagen = obtenerRutaImagen(reporteTecnico, i);
             System.out.println("dentro del for1 rutaImagen = " + rutaImagen);
             procesarRutaImagen(rutaImagen, i, inputStreams, params);
@@ -61,13 +70,13 @@ public class ReporteTecnicoReportGenerator {
         }
 
 // Luego, puedes pasar los InputStream directamente como parámetros a tu generador de informes
-        int i = 1;
+       int i = 1;
         for (InputStream inputStream : inputStreams) {
             params.put("imagen_" + i, inputStream);
             System.out.println("inputStream dentro del for2 = imagen_" + inputStream);
             i++;
 
-        }
+        }*/
 
 
 
