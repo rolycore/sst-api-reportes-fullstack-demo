@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
 })
 export class FooterComponent {
   currentYear: number = new Date().getFullYear();
-  copyrightText: string = `Copyright ${this.currentYear} IC METROLOGIA`;
+  copyrightText: string = `Copyright ${this.currentYear} SHALOM SOLUTION TECH`;
 
 }

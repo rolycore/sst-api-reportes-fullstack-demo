@@ -346,7 +346,7 @@ export class ReporteformComponent implements OnInit{
       descripcion4: [''],
       rutaImagen1: [''],
       rutaImagen2: [''],
-      rutaImagen3: [''],
+      rutaImagen3:[''],
       rutaImagen4: [''],
 
     });

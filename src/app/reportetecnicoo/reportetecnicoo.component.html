@@ -113,13 +113,13 @@
       <tbody>
         <tr *ngFor="let reporte of reportes.slice().reverse() | paginate: { itemsPerPage: 5, currentPage: pages }">
           <td>
-            <button type="button" name="editar" [routerLink]="['/reportes/reportesform',reporte.idreptec]" class="btn btn-success btn-sm"><i class="fa-solid fa-pen-to-square"></i></button>
+            <button title="editar"type="button" name="editar" [routerLink]="['/reportes/reportesform',reporte.idreptec]" class="btn btn-success btn-sm"><i class="fa-solid fa-pen-to-square"></i></button>
           </td>
           <td>
-            <button type="button" name="eliminar" (click)='delete(reporte)' class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></button>
+            <button title="eliminar"type="button" name="eliminar" (click)='delete(reporte)' class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></button>
           </td>
           <td>
-            <button type="button" name="imprimir" (click)='exportarPDF(reporte.idreptec)' class="btn btn-primary btn-sm"><i class="fa-solid fa-print"></i></button>
+            <button title="imprimir"type="button" name="imprimir" (click)='exportarPDF(reporte.idreptec)' class="btn btn-primary btn-sm"><i class="fa-solid fa-print"></i></button>
           </td>
           <td>{{ reporte.idreptec }}</td>
 	  <td>{{reporte.nombrecliente }}</td>

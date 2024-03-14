@@ -1,0 +1,24 @@
+/* Estilos para el perfil */
+.profile-info {
+  margin-top: 20px;
+}
+
+/* Estilos para los roles */
+.profile-info ul {
+  padding-left: 0;
+}
+
+.profile-info li {
+  list-style: none;
+}
+
+/* Estilos para la tarjeta del perfil */
+.bg-body-tertiary {
+  background-color: #f8f9fa;
+}
+
+.text-body-emphasis {
+  color: #333;
+  font-size: 1.5rem;
+  font-weight: bold;
+}

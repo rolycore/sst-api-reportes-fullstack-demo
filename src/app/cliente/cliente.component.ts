@@ -4,11 +4,23 @@ import { ClienteService } from '../_services/cliente.service';
 import swal from 'sweetalert2';
 import { tap } from 'rxjs/operators';
 import Swal from 'sweetalert2';
+import { trigger, transition, style, animate } from '@angular/animations'; // Importa las animaciones
 
 @Component({
   selector: 'app-cliente',
   templateUrl: './cliente.component.html',
-  styleUrls: ['./cliente.component.css']
+  styleUrls: ['./cliente.component.css'],
+  animations: [
+    trigger('fadeInOut', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('500ms ease-out', style({ opacity: 1 })),
+      ]),
+      transition(':leave', [
+        animate('500ms ease-out', style({ opacity: 0 })),
+      ])
+    ])
+  ]
 })
 export class ClienteComponent  implements OnInit{
   loading: boolean = false;

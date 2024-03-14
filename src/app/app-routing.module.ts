@@ -22,6 +22,8 @@ import { CmcformComponent } from './capacidadmedicion/cmcform/cmcform.component'
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { ReportemantenimientoComponent } from './reportemantenimiento/reportemantenimiento.component';
 import { ReportemantformComponent } from './reportemantenimiento/reportemantform/reportemantform.component';
+import { AdminformComponent } from './board-admin/adminform/adminform.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
@@ -30,6 +32,8 @@ const routes: Routes = [
   { path: 'user', component: BoardUserComponent },
   { path: 'mod', component: BoardModeratorComponent },
   { path: 'admin', component: BoardAdminComponent },
+  {path:'usuarios/adminform',component: AdminformComponent},
+  {path: 'usuarios/adminform/:id', component: AdminformComponent},
   { path: 'reset-password', component: ResetpasswordComponent},
   {path:'cliente',component:ClienteComponent },
   {path:'clientes/form',component: FormComponent },
@@ -50,7 +54,12 @@ const routes: Routes = [
   {path:'capacidadmedicion/cmcform',component:CmcformComponent},
   {path:'capacidadmedicion/cmcform/:id',component:CmcformComponent},
   {path:'manejoarchivo',component: ManejoarchivosComponent},
-  { path: '', redirectTo: 'home', pathMatch: 'full' }
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+   // Ruta para manejar errores
+   { path: 'error', component: ErrorPageComponent },
+
+   // Ruta por defecto para redirigir errores 404
+   { path: '**', redirectTo: '/error' }
 ];
 
 @NgModule({

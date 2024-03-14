@@ -1,6 +1,70 @@
-<div class="container my-5">
+<div class="container my-5" [@fadeInOut]>
   <div class="p-5 text-center bg-body-tertiary rounded-3">
-  <h1 class="text-body-emphasis"> Admin</h1>
+    <h1 class="text-body-emphasis">¡Bienvenido, {{ username }}!</h1>
     <p class="lead">{{ content }}</p>
+    <p class="lead">Aquí puedes encontrar contenido personalizado para administradores.</p>
+    <!-- Agrega más contenido según lo necesites -->
   </div>
+  <div class="card border-primary mb-3"[@fadeInOut]>
+    <div class="card-header">Administrar usuarios</div>
+  <h5 class="card-title">Listado de usuarios</h5>
+  <div class="d-flex gap-2 my-2">
+    <button class="btn btn-rounded btn-primary" type="button" [routerLink]="['/register']"><i class="fa-solid fa-user-plus"></i>Registrar nuevo usuario</button>
+  </div>
+  <div *ngIf="loading" class="alert alert-info">
+    Cargando... Por favor, espere.
+  </div>
+  <div *ngIf="users?.length==0" class="alert alert-info">
+    No hay registros en la base de datos!
+  </div>
+  <div class="table-responsive text-nowrap">
+    <table class="table table-bordered table-striped w-auto table-hover table-fixed"  *ngIf="users?.length">
+      <thead>
+        <tr>
+          <th>
+            editar
+          </th>
+          <th>
+            eliminar
+          </th>
+          <th>id</th>
+          <th>Nombre Usuario</th>
+          <th>Email</th>
+          <th>Password</th>
+          <th>Rol</th>
+          <th>Creado Por</th>
+          <th>Fecha Creacion</th>
+          <th>Actualizado Por</th>
+          <th>Fecha Actualizacion</th>
+          <th>Reinicio contraseña</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users.slice().reverse()  | paginate: { itemsPerPage: 5, currentPage: pages }">
+
+          <td>
+            <button title="editar"type="button" name="editar" [routerLink]="['/usuarios/adminform',user.id]" class="btn btn-success btn-sm"><i class="fa-solid fa-pen-to-square"></i></button>
+          </td>
+          <td>
+            <button title="borrar"type="button" name="eliminar" (click)='deleteUser(user.id)' class="btn btn-danger btn-sm"><i class="fa-solid fa-user-minus"></i></button>
+          </td>
+          <td>{{ user.id }}</td>
+          <td>{{user.username}}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.password }}</td>
+          <td>{{ getRoleNames(user) }}</td>
+          <td>{{user.creado_por}}</td>
+          <td>{{user.fecha_hora_creacion |  date:"dd, MMMM yyyy"}}</td>
+          <td>{{user.ultima_actualizacion_por}}</td>
+          <td>{{user.fecha_hora_ultima_actualizacion |  date:"dd, MMMM yyyy"}}</td>
+          <td>{{user.reset_password_token}}</td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <pagination-controls (pageChange)="pages = $event " previousLabel="Anterior" nextLabel="Siguiente" ></pagination-controls>
+  </div>
+
 </div>

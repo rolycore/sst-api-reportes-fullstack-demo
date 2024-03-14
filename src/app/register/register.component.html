@@ -1,4 +1,4 @@
-<div class="col-md-12">
+<div class="col-md-12"[@fadeInOut]>
   <div class="card card-container">
     <img title="imagen"
       id="profile-img"
@@ -70,16 +70,16 @@
         </div>
       </div>
       <div class="form-group">
-        <button class="btn btn-primary btn-block">Sign Up</button>
+        <button class="btn btn-primary btn-block">Registrar</button>
       </div>
 
       <div class="alert alert-warning" *ngIf="!submitted && isSignUpFailed">
-        Signup failed!<br />{{ errorMessage }}
+        Registro fallido!<br />{{ errorMessage }}
       </div>
     </form>
 
     <div class="alert alert-success" *ngIf="isSuccessful">
-      Your registration is successful!
+      El registro fue exitoso!
     </div>
   </div>
 </div>

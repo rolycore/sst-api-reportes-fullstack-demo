@@ -7,10 +7,22 @@ import { EquipoCliente } from 'src/app/models/equipocliente';
 import { EquipoclienteService } from 'src/app/_services/equipocliente.service';
 import { ReporteMantenimiento } from '../models/reportemantenimiento';
 import { ReportemantenimientoService } from '../_services/reportemantenimiento.service';
+import { trigger, transition, style, animate } from '@angular/animations'; // Importa las animaciones
 @Component({
   selector: 'app-reportemantenimiento',
   templateUrl: './reportemantenimiento.component.html',
-  styleUrls: ['./reportemantenimiento.component.css']
+  styleUrls: ['./reportemantenimiento.component.css'],
+  animations: [
+    trigger('fadeInOut', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('500ms ease-out', style({ opacity: 1 })),
+      ]),
+      transition(':leave', [
+        animate('500ms ease-out', style({ opacity: 0 })),
+      ])
+    ])
+  ]
 })
 export class ReportemantenimientoComponent implements OnInit{
   loading: boolean = false;

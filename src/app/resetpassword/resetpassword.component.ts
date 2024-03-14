@@ -3,11 +3,23 @@ import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../_services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { trigger, transition, style, animate } from '@angular/animations'; // Importa las animaciones
 
 @Component({
   selector: 'app-resetpassword',
   templateUrl: './resetpassword.component.html',
-  styleUrls: ['./resetpassword.component.css']
+  styleUrls: ['./resetpassword.component.css'],
+  animations: [
+    trigger('fadeInOut', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('500ms ease-out', style({ opacity: 1 })),
+      ]),
+      transition(':leave', [
+        animate('500ms ease-out', style({ opacity: 0 })),
+      ])
+    ])
+  ]
 })
 export class ResetpasswordComponent {
   email: string = '';

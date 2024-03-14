@@ -39,6 +39,9 @@ import { ReportemantenimientoComponent } from './reportemantenimiento/reporteman
 import { ReportemantenimientoService } from './_services/reportemantenimiento.service';
 import { ReportemantformComponent } from './reportemantenimiento/reportemantform/reportemantform.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { AdminformComponent } from './board-admin/adminform/adminform.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
+import { ErrorHandlerService } from './_services/error-handler.service';
 
 @NgModule({
   declarations: [
@@ -64,7 +67,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
     CmcformComponent,
     ResetpasswordComponent,
     ReportemantenimientoComponent,
-    ReportemantformComponent
+    ReportemantformComponent,
+    AdminformComponent,
+    ErrorPageComponent
   ],
   imports: [
     BrowserModule,
@@ -83,7 +88,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     MediaService,
     FileHandlerService,
     ResetpasswordService,
-    DatePipe
+    DatePipe,
+    ErrorHandlerService
   ],
 
   bootstrap: [AppComponent]

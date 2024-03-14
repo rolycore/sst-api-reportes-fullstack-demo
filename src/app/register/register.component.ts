@@ -2,11 +2,24 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TokenStorageService } from '../_services/token-storage.service';
+import { trigger, transition, style, animate } from '@angular/animations'; // Importa las animaciones
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
+  animations: [
+    trigger('fadeInOut', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('500ms ease-out', style({ opacity: 1 })),
+      ]),
+      transition(':leave', [
+        animate('500ms ease-out', style({ opacity: 0 })),
+      ])
+    ])
+  ]
 })
 export class RegisterComponent implements OnInit {
   form: FormGroup;
@@ -18,6 +31,8 @@ export class RegisterComponent implements OnInit {
   errorMessage = '';
   constructor(private authService: AuthService,
     private tokenStorage: TokenStorageService,
+    private router: Router,
+    private activateRoute: ActivatedRoute,
     private formBuilder: FormBuilder
     ) {
       this.form = this.formBuilder.group({
@@ -40,6 +55,7 @@ export class RegisterComponent implements OnInit {
 
     this.authService.register(username, email, password, this.selectedRole).subscribe(
       data => {
+        this.router.navigate(['/admin']);
         this.form.patchValue({
         username: username,
         email: email,

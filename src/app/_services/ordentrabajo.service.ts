@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class OrdentrabajoService {
-  private baseUrl = 'https://appicmetrologia.icmetrologia.com:8080/api/v1/ordenes-trabajos';//appicmetrologia.icmetrologia.com
+  private baseUrl = 'https://localhost:8080/api/v1/ordenes-trabajos';//appicmetrologia.icmetrologia.com
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 
   constructor(private http: HttpClient,private router: Router) { }

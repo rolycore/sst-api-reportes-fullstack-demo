@@ -7,11 +7,23 @@ import { OrdentrabajoService } from '../_services/ordentrabajo.service';
 import { ClienteService } from '../_services/cliente.service';
 import { Cliente } from '../models/cliente';
 import { tap } from 'rxjs';
+import { trigger, transition, style, animate } from '@angular/animations'; // Importa las animaciones
 
 @Component({
   selector: 'app-ordentrabajo',
   templateUrl: './ordentrabajo.component.html',
-  styleUrls: ['./ordentrabajo.component.css']
+  styleUrls: ['./ordentrabajo.component.css'],
+  animations: [
+    trigger('fadeInOut', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('500ms ease-out', style({ opacity: 1 })),
+      ]),
+      transition(':leave', [
+        animate('500ms ease-out', style({ opacity: 0 })),
+      ])
+    ])
+  ]
 })
 export class OrdentrabajoComponent implements OnInit {
   loading: boolean = false;

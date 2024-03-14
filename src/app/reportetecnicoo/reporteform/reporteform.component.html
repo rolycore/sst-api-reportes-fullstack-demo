@@ -496,6 +496,7 @@
 
           <input class="input-file" id="imagen_1" (change)="capturarFile($event, 0)" type="file" formControlName="imagen_1" class="form-control"
             placeholder="Ingrese la foto 1" />
+
           <div class="alert alert-danger" *ngIf="formulario?.get('imagen_1')?.invalid && formulario?.get('imagen_1')?.touched">
             La Foto es requerida
           </div>

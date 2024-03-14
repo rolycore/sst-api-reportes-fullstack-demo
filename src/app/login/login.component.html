@@ -1,4 +1,4 @@
-<div class="col-md-12">
+<div class="col-md-12"[@fadeInOut]>
   <div class="card card-container">
     <img title="image" id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="profile-img-card" />
     <form *ngIf="!isLoggedIn" [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
@@ -35,21 +35,18 @@
       </div>
 
       <div class="form-group">
-        <button class="btn btn-primary btn-block" type="submit">Login</button>
+        <button class="btn btn-primary btn-block" type="submit">Ingresar</button>
       </div>
-      <div class="form-group">
-        <!-- Enlace para restablecimiento de contraseña -->
-        <a routerLink="/reset-password">¿Olvidaste tu contraseña?</a>
-      </div>
+
       <div class="form-group" *ngIf="isLoginFailed">
         <div class="alert alert-danger" role="alert">
-          Login failed: {{ errorMessage }}
+          Error de inicio de sesion: {{ errorMessage }}
         </div>
       </div>
     </form>
 
     <div class="alert alert-success" *ngIf="isLoggedIn">
-      Logged in as {{ this.selectedRole }}.
+      Conectado como {{ this.selectedRole }}.
     </div>
 
   </div>

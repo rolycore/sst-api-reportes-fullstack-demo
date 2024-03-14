@@ -1,0 +1,29 @@
+/* Estilos para el botón */
+.btn-primary {
+  background-color: #007bff; /* Cambia el color de fondo */
+  border-color: #007bff; /* Cambia el color del borde */
+}
+
+.btn-primary:hover {
+  background-color: #0056b3; /* Cambia el color de fondo al pasar el ratón */
+  border-color: #0056b3; /* Cambia el color del borde al pasar el ratón */
+}
+
+/* Estilos para el título */
+.text-body-emphasis {
+  color: #333; /* Cambia el color del texto */
+  font-size: 2.5rem; /* Cambia el tamaño del texto */
+  font-weight: bold; /* Hace que el texto sea negrita */
+  text-transform: uppercase; /* Convierte el texto a mayúsculas */
+}
+
+/* Estilos para el párrafo */
+.lead {
+  font-size: 1.2rem; /* Cambia el tamaño del texto */
+  color: #555; /* Cambia el color del texto */
+}
+
+/* Estilos para el contenedor */
+.bg-body-tertiary {
+  background-color: #f8f9fa; /* Cambia el color de fondo */
+}

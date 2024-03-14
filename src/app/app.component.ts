@@ -7,7 +7,7 @@ import { TokenStorageService } from './_services/token-storage.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  titleheader: string ='IC Metrología';
+  titleheader: string ='Shalom Lab App';
   private roles: string[] = [];
   selectedRole: string = ''; // Variable para almacenar el rol seleccionado
   isLoggedIn = false;
