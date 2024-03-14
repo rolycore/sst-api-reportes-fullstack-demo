@@ -47,7 +47,7 @@ public class ReporteTecnicoReportGenerator {
         //final File file = ResourceUtils.getFile("classpath:reporte_de_tecnico.jasper");
         Resource resource = new ClassPathResource("reporte_de_tecnico.jasper");
         InputStream jasperStream = resource.getInputStream();
-        Resource logoResource = new ClassPathResource("logo-icm-rbg.png");
+        Resource logoResource = new ClassPathResource("logo.png");
         InputStream logoInputStream = logoResource.getInputStream();
         InputStream[] inputStreams = new InputStream[4];
         Map<String, Object> params = new HashMap<>();
@@ -184,7 +184,8 @@ public class ReporteTecnicoReportGenerator {
 
     private void procesarRutaImagen(String reporteImagen, int numeroImagen, InputStream[] inputStreams, Map<String, Object> params) throws IOException {
         // Verificar si la ruta de imagen es nula antes de crear el objeto URL
-        URL urlObj = (reporteImagen != null) ? new URL(reporteImagen) : null;
+        //URL urlObj = (reporteImagen != null) ? new URL(reporteImagen) : null;
+        URL urlObj  = new URL(reporteImagen);
 
         // Verificar si la URL es nula antes de continuar
         if (urlObj != null) {
@@ -193,7 +194,7 @@ public class ReporteTecnicoReportGenerator {
             //  System.out.println("nombreArchivo" + numeroImagen + " = " + nombreArchivo);
 
             // Resto del código relacionado con la URL...
-            String archivoImagen = "/root/mediafiles/" + nombreArchivo; //ruta local windows C:/mediafiles/ ruta local linux /root/mediafiles/
+            String archivoImagen = "C:/mediafiles/" + nombreArchivo; //ruta local windows C:/mediafiles/ ruta local linux /root/mediafiles/
             Resource rutaImagen = new FileSystemResource(archivoImagen);
             inputStreams[numeroImagen - 1] = rutaImagen.getInputStream();
             //   System.out.println("archivoImagen" + numeroImagen + " = " + archivoImagen);

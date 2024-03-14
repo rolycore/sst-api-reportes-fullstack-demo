@@ -15,7 +15,7 @@ public class CorsConfig {
                 // Permitir todas las solicitudes desde cualquier origen
                 registry.addMapping("/**"
                         )
-                        .allowedOrigins("*")//.allowedOrigins("https://appicmlab.icmetrologia.com/")
+                        .allowedOrigins("http://localhost:4200")//.allowedOrigins("https://appicmlab.icmetrologia.com/")
                         .allowedMethods("GET", "POST", "PUT", "DELETE");
             }
         };

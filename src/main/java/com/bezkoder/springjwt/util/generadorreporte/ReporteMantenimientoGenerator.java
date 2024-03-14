@@ -43,7 +43,7 @@ public class ReporteMantenimientoGenerator {
         try {
             Resource resource = new ClassPathResource("reporte_mantenimiento.jasper");
             InputStream jasperStream = resource.getInputStream();
-            Resource logoResource = new ClassPathResource("logo-icm-rbg.png");
+            Resource logoResource = new ClassPathResource("logo.png");
             InputStream logoInputStream = logoResource.getInputStream();
             // Cargar el subreporte
             Resource subreportResource = new ClassPathResource("reporte_checklist_mantenimiento.jasper");
@@ -184,7 +184,7 @@ public class ReporteMantenimientoGenerator {
           //  System.out.println("nombreArchivo" + numeroImagen + " = " + nombreArchivo);
 
             // Resto del código relacionado con la URL...
-            String archivoImagen = "/root/mediafiles/" + nombreArchivo; //C:/mediafiles/ linux /root/mediafiles/
+            String archivoImagen = "C:/mediafiles/" + nombreArchivo; //C:/mediafiles/ linux /root/mediafiles/
             Resource rutaImagen = new FileSystemResource(archivoImagen);
             inputStreams[numeroImagen - 1] = rutaImagen.getInputStream();
          //   System.out.println("archivoImagen" + numeroImagen + " = " + archivoImagen);
