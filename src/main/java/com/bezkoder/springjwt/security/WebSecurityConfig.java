@@ -74,8 +74,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/api/test/**").permitAll()
 				.antMatchers("/media/**").permitAll()
 				.antMatchers("/.well-known/**").permitAll()
-				.anyRequest().authenticated();
+				.anyRequest().authenticated()
+				.and()
+				.exceptionHandling()
+				.accessDeniedPage("/error-page"); // Redirigir a la página de error personalizada
 
 		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 	}
+
 }
