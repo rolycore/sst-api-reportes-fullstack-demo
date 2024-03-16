@@ -47,7 +47,7 @@ public class ReporteTecnicoReportGenerator {
         //final File file = ResourceUtils.getFile("classpath:reporte_de_tecnico.jasper");
         Resource resource = new ClassPathResource("reporte_de_tecnico.jasper");
         InputStream jasperStream = resource.getInputStream();
-        Resource logoResource = new ClassPathResource("logo.png");
+        Resource logoResource = new ClassPathResource("logo.jpg");
         InputStream logoInputStream = logoResource.getInputStream();
         InputStream[] inputStreams = new InputStream[4];
         Map<String, Object> params = new HashMap<>();

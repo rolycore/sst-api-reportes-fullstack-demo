@@ -24,6 +24,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
         save(user);
     }
 // Método para ver que usuario tiene que rol
-@Query("SELECT u, r.name FROM User u JOIN u.roles r")
+@Query("SELECT u, r.name FROM User u LEFT JOIN u.roles r")
 List<Object[]> getUsersWithRoleNames();
 }

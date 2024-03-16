@@ -52,6 +52,7 @@ public class EquipoClienteController {
    // EquipoCliente nequipoCliente = new EquipoCliente();
     // Buscar todos los equipos de clientes
     @GetMapping("/equipos-clientes")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('MODERATOR') or hasRole('USER')")
     public List<EquipoCliente>findAllEquipos() {
 
         return  equipoClienteService.findAll();
@@ -59,6 +60,7 @@ public class EquipoClienteController {
 
     // Buscar equipo de cliente por ID
     @GetMapping("/equipos-clientes/{id}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('MODERATOR')")
     public ResponseEntity<?> getEquipoWithImagen(@PathVariable Long id) {
         EquipoCliente equipo=null;
         Map<String, Object> response = new HashMap<>();
@@ -136,6 +138,7 @@ public class EquipoClienteController {
 
     // Actualizar equipo de cliente por ID
     @PutMapping("/equipos-clientes/{id}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('MODERATOR')")
     public ResponseEntity<?> updateEquipo(@PathVariable Long id, @Valid @RequestBody EquipoCliente equipo) {
       // EquipoCliente equipoUpdated = null;
         Map<String, Object> response = new HashMap<>();

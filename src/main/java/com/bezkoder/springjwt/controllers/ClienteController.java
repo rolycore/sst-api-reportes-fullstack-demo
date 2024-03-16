@@ -51,7 +51,7 @@
         // }
         //Listado de cliente
         @GetMapping("/clientes")
-        @PreAuthorize("hasRole('ADMIN')")
+        @PreAuthorize("hasRole('ADMIN') or hasRole('MODERATOR') or hasRole('USER')")
         public List<Cliente> todos(){
             return iClienteService.todos();
         }
@@ -95,7 +95,7 @@
         // Buscar Cliente por ID
         @GetMapping("/clientes/{id}")
         @ResponseStatus(HttpStatus.OK)
-        @PreAuthorize("hasRole('ADMIN')")
+        @PreAuthorize("hasRole('ADMIN') or hasRole('MODERATOR')")
         public ResponseEntity<?> show(@PathVariable Long id) {
             Cliente cliente = null;
             Map<String, Object> response = new HashMap<>();
@@ -117,7 +117,7 @@
         }
         // Actualizar Cliente por ID
         @PutMapping("/clientes/{id}")
-        @PreAuthorize("hasRole('ADMIN')")
+        @PreAuthorize("hasRole('ADMIN') or hasRole('MODERATOR')")
         public ResponseEntity<?> updateCliente(@Valid @RequestBody Cliente cliente, @PathVariable Long id) {
             Map<String, Object> response = new HashMap<>();
 

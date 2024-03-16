@@ -27,8 +27,9 @@ public class MediaController {
     private final HttpServletRequest request;
 
     //metodo para almacenar y consultar los archivos
-    @PreAuthorize("hasRole('ADMIN')")
+
     @PostMapping("/upload")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('MODERATOR')")
     public ResponseEntity<Map<String, String>>uploadFile(@RequestParam("file")MultipartFile multipartFile){
         String path = storageService.store(multipartFile);
         String scheme = request.getScheme(); // Obtener el esquema (http o https)
@@ -49,8 +50,9 @@ public class MediaController {
 
         return  ResponseEntity.ok(resultMap);
     }
-    @PreAuthorize("hasRole('ADMIN')")
+
     @PostMapping("/subir")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('MODERATOR')")
     public ResponseEntity<Map<String, String>> uploadAndResizeFile(
             @RequestParam("file") MultipartFile multipartFile,
             @RequestParam(name = "maxWidth", defaultValue = "0") int maxWidth,
@@ -75,8 +77,9 @@ public class MediaController {
         System.out.println("resultMap = " + resultMap);
         return ResponseEntity.ok(resultMap);
     }
-    @PreAuthorize("hasRole('ADMIN') or hasRole('USER') or hasRole('MODERATOR') or hasRole('ANONYMOUSUSER')")
+
     @GetMapping("{filename:.+}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('MODERATOR')")
     public ResponseEntity<Resource> getFile(@PathVariable String filename) throws IOException {
         File file = storageService.loadAsFile(filename);
         String contentType = Files.probeContentType(file.toPath());

@@ -5,9 +5,10 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
-import com.bezkoder.springjwt.models.ReporteMantenimiento;
+import com.bezkoder.springjwt.models.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,9 +20,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import com.bezkoder.springjwt.models.ERole;
-import com.bezkoder.springjwt.models.Role;
-import com.bezkoder.springjwt.models.User;
 import com.bezkoder.springjwt.payload.request.LoginRequest;
 import com.bezkoder.springjwt.payload.request.SignupRequest;
 import com.bezkoder.springjwt.payload.response.JwtResponse;
@@ -63,36 +61,82 @@ public class AuthController {
 		List<Object[]> usersWithRoles = userRepository.getUsersWithRoleNames();
 		return ResponseEntity.ok(usersWithRoles);
 	}
+	@GetMapping("/usuario/{id}")
+	public ResponseEntity<?> listById(@PathVariable Long id) {
+		return ResponseEntity.ok(userRepository.findById(id));
+	}
+	@GetMapping("/roles")
+	@PreAuthorize("hasRole('ADMIN')")
+	public ResponseEntity<?> listAllrol() {
+		return ResponseEntity.ok(roleRepository.findAll());
+	}
+	@GetMapping("/role/{id}")
+	public ResponseEntity<?> listRolById(@PathVariable Long id) {
+		return ResponseEntity.ok(roleRepository.findById(id));
+	}
 	@DeleteMapping("/usuario/{id}")
 	@PreAuthorize("hasRole('ADMIN')")
-	public ResponseEntity<User> getuserById(@PathVariable Long id){
-		User user = userRepository.findById(id).orElse(null);
-		if(user!=null){
-			return ResponseEntity.ok(user);
-		}else {
-			return ResponseEntity.notFound().build();
-		}
-	}
-	@PutMapping("/usuario/{id}")
-	@PreAuthorize("hasRole('ADMIN')")
-	public ResponseEntity<?>updateUser(@PathVariable Long id, @RequestBody User user){
-
+	public ResponseEntity<?> deleteUser(@PathVariable Long id) {
 		Map<String, Object> response = new HashMap<>();
 		try {
-			User usuarioActual = userRepository.findById(id).get();
-			if (usuarioActual ==null){
-				response.put("mensaje","Error: no se pudo editar, el usuario ID: " + id + " no existe en la base de datos.");
+			User user = userRepository.findById(id).orElse(null);
+			if (user == null) {
+				response.put("mensaje", "Error: no se pudo eliminar, el usuario ID: " + id + " no existe en la base de datos.");
 				return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
 			}
-			// Copiar propiedades actualizadas desde cliente al clienteActual
-			BeanUtils.copyProperties(user, usuarioActual, "id");
 
-			User usuarioUpdated = userRepository.save(usuarioActual);
-			response.put("mensaje", "El usuario ha sido actualizado con éxito.");
-			response.put("mantenimiento", usuarioUpdated);
+			userRepository.delete(user);
+
+			response.put("mensaje", "Usuario eliminado correctamente.");
 			return new ResponseEntity<>(response, HttpStatus.OK);
+		} catch (Exception e) {
+			response.put("mensaje", "Error interno del servidor.");
+			response.put("error", e.getMessage());
+			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 
-		}catch (DataIntegrityViolationException e) {
+	@PutMapping("/usuario/{id}")
+	@PreAuthorize("hasRole('ADMIN')")
+	public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody User user) {
+		Map<String, Object> response = new HashMap<>();
+		try {
+			User usuarioActual = userRepository.findById(id).orElse(null);
+			if (usuarioActual == null) {
+				response.put("mensaje", "Error: no se pudo editar, el usuario ID: " + id + " no existe en la base de datos.");
+				return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+			}
+
+			// Actualizar campos del usuario actual con los valores proporcionados
+			usuarioActual.setUsername(user.getUsername());
+			usuarioActual.setEmail(user.getEmail());
+
+			// Si se proporcionó una nueva contraseña, encriptarla y actualizarla
+			if (user.getPassword() != null && !user.getPassword().isEmpty()) {
+				usuarioActual.setPassword(encoder.encode(user.getPassword()));
+				usuarioActual.setResetPasswordToken("Se reinició la contraseña");
+			}
+
+			// Eliminar los roles anteriores del usuario
+			usuarioActual.getRoles().clear();
+
+			// Obtener los nuevos roles del request y agregarlos al usuario
+			Set<Role> nuevosRoles = new HashSet<>();
+			for (Role role : user.getRoles()) {
+				Role fetchedRole = roleRepository.findByName(role.getName())
+						.orElseThrow(() -> new RuntimeException("Error: Role not found."));
+				nuevosRoles.add(fetchedRole);
+				System.out.println("fetchedRole = " + fetchedRole);
+			}
+			usuarioActual.setRoles(nuevosRoles);
+			System.out.println("nuevosRoles = " + nuevosRoles);
+			// Guardar el usuario actualizado
+			User usuarioActualizado = userRepository.save(usuarioActual);
+
+			response.put("mensaje", "El usuario ha sido actualizado con éxito.");
+			response.put("usuario", usuarioActualizado);
+			return new ResponseEntity<>(response, HttpStatus.OK);
+		} catch (DataIntegrityViolationException e) {
 			response.put("mensaje", "Error al actualizar el usuario en la base de datos.");
 			response.put("error", e.getMessage());
 			return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
@@ -102,6 +146,11 @@ public class AuthController {
 			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+
+
+
+
+
 	@PostMapping("/signin")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 

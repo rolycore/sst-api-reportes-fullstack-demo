@@ -72,11 +72,13 @@ public class ReporteMantenimientoController {
     }
 
     @GetMapping("/reporte-mantenimiento")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('MODERATOR') or hasRole('USER')")
     public ResponseEntity<?> listAll() {
         return ResponseEntity.ok(reporteMantenimientoRepository.findAll());
     }
 
     @GetMapping("/reporte-mantenimiento/{id}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('MODERATOR')")
     public ResponseEntity<?> listById(@PathVariable Long id) {
         return ResponseEntity.ok(reporteMantenimientoRepository.findById(id));
     }
@@ -117,6 +119,7 @@ public class ReporteMantenimientoController {
 
     }
     @PutMapping("/reporte-mantenimiento/{id}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('MODERATOR')")
     public ResponseEntity<?>updateMantenimiento(@PathVariable Long id, @RequestBody ReporteMantenimiento reporteMantenimiento){
 
         Map<String, Object> response = new HashMap<>();
@@ -155,8 +158,9 @@ public class ReporteMantenimientoController {
     }
     //Imprimir Reporte Tecnico
 
-    @PreAuthorize("hasRole('ADMIN')")
+
     @GetMapping("/reporte-mantenimiento/generate")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('MODERATOR')")
     public ResponseEntity<byte[]> generateReport(@RequestParam("reportId") Long reportId) throws JRException, IOException {
         // try{
         ReporteMantenimiento reporteMantenimiento = reporteMantenimientoRepository.findById(reportId).get();

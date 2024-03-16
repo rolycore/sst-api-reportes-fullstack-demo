@@ -82,13 +82,13 @@
 	<pageHeader>
 		<band height="80" splitType="Stretch">
 			<rectangle>
-				<reportElement x="0" y="0" width="555" height="80" uuid="6603bc89-d3ce-49e0-8af9-cbe2cde1eb4c"/>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="80" backcolor="#006FB9" uuid="6603bc89-d3ce-49e0-8af9-cbe2cde1eb4c"/>
 				<graphicElement>
 					<pen lineColor="#FFFFFF"/>
 				</graphicElement>
 			</rectangle>
 			<staticText>
-				<reportElement x="110" y="0" width="310" height="80" backcolor="#FFFFFF" uuid="b47bdb33-e680-40f3-b92d-9008fdf85a6c"/>
+				<reportElement x="110" y="0" width="310" height="80" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="b47bdb33-e680-40f3-b92d-9008fdf85a6c"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -100,12 +100,12 @@
 				</textElement>
 				<text><![CDATA[REPORTE DE MANTENIMIENTO]]></text>
 			</staticText>
-			<image onErrorType="Blank">
+			<image hAlign="Center" vAlign="Middle" onErrorType="Blank">
 				<reportElement x="427" y="0" width="123" height="80" uuid="a1bcc528-d296-4eb0-94ff-b7d5c1657144"/>
 				<imageExpression><![CDATA[$P{imgLogo}]]></imageExpression>
 			</image>
 			<textField>
-				<reportElement x="10" y="25" width="100" height="30" forecolor="#FF0905" uuid="a3b4fe49-1791-4d56-95bf-9c836da933fc"/>
+				<reportElement mode="Transparent" x="10" y="25" width="100" height="30" forecolor="#FFFFFF" uuid="a3b4fe49-1791-4d56-95bf-9c836da933fc"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="16" isBold="true"/>
 				</textElement>
@@ -116,7 +116,7 @@
 	<columnHeader>
 		<band height="460" splitType="Stretch">
 			<staticText>
-				<reportElement mode="Opaque" x="0" y="3" width="555" height="20" forecolor="#FFFFFF" backcolor="#FC0703" uuid="197f1d2d-7d16-4696-b8de-48592e8cb71a"/>
+				<reportElement mode="Opaque" x="0" y="3" width="555" height="20" forecolor="#FFFFFF" backcolor="#006FB9" uuid="197f1d2d-7d16-4696-b8de-48592e8cb71a"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -311,7 +311,7 @@
 				<textFieldExpression><![CDATA[$P{ubicacionequipo}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Opaque" x="1" y="90" width="555" height="20" forecolor="#FFFFFF" backcolor="#FC0703" uuid="6cf9ba40-428b-499a-9fec-6605a7d5d719"/>
+				<reportElement mode="Opaque" x="1" y="90" width="555" height="20" forecolor="#FFFFFF" backcolor="#006FB9" uuid="6cf9ba40-428b-499a-9fec-6605a7d5d719"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -325,7 +325,7 @@
 ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="0" y="134" width="555" height="20" forecolor="#FFFFFF" backcolor="#FC0703" uuid="bb7435e3-28bb-453d-b948-79363e0e5e0e"/>
+				<reportElement mode="Opaque" x="0" y="134" width="555" height="20" forecolor="#FFFFFF" backcolor="#006FB9" uuid="bb7435e3-28bb-453d-b948-79363e0e5e0e"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -562,7 +562,7 @@
 				<textFieldExpression><![CDATA[$P{serietransductor}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Opaque" x="0" y="245" width="555" height="20" forecolor="#FFFFFF" backcolor="#FC0703" uuid="bbfd0e67-e517-4352-825c-bfabf34b127e"/>
+				<reportElement mode="Opaque" x="0" y="245" width="555" height="20" forecolor="#FFFFFF" backcolor="#006FB9" uuid="bbfd0e67-e517-4352-825c-bfabf34b127e"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -754,7 +754,7 @@
 	<columnFooter>
 		<band height="160" splitType="Stretch">
 			<staticText>
-				<reportElement mode="Opaque" x="-1" y="4" width="555" height="20" forecolor="#FFFFFF" backcolor="#FC0703" uuid="6d9e1bd5-fe76-44b9-aa9e-6e260a7134c4"/>
+				<reportElement mode="Opaque" x="-1" y="4" width="555" height="20" forecolor="#FFFFFF" backcolor="#006FB9" uuid="6d9e1bd5-fe76-44b9-aa9e-6e260a7134c4"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -780,7 +780,7 @@
 				<textFieldExpression><![CDATA[$P{notahallazgos}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Opaque" x="-1" y="52" width="555" height="20" forecolor="#FFFFFF" backcolor="#FC0703" uuid="b6a2ebee-0220-47fe-b48c-fb337d48be19"/>
+				<reportElement mode="Opaque" x="-1" y="52" width="555" height="20" forecolor="#FFFFFF" backcolor="#006FB9" uuid="b6a2ebee-0220-47fe-b48c-fb337d48be19"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -817,7 +817,7 @@
 				</graphicElement>
 			</rectangle>
 			<staticText>
-				<reportElement x="-1" y="0" width="100" height="44" uuid="67929338-6c77-48d4-8b0d-db7d1a24c1a8"/>
+				<reportElement mode="Opaque" x="-1" y="0" width="100" height="44" forecolor="#FFFFFF" backcolor="#006FB9" uuid="67929338-6c77-48d4-8b0d-db7d1a24c1a8"/>
 				<box topPadding="2" leftPadding="3" bottomPadding="3" rightPadding="3">
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -830,7 +830,7 @@
 				<text><![CDATA[Versión 1]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="99" y="0" width="320" height="44" uuid="8c262f96-7404-4a0f-a71c-058782a17ad3"/>
+				<reportElement mode="Opaque" x="99" y="0" width="320" height="44" forecolor="#FFFFFF" backcolor="#006FB9" uuid="8c262f96-7404-4a0f-a71c-058782a17ad3"/>
 				<box topPadding="2" leftPadding="3" bottomPadding="3" rightPadding="3">
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -840,13 +840,10 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Verdana" size="7" isBold="false"/>
 				</textElement>
-				<text><![CDATA[Casa 84, Calle Espíritu Santo Tapia, Distrito de Aguadulce, Provincia de Coclé.
-www.icmetrologia.com | Correo: icmetrologiapty@gmail.com
-Apartado Postal: 0819-00088
-]]></text>
+				<text><![CDATA[Casa 91, San Martín Residencial El Alto, Calle 2, Distrito de Aguadulce, Provincia de Coclé. | www.shalomsolutiontech.com  | Correo: shalomsolutiontech@gmail.com]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="419" y="0" width="135" height="44" uuid="b9c935c0-ccc0-43ec-ad61-a3e489e42b82"/>
+				<reportElement mode="Opaque" x="419" y="0" width="135" height="44" backcolor="#006FB9" uuid="b9c935c0-ccc0-43ec-ad61-a3e489e42b82"/>
 				<box topPadding="2" leftPadding="3" bottomPadding="3" rightPadding="3">
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -859,14 +856,14 @@ Apartado Postal: 0819-00088
 				<text><![CDATA[]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="439" y="1" width="58" height="44" uuid="a36cb6c5-50b8-4a3c-8d02-f8ecdebac810"/>
+				<reportElement x="439" y="1" width="58" height="44" forecolor="#FFFFFF" uuid="a36cb6c5-50b8-4a3c-8d02-f8ecdebac810"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Verdana" size="7" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Página " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement x="491" y="18" width="22" height="18" uuid="a91ec42d-a627-49d7-910b-c964a44d0d26"/>
+				<reportElement x="491" y="18" width="22" height="18" forecolor="#FFFFFF" uuid="a91ec42d-a627-49d7-910b-c964a44d0d26"/>
 				<textElement textAlignment="Left">
 					<font fontName="Verdana" size="7"/>
 				</textElement>
@@ -883,7 +880,7 @@ Apartado Postal: 0819-00088
 				</graphicElement>
 			</rectangle>
 			<staticText>
-				<reportElement x="0" y="54" width="100" height="44" uuid="87ffbec5-a56d-4e8f-b67c-610557667d6d"/>
+				<reportElement mode="Opaque" x="0" y="54" width="100" height="44" forecolor="#FFFFFF" backcolor="#006FB9" uuid="87ffbec5-a56d-4e8f-b67c-610557667d6d"/>
 				<box topPadding="2" leftPadding="3" bottomPadding="3" rightPadding="3">
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -896,7 +893,7 @@ Apartado Postal: 0819-00088
 				<text><![CDATA[Versión 1]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="100" y="54" width="320" height="44" uuid="099ec5ae-b061-47ea-ad26-337153c5adfe"/>
+				<reportElement mode="Opaque" x="100" y="54" width="320" height="44" forecolor="#FFFFFF" backcolor="#006FB9" uuid="099ec5ae-b061-47ea-ad26-337153c5adfe"/>
 				<box topPadding="2" leftPadding="3" bottomPadding="3" rightPadding="3">
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -906,13 +903,10 @@ Apartado Postal: 0819-00088
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Verdana" size="7" isBold="false"/>
 				</textElement>
-				<text><![CDATA[Casa 84, Calle Espíritu Santo Tapia, Distrito de Aguadulce, Provincia de Coclé.
-www.icmetrologia.com | Correo: icmetrologiapty@gmail.com
-Apartado Postal: 0819-00088
-]]></text>
+				<text><![CDATA[Casa 91, San Martín Residencial El Alto, Calle 2, Distrito de Aguadulce, Provincia de Coclé. | www.shalomsolutiontech.com  | Correo: shalomsolutiontech@gmail.com]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="420" y="54" width="135" height="44" uuid="8f51ec4f-b55c-457e-a711-a7cb1945d295"/>
+				<reportElement mode="Opaque" x="420" y="54" width="135" height="44" forecolor="#FFFFFF" backcolor="#006FB9" uuid="8f51ec4f-b55c-457e-a711-a7cb1945d295"/>
 				<box topPadding="2" leftPadding="3" bottomPadding="3" rightPadding="3">
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -925,14 +919,14 @@ Apartado Postal: 0819-00088
 				<text><![CDATA[]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="440" y="55" width="58" height="44" uuid="889eb52a-d8ef-4018-84be-fe9e51536b0d"/>
+				<reportElement x="440" y="55" width="58" height="44" forecolor="#FFFFFF" uuid="889eb52a-d8ef-4018-84be-fe9e51536b0d"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Verdana" size="7" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Página " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement x="492" y="72" width="22" height="18" uuid="28da03e0-658e-40d8-818f-72cca9bec683"/>
+				<reportElement x="492" y="72" width="22" height="18" forecolor="#FFFFFF" uuid="28da03e0-658e-40d8-818f-72cca9bec683"/>
 				<textElement textAlignment="Left">
 					<font fontName="Verdana" size="7"/>
 				</textElement>
@@ -946,18 +940,20 @@ Apartado Postal: 0819-00088
 			</line>
 			<staticText>
 				<reportElement x="80" y="25" width="100" height="23" uuid="ddce42a9-250c-4d19-8f77-c501aab49979"/>
+				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[Firma Cliente]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="350" y="25" width="100" height="23" uuid="2ea85058-104d-49f7-85da-6f31a9a4a987"/>
-				<text><![CDATA[IC Metrología]]></text>
+				<reportElement x="320" y="25" width="130" height="23" uuid="2ea85058-104d-49f7-85da-6f31a9a4a987"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[SHALOM SOLUTION TECH]]></text>
 			</staticText>
 		</band>
 	</lastPageFooter>
 	<summary>
 		<band height="750" splitType="Stretch">
 			<staticText>
-				<reportElement mode="Opaque" x="-1" y="0" width="555" height="20" forecolor="#FFFFFF" backcolor="#FC0703" uuid="ad5bbd2b-8815-4316-9705-f338a70495c1"/>
+				<reportElement mode="Opaque" x="-1" y="0" width="555" height="20" forecolor="#FFFFFF" backcolor="#006FB9" uuid="ad5bbd2b-8815-4316-9705-f338a70495c1"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>

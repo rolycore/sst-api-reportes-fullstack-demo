@@ -43,12 +43,16 @@ public class OrdenTrabajoController {
     private OrdenTrabajoReportGenerator ordenTrabajoReportGenerator;
     // Buscar todas las Ordenes de Trabajo
     @GetMapping("/ordenes-trabajos")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('MODERATOR') or hasRole('USER')")
     public List<OrdenTrabajo> todos() {
         return iOrdenesTrabajoService.todos();
 
     }
     // Buscar orden de trabajo por ID
+    //Creando Ordenes de Trabajos
+
     @GetMapping("/ordenes-trabajos/{id}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('MODERATOR')")
     public ResponseEntity<?> show(@PathVariable Long id) {
         OrdenTrabajo orden=null;
         Map<String, Object> response = new HashMap<>();
@@ -68,8 +72,6 @@ public class OrdenTrabajoController {
         return new ResponseEntity<OrdenTrabajo>(orden, HttpStatus.CREATED);
 
     }
-
-    //Creando Ordenes de Trabajos
     @PostMapping("/ordenes-trabajos")
     public ResponseEntity<?> create(@Valid @RequestBody OrdenTrabajo ordenTrabajo, BindingResult result) throws IOException {
         OrdenTrabajo ordenNew=null;
