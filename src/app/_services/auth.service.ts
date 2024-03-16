@@ -4,6 +4,7 @@ import { Observable, throwError  } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { User } from '../models/user';
 import Swal from 'sweetalert2';
+import { Roles } from '../models/roles';
 const AUTH_API = 'https://localhost:8080/api/auth/';//https://appicmetrologia.icmetrologia.com:8080/api/auth/
 
 const httpOptions = {
@@ -56,14 +57,30 @@ export class AuthService {
   }
 
   updateUser(id: number, user: User): Observable<any> {
-    return this.http.put<any>(AUTH_API + `usuario/${id}`, user);
+    return this.http.put<any>(`${AUTH_API}usuario/${id}`, user)
+      .pipe(
+        catchError(error => {
+          console.error('Ocurrió un error al actualizar el usuario:', error);
+          return throwError('Error al actualizar el usuario. Por favor, inténtalo de nuevo más tarde.');
+        })
+      );
   }
 
-  deleteUser(id: number): Observable<User> {
-    return this.http.delete<User>(AUTH_API + `usuario/${id}`);
+  deleteUser(id: number): Observable<any> {
+    return this.http.delete<any>(AUTH_API + `usuario/${id}`);
   }
+
 
   getUsersWithRoles(): Observable<any[]> {
     return this.http.get<any[]>(AUTH_API + `usersWithRoles`);
+  }
+
+  getAllRoles(): Observable<Roles[]> {
+    return this.http.get<Roles[]>(AUTH_API + 'roles');
+  }
+
+  getRoleById(id: number): Observable<Roles> {
+    const url = AUTH_API +`role/${id}`;
+    return this.http.get<Roles>(url);
   }
 }

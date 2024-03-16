@@ -6,6 +6,7 @@ import { User } from '../models/user';
 import { AuthService } from '../_services/auth.service';
 import { tap } from 'rxjs';
 import { Roles } from '../models/roles';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-board-admin',
   templateUrl: './board-admin.component.html',
@@ -26,7 +27,7 @@ export class BoardAdminComponent implements OnInit {
   loading: boolean = false;
   content?: string;
   username: string = '';
-  users: User[] = []; // Modificado para usar la clase User
+  users!: User[]; // Modificado para usar la clase User
   pages!: number;
 
   constructor(private userService: UserService,
@@ -96,16 +97,48 @@ export class BoardAdminComponent implements OnInit {
     return user.roles.map(role => role.name).join(', ');
   }
 
-  updateUser(id: number, updatedUser: User): void {
-    this.authService.updateUser(id, updatedUser).subscribe(response => {
-      console.log('Usuario actualizado exitosamente', response);
-    });
-  }
 
-  deleteUser(id: number): void {
+ /* deleteUser(id: number): void {
     this.authService.deleteUser(id).subscribe(response => {
       console.log('Usuario eliminado exitosamente', response);
       this.loadUsers(); // Opcional: recargar la lista de usuarios después de eliminar uno
+    });
+  }*/
+  deleteUser(id: number): void {
+    // Mostrar la alerta de confirmación
+    Swal.fire({
+      title: '¿Está seguro?',
+      text: '¿Seguro que desea eliminar al cliente?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Si el usuario confirma la eliminación, llamar al servicio para eliminar el usuario
+        this.authService.deleteUser(id).subscribe(
+          () => {
+            // Si la eliminación es exitosa, mostrar una alerta de éxito
+            Swal.fire(
+              '¡Eliminado!',
+              'El Usuario ha sido eliminado correctamente.',
+              'success'
+            );
+            // Actualizar la lista de usuarios después de eliminar uno
+            this.loadUsers();
+          },
+          (error) => {
+            // Si hay un error al eliminar el usuario, mostrar una alerta de error
+            Swal.fire(
+              '¡Error!',
+              'Ocurrió un error al eliminar el usuario.',
+              'error'
+            );
+          }
+        );
+      }
     });
   }
 }

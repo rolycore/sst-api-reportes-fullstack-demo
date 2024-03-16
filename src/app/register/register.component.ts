@@ -29,6 +29,12 @@ export class RegisterComponent implements OnInit {
   isSignUpFailed = false;
   submitted = false;
   errorMessage = '';
+  password: string = '';
+  showPassword: boolean = false;
+
+  toggleShowPassword(): void {
+    this.showPassword = !this.showPassword;
+  }
   constructor(private authService: AuthService,
     private tokenStorage: TokenStorageService,
     private router: Router,

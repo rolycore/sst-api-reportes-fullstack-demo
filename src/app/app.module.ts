@@ -42,7 +42,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { AdminformComponent } from './board-admin/adminform/adminform.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { ErrorHandlerService } from './_services/error-handler.service';
-
+import { LocationStrategy, Location, HashLocationStrategy } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -89,7 +89,8 @@ import { ErrorHandlerService } from './_services/error-handler.service';
     FileHandlerService,
     ResetpasswordService,
     DatePipe,
-    ErrorHandlerService
+    ErrorHandlerService,
+    { provide: LocationStrategy, useClass: HashLocationStrategy }
   ],
 
   bootstrap: [AppComponent]

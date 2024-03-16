@@ -1,6 +1,6 @@
 <div class="col-md-12"[@fadeInOut]>
   <div class="card card-container">
-    <img title="image" id="profile-img" src="/src/img/LOGOSHALOM.jpg" class="profile-img-card" />
+    <img title="image" id="profile-img" src="./assets/LOGOSHALOM.jpg" class="profile-img-card" />
     <form *ngIf="!isLoggedIn" [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
       <div class="form-group">
         <label for="username">Username</label>
@@ -12,7 +12,17 @@
       </div>
       <div class="form-group">
         <label for="password">Password</label>
-        <input placeholder="Ingrese el Password" type="password" class="form-control" formControlName="password" />
+
+          <input placeholder="Ingrese el Password" type="{{ showPassword ? 'text' : 'password' }}" class="form-control" formControlName="password" >
+          <button title='password'type="button" class="btn btn-secondary"(click)="toggleShowPassword()">
+            <span *ngIf="showPassword">
+              <i class="fas fa-eye"></i>
+            </span>
+            <span *ngIf="!showPassword">
+              <i class="fas fa-eye-slash"></i>
+            </span>
+          </button>
+       <!-- <input placeholder="Ingrese el Password" type="password" class="form-control" formControlName="password" /> -->
         <div class="alert alert-danger" role="alert"
           *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched">
           Password is required
@@ -46,7 +56,8 @@
     </form>
 
     <div class="alert alert-success" *ngIf="isLoggedIn">
-      Conectado como {{ this.selectedRole }}.
+      <p class="lead">¡Bienvenido, {{ username }}!</p>
+      Haz Conectado como {{ this.selectedRole }}.
     </div>
 
   </div>

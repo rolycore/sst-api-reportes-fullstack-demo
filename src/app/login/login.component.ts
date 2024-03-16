@@ -26,8 +26,15 @@ export class LoginComponent implements OnInit {
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
+  username?: string;
   roles: string[] = ['ROLE_ADMIN', 'ROLE_MODERATOR', 'ROLE_USER'];
   selectedRole: string = ''; // Variable para almacenar el rol seleccionado
+  password: string = '';
+  showPassword: boolean = false;
+
+  toggleShowPassword(): void {
+    this.showPassword = !this.showPassword;
+  }
   constructor(private authService: AuthService,
      private tokenStorage: TokenStorageService,
       private fb: FormBuilder,
@@ -56,6 +63,8 @@ export class LoginComponent implements OnInit {
 
     const { username, password} = this.loginForm.value;
     this.selectedRole = this.loginForm.get('role')?.value;// Actualizar selectedRole con el valor del campo role
+    this.username=this.loginForm.get('username')?.value;
+    this.password=this.loginForm.get('password')?.value;
     this.authService.login(username, password).subscribe(
       data => {
 
